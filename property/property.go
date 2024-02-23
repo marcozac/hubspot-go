@@ -75,16 +75,20 @@ func (e *Enumeration) UnmarshalJSON(data []byte) error {
 //
 // It returns a string in the format "2006-01-02" when formatted with String()
 // and marshals to and from JSON as a string in the same format.
-// The other methods are (almost) wrappers around the time.Time ones.
+// The other methods are essentially wrappers around the time.Time ones.
 type Date time.Time
 
 func (d Date) String() string {
 	return time.Time(d).Format(time.DateOnly)
 }
 
+var _ json.Marshaler = Date{}
+
 func (d Date) MarshalJSON() ([]byte, error) {
 	return util.MarshalStringerAsJSON(d)
 }
+
+var _ json.Unmarshaler = (*Date)(nil)
 
 func (d *Date) UnmarshalJSON(data []byte) error {
 	if err := d.unmarshalJSON(data); err != nil {
@@ -282,5 +286,224 @@ func (d Date) Zone() (name string, offset int) {
 }
 
 func (d Date) ZoneBounds() (start time.Time, end time.Time) {
+	return time.Time(d).ZoneBounds()
+}
+
+// DateTime is a time.Time compatible with HubSpot's date properties.
+//
+// It returns a string in the format "2006-01-02T15:04:05.999Z07:00": ISO 8601
+// with millisecond precision when formatted with String() and marshals to and
+// from JSON as a string in the same format.
+// The other methods are essentially wrappers around the time.Time ones.
+type DateTime time.Time
+
+func (d DateTime) String() string {
+	return time.Time(d).Format(util.RFC3339Milli)
+}
+
+var _ json.Marshaler = DateTime{}
+
+func (d DateTime) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(d)
+}
+
+var _ json.Unmarshaler = (*DateTime)(nil)
+
+func (d *DateTime) UnmarshalJSON(data []byte) error {
+	if err := d.unmarshalJSON(data); err != nil {
+		// Try to unmarshal as a time.Time (strict RFC 3339)
+		return json.Unmarshal(data, (*time.Time)(d))
+	}
+	return nil
+}
+
+func (d *DateTime) unmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		return err
+	}
+	t, err := time.Parse(util.RFC3339Milli, s)
+	if err != nil {
+		return err
+	}
+	*d = DateTime(t)
+	return nil
+}
+
+func (d DateTime) Add(dn time.Duration) time.Time {
+	return time.Time(d).Add(dn)
+}
+
+func (d DateTime) AddDate(years int, months int, days int) time.Time {
+	return time.Time(d).AddDate(years, months, days)
+}
+
+func (d DateTime) After(u time.Time) bool {
+	return time.Time(d).After(u)
+}
+
+func (d DateTime) AppendFormat(b []byte, layout string) []byte {
+	return time.Time(d).AppendFormat(b, layout)
+}
+
+func (d DateTime) Before(u time.Time) bool {
+	return time.Time(d).Before(u)
+}
+
+func (d DateTime) Clock() (hour int, min int, sec int) {
+	return time.Time(d).Clock()
+}
+
+func (d DateTime) Compare(u time.Time) int {
+	return time.Time(d).Compare(u)
+}
+
+func (d DateTime) Date() (year int, month time.Month, day int) {
+	return time.Time(d).Date()
+}
+
+func (d DateTime) Day() int {
+	return time.Time(d).Day()
+}
+
+func (d DateTime) Equal(u time.Time) bool {
+	return time.Time(d).Equal(u)
+}
+
+func (d DateTime) Format(layout string) string {
+	return time.Time(d).Format(layout)
+}
+
+func (d DateTime) GoString() string {
+	return time.Time(d).GoString()
+}
+
+func (d *DateTime) GobDecode(data []byte) error {
+	return d.UnmarshalBinary(data)
+}
+
+func (d DateTime) GobEncode() ([]byte, error) {
+	return d.MarshalBinary()
+}
+
+func (d DateTime) Hour() int {
+	return time.Time(d).Hour()
+}
+
+func (d DateTime) ISOWeek() (year int, week int) {
+	return time.Time(d).ISOWeek()
+}
+
+func (d DateTime) In(loc *time.Location) time.Time {
+	return time.Time(d).In(loc)
+}
+
+func (d DateTime) IsDST() bool {
+	return time.Time(d).IsDST()
+}
+
+func (d DateTime) IsZero() bool {
+	return time.Time(d).IsZero()
+}
+
+func (d DateTime) Local() time.Time {
+	return time.Time(d).Local()
+}
+
+func (d DateTime) Location() *time.Location {
+	return time.Time(d).Location()
+}
+
+func (d DateTime) MarshalBinary() ([]byte, error) {
+	return time.Time(d).MarshalBinary()
+}
+
+func (d DateTime) MarshalText() ([]byte, error) {
+	return time.Time(d).MarshalText()
+}
+
+func (d DateTime) Minute() int {
+	return time.Time(d).Minute()
+}
+
+func (d DateTime) Month() time.Month {
+	return time.Time(d).Month()
+}
+
+func (d DateTime) Nanosecond() int {
+	return time.Time(d).Nanosecond()
+}
+
+func (d DateTime) Round(dn time.Duration) time.Time {
+	return time.Time(d).Round(dn)
+}
+
+func (d DateTime) Second() int {
+	return time.Time(d).Second()
+}
+
+func (d DateTime) Sub(u time.Time) time.Duration {
+	return time.Time(d).Sub(u)
+}
+
+func (d DateTime) Truncate(dn time.Duration) time.Time {
+	return time.Time(d).Truncate(dn)
+}
+
+func (d DateTime) UTC() time.Time {
+	return time.Time(d).UTC()
+}
+
+func (d DateTime) Unix() int64 {
+	return time.Time(d).Unix()
+}
+
+func (d DateTime) UnixMicro() int64 {
+	return time.Time(d).UnixMicro()
+}
+
+func (d DateTime) UnixMilli() int64 {
+	return time.Time(d).UnixMilli()
+}
+
+func (d DateTime) UnixNano() int64 {
+	return time.Time(d).UnixNano()
+}
+
+func (d *DateTime) UnmarshalBinary(data []byte) error {
+	var t time.Time
+	if err := (&t).UnmarshalBinary(data); err != nil {
+		return err
+	}
+	*d = DateTime(t)
+	return nil
+}
+
+func (d *DateTime) UnmarshalText(data []byte) error {
+	var t time.Time
+	if err := (&t).UnmarshalText(data); err != nil {
+		return err
+	}
+	*d = DateTime(t)
+	return nil
+}
+
+func (d DateTime) Weekday() time.Weekday {
+	return time.Time(d).Weekday()
+}
+
+func (d DateTime) Year() int {
+	return time.Time(d).Year()
+}
+
+func (d DateTime) YearDay() int {
+	return time.Time(d).YearDay()
+}
+
+func (d DateTime) Zone() (name string, offset int) {
+	return time.Time(d).Zone()
+}
+
+func (d DateTime) ZoneBounds() (start time.Time, end time.Time) {
 	return time.Time(d).ZoneBounds()
 }
