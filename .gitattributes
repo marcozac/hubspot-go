@@ -1,0 +1,57 @@
+* text=auto
+
+# Documents
+*.md            text diff=markdown
+*.csv           text
+*.txt           text
+AUTHORS         text
+CHANGELOG       text
+CHANGES         text
+CONTRIBUTING    text
+LICENSE         text
+
+# Graphics
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.tif     binary
+*.tiff    binary
+*.ico     binary
+*.svg     binary
+
+# Serialisation
+*.json    text
+*.toml    text
+*.xml     text
+*.yml     text
+*.yaml    text
+
+# Archives
+*.gz    binary
+*.tgz   binary
+*.zip   binary
+
+# Scripts
+*.sh    text eol=lf
+
+# Go
+# See https://github.com/golang/go/blob/master/.gitattributes
+*.go         -text diff=golang
+go.sum       linguist-generated
+vendor/**    linguist-vendored
+
+# Templates
+*.tmpl    text
+
+# Configs
+Makefile          text
+.editorconfig     text export-ignore
+.env              text export-ignore
+.env.*            text export-ignore
+.gitattributes    text export-ignore
+.gitconfig        text export-ignore
+
+# Not exported files
+.gitignore         text export-ignore
+.gitkeep           text export-ignore

@@ -1,0 +1,45 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+*.tmp
+
+
+# Environment files
+.env*
+!.env.example
+
+# Certificates
+*.pem
+*.key
+*.crt
+
+# IDE
+.idea/
+.vscode/**
+!.vscode/settings.json
+
+# Go
+*.test
+go.work
+
+# Go coverage
+cover.*
+*.out
+
+# Misc
+*~
+.DS_Store
+*.pem
+
+# Do not ignore example files
+!example/**
