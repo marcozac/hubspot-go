@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"strconv"
 	"strings"
+
+	"github.com/marcozac/hubspot-go/util"
 )
 
 type Bool bool
@@ -19,7 +21,7 @@ func (b Bool) String() string {
 var _ json.Marshaler = Bool(true)
 
 func (b Bool) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + b.String() + `"`), nil
+	return util.MarshalStringerAsJSON(b)
 }
 
 var (
@@ -51,7 +53,7 @@ func (e Enumeration) String() string {
 var _ json.Marshaler = Enumeration{}
 
 func (e Enumeration) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + e.String() + `"`), nil
+	return util.MarshalStringerAsJSON(e)
 }
 
 var _ json.Unmarshaler = (*Enumeration)(nil)
