@@ -1,4 +1,4 @@
-package property
+package hubspot
 
 import (
 	"encoding/json"
