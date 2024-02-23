@@ -61,7 +61,8 @@ var _ json.Unmarshaler = (*Enumeration)(nil)
 func (e *Enumeration) UnmarshalJSON(data []byte) error {
 	s, err := strconv.Unquote(string(data))
 	if err != nil {
-		return err
+		// Try to unmarshal as a slice of strings.
+		return json.Unmarshal(data, (*[]string)(e))
 	}
 	for _, v := range strings.Split(s, ";") {
 		*e = append(*e, v)

@@ -49,6 +49,8 @@ func TestEnumeration(t *testing.T) {
 		var s S
 		assert.NoError(t, json.Unmarshal([]byte(`{ "e": "a;b;c" }`), &s), `json.Unmarshal: "a;b;c"`)
 		assert.Equal(t, Enumeration{"a", "b", "c"}, s.E)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "e": ["d", "e", "f"] }`), &s), `json.Unmarshal: ["a", "b", "c"]`)
+		assert.Equal(t, Enumeration{"d", "e", "f"}, s.E)
 		assert.Error(t, json.Unmarshal([]byte(`{ "e": 1 }`), &s), `json.Unmarshal: 1`)
 	})
 }
