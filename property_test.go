@@ -35,6 +35,111 @@ func TestBool(t *testing.T) {
 	})
 }
 
+func TestInt(t *testing.T) {
+	assert.Equal(t, "42", Int(42).String(), `Int.String(): "42"`)
+	type S struct {
+		I Int `json:"i"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{I: 42}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"i":"42"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": "42" }`), &s), `json.Unmarshal: "42"`)
+		assert.Equal(t, Int(42), s.I)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": 42 }`), &s), `json.Unmarshal: 42`)
+		assert.Equal(t, Int(42), s.I)
+		assert.Error(t, json.Unmarshal([]byte(`{ "i": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
+func TestInt32(t *testing.T) {
+	assert.Equal(t, "42", Int32(42).String(), `Int32.String(): "42"`)
+	type S struct {
+		I Int32 `json:"i"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{I: 42}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"i":"42"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": "42" }`), &s), `json.Unmarshal: "42"`)
+		assert.Equal(t, Int32(42), s.I)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": 42 }`), &s), `json.Unmarshal: 42`)
+		assert.Equal(t, Int32(42), s.I)
+		assert.Error(t, json.Unmarshal([]byte(`{ "i": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
+func TestInt64(t *testing.T) {
+	assert.Equal(t, "42", Int64(42).String(), `Int64.String(): "42"`)
+	type S struct {
+		I Int64 `json:"i"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{I: 42}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"i":"42"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": "42" }`), &s), `json.Unmarshal: "42"`)
+		assert.Equal(t, Int64(42), s.I)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "i": 42 }`), &s), `json.Unmarshal: 42`)
+		assert.Equal(t, Int64(42), s.I)
+		assert.Error(t, json.Unmarshal([]byte(`{ "i": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
+func TestFloat32(t *testing.T) {
+	assert.Equal(t, "42.42", Float32(42.42).String(), `Float32.String(): "42.42"`)
+	type S struct {
+		F Float32 `json:"f"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{F: 42.42}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"f":"42.42"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "f": "42.42" }`), &s), `json.Unmarshal: "42.42"`)
+		assert.Equal(t, Float32(42.42), s.F)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "f": 42.42 }`), &s), `json.Unmarshal: 42.42`)
+		assert.Equal(t, Float32(42.42), s.F)
+		assert.Error(t, json.Unmarshal([]byte(`{ "f": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
+func TestFloat64(t *testing.T) {
+	assert.Equal(t, "42.42", Float64(42.42).String(), `Float64.String(): "42.42"`)
+	type S struct {
+		F Float64 `json:"f"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{F: 42.42}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"f":"42.42"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "f": "42.42" }`), &s), `json.Unmarshal: "42.42"`)
+		assert.Equal(t, Float64(42.42), s.F)
+		assert.NoError(t, json.Unmarshal([]byte(`{ "f": 42.42 }`), &s), `json.Unmarshal: 42.42`)
+		assert.Equal(t, Float64(42.42), s.F)
+		assert.Error(t, json.Unmarshal([]byte(`{ "f": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
 func TestEnumeration(t *testing.T) {
 	assert.Equal(t, "a;b;c", Enumeration{"a", "b", "c"}.String(), "Enumeration.String()")
 	type S struct {

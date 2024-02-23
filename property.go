@@ -45,6 +45,146 @@ func (b *Bool) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+type Int int
+
+func (i Int) String() string {
+	return strconv.Itoa(int(i))
+}
+
+var _ json.Marshaler = Int(0)
+
+func (i Int) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(i)
+}
+
+var _ json.Unmarshaler = (*Int)(nil)
+
+func (i *Int) UnmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		// Try to unmarshal as an int.
+		return json.Unmarshal(data, (*int)(i))
+	}
+	v, err := strconv.Atoi(s)
+	if err != nil {
+		return err
+	}
+	*i = Int(v)
+	return nil
+}
+
+type Int32 int32
+
+func (i Int32) String() string {
+	return strconv.FormatInt(int64(i), 10)
+}
+
+var _ json.Marshaler = Int32(0)
+
+func (i Int32) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(i)
+}
+
+var _ json.Unmarshaler = (*Int32)(nil)
+
+func (i *Int32) UnmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		// Try to unmarshal as an int32.
+		return json.Unmarshal(data, (*int32)(i))
+	}
+	v, err := strconv.ParseInt(s, 10, 32)
+	if err != nil {
+		return err
+	}
+	*i = Int32(v)
+	return nil
+}
+
+type Int64 int64
+
+func (i Int64) String() string {
+	return strconv.FormatInt(int64(i), 10)
+}
+
+var _ json.Marshaler = Int64(0)
+
+func (i Int64) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(i)
+}
+
+var _ json.Unmarshaler = (*Int64)(nil)
+
+func (i *Int64) UnmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		// Try to unmarshal as an int64.
+		return json.Unmarshal(data, (*int64)(i))
+	}
+	v, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		return err
+	}
+	*i = Int64(v)
+	return nil
+}
+
+type Float32 float32
+
+func (f Float32) String() string {
+	return strconv.FormatFloat(float64(f), 'f', -1, 32)
+}
+
+var _ json.Marshaler = Float32(0)
+
+func (f Float32) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(f)
+}
+
+var _ json.Unmarshaler = (*Float32)(nil)
+
+func (f *Float32) UnmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		// Try to unmarshal as a float32.
+		return json.Unmarshal(data, (*float32)(f))
+	}
+	v, err := strconv.ParseFloat(s, 32)
+	if err != nil {
+		return err
+	}
+	*f = Float32(v)
+	return nil
+}
+
+type Float64 float64
+
+func (f Float64) String() string {
+	return strconv.FormatFloat(float64(f), 'f', -1, 64)
+}
+
+var _ json.Marshaler = Float64(0)
+
+func (f Float64) MarshalJSON() ([]byte, error) {
+	return util.MarshalStringerAsJSON(f)
+}
+
+var _ json.Unmarshaler = (*Float64)(nil)
+
+func (f *Float64) UnmarshalJSON(data []byte) error {
+	s, err := strconv.Unquote(string(data))
+	if err != nil {
+		// Try to unmarshal as a float64.
+		return json.Unmarshal(data, (*float64)(f))
+	}
+	v, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		return err
+	}
+	*f = Float64(v)
+	return nil
+}
+
 type Enumeration []string
 
 func (e Enumeration) String() string {
