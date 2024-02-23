@@ -9,13 +9,13 @@ import (
 )
 
 func TestBool(t *testing.T) {
-	assert.Equal(t, "true", Bool(true).String(), "Bool.String() should return 'true' for true")
-	assert.Equal(t, "false", Bool(false).String(), "Bool.String() should return 'false' for false")
+	assert.Equal(t, "true", Bool(true).String(), `Bool.String(): "true"`)
+	assert.Equal(t, "false", Bool(false).String(), `Bool.String(): "false"`)
 	type S struct {
 		B Bool `json:"b"`
 	}
 	t.Run("Marshal", func(t *testing.T) {
-		v := &S{B: true}
+		v := S{B: true}
 		data, err := json.Marshal(v)
 		require.NoError(t, err, "json.Marshal must not return an error")
 		assert.Equal(t, []byte(`{"b":"true"}`), data)
@@ -31,5 +31,24 @@ func TestBool(t *testing.T) {
 		assert.NoError(t, json.Unmarshal([]byte(`{ "b": false }`), &s), `json.Unmarshal: true`)
 		assert.False(t, bool(s.B))
 		assert.Error(t, json.Unmarshal([]byte(`{ "b": "foo" }`), &s), `json.Unmarshal: "foo"`)
+	})
+}
+
+func TestEnumeration(t *testing.T) {
+	assert.Equal(t, "a;b;c", Enumeration{"a", "b", "c"}.String(), "Enumeration.String()")
+	type S struct {
+		E Enumeration `json:"e"`
+	}
+	t.Run("Marshal", func(t *testing.T) {
+		v := S{E: Enumeration{"a", "b", "c"}}
+		data, err := json.Marshal(v)
+		require.NoError(t, err, "json.Marshal must not return an error")
+		assert.Equal(t, []byte(`{"e":"a;b;c"}`), data)
+	})
+	t.Run("Unmarshal", func(t *testing.T) {
+		var s S
+		assert.NoError(t, json.Unmarshal([]byte(`{ "e": "a;b;c" }`), &s), `json.Unmarshal: "a;b;c"`)
+		assert.Equal(t, Enumeration{"a", "b", "c"}, s.E)
+		assert.Error(t, json.Unmarshal([]byte(`{ "e": 1 }`), &s), `json.Unmarshal: 1`)
 	})
 }
