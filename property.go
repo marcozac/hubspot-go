@@ -12,6 +12,7 @@ import (
 
 const (
 	PropertyTypeString      PropertyType = "string"
+	PropertyTypePhoneNumber PropertyType = "phone_number" // Alias for "string"
 	PropertyTypeNumber      PropertyType = "number"
 	PropertyTypeDate        PropertyType = "date"
 	PropertyTypeDateTime    PropertyType = "datetime"
@@ -371,9 +372,7 @@ func (e *Enumeration) UnmarshalJSON(data []byte) error {
 		// Try to unmarshal as a slice of strings.
 		return json.Unmarshal(data, (*[]string)(e))
 	}
-	for _, v := range strings.Split(s, ";") {
-		*e = append(*e, v)
-	}
+	*e = strings.Split(s, ";")
 	return nil
 }
 
