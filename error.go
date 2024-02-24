@@ -20,4 +20,8 @@ var (
 	// ErrEncryptedAccessTokenTooShort is returned when the encrypted
 	// access token is too short.
 	ErrEncryptedAccessTokenTooShort = errors.New("encrypted access token too short")
+
+	// ErrTokenSourceRequired is returned when a token source is required but
+	// not provided.
+	ErrTokenSourceRequired = errors.New("token source is required")
 )
