@@ -49,13 +49,16 @@ func (e *EnvTokenSource) Token() (*oauth2.Token, error) {
 }
 
 // Refresh updates the token from the environment variable.
+// It returns an error if the environment variable is not set.
 func (e *EnvTokenSource) Refresh() error {
+	// Lock immediately to prevent retrieving the token while it's
+	// being refreshed
+	e.mu.Lock()
+	defer e.mu.Unlock()
 	v := os.Getenv(e.k)
 	if v == "" {
 		return ErrEnvVarNotSet
 	}
-	e.mu.Lock()
-	defer e.mu.Unlock()
 	e.t = &oauth2.Token{
 		AccessToken: v,
 		TokenType:   "bearer",
@@ -78,6 +81,14 @@ func NewEnvTokenSourceEncrypted(envKey string, encryptionKey []byte) (*EnvTokenS
 	return e, nil
 }
 
+// EnvTokenSourceEncrypted implements the oauth2.TokenSource interface and
+// retrieves the token from an environment variable, as [EnvTokenSource],
+// caching an encrypted version of the token in memory.
+//
+// The token is encrypted using AES in CFB mode with a random IV and the
+// provided encryption key.
+//
+// It is safe to use this token source from multiple goroutines.
 type EnvTokenSourceEncrypted struct {
 	k   string
 	mu  sync.RWMutex
@@ -87,6 +98,7 @@ type EnvTokenSourceEncrypted struct {
 
 var _ oauth2.TokenSource = (*EnvTokenSourceEncrypted)(nil)
 
+// Token returns the decrypted token or an error on decryption failure.
 func (e *EnvTokenSourceEncrypted) Token() (*oauth2.Token, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -100,7 +112,14 @@ func (e *EnvTokenSourceEncrypted) Token() (*oauth2.Token, error) {
 	}, nil
 }
 
+// Refresh updates the encrypted access token from the environment variable.
+// It returns an error if the environment variable is not set or in case of
+// encryption failure.
 func (e *EnvTokenSourceEncrypted) Refresh() error {
+	// Lock immediately to prevent retrieving the token while it's
+	// being refreshed
+	e.mu.Lock()
+	defer e.mu.Unlock()
 	v := os.Getenv(e.k)
 	if v == "" {
 		return ErrEnvVarNotSet
@@ -109,8 +128,6 @@ func (e *EnvTokenSourceEncrypted) Refresh() error {
 	if err != nil {
 		return err
 	}
-	e.mu.Lock()
-	defer e.mu.Unlock()
 	e.eat = eat
 	return nil
 }
