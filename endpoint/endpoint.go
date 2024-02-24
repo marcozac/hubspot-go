@@ -1,4 +1,4 @@
-package hubspotgo
+package endpoint
 
 const (
 	BaseURL = "https://api.hubapi.com"
@@ -10,7 +10,9 @@ const (
 const (
 	// Objects
 
-	Contacts             = CRMV3 + "/objects/contacts"
+	Objects = CRMV3 + "/objects"
+
+	Contacts             = Objects + "/contacts"
 	ContactsBatchArchive = Contacts + BatchArchive
 	ContactsBatchCreate  = Contacts + BatchCreate
 	ContactsBatchRead    = Contacts + BatchRead
@@ -19,7 +21,7 @@ const (
 	ContactsGDPRDelete   = Contacts + GDPRDelete
 	ContactsSearch       = Contacts + Search
 
-	Companies             = CRMV3 + "/objects/companies"
+	Companies             = Objects + "/companies"
 	CompaniesBatchArchive = Companies + BatchArchive
 	CompaniesBatchCreate  = Companies + BatchCreate
 	CompaniesBatchRead    = Companies + BatchRead
@@ -28,7 +30,7 @@ const (
 	CompaniesGDPRDelete   = Companies + GDPRDelete
 	CompaniesSearch       = Companies + Search
 
-	Deals             = CRMV3 + "/objects/deals"
+	Deals             = Objects + "/deals"
 	DealsBatchArchive = Deals + BatchArchive
 	DealsBatchCreate  = Deals + BatchCreate
 	DealsBatchRead    = Deals + BatchRead
@@ -37,10 +39,10 @@ const (
 	DealsGDPRDelete   = Deals + GDPRDelete
 	DealsSearch       = Deals + Search
 
-	FeedbackSubmissions          = CRMV3 + "/objects/feedback_submissions"
+	FeedbackSubmissions          = Objects + "/feedback_submissions"
 	FeedbackSubmissionsBatchRead = FeedbackSubmissions + BatchRead
 
-	LineItems             = CRMV3 + "/objects/line_items"
+	LineItems             = Objects + "/line_items"
 	LineItemsBatchArchive = LineItems + BatchArchive
 	LineItemsBatchCreate  = LineItems + BatchCreate
 	LineItemsBatchRead    = LineItems + BatchRead
@@ -49,7 +51,7 @@ const (
 	LineItemsGDPRDelete   = LineItems + GDPRDelete
 	LineItemsSearch       = LineItems + Search
 
-	Products             = CRMV3 + "/objects/products"
+	Products             = Objects + "/products"
 	ProductsBatchArchive = Products + BatchArchive
 	ProductsBatchCreate  = Products + BatchCreate
 	ProductsBatchRead    = Products + BatchRead
@@ -58,7 +60,7 @@ const (
 	ProductsGDPRDelete   = Products + GDPRDelete
 	ProductsSearch       = Products + Search
 
-	Quotes             = CRMV3 + "/objects/quotes"
+	Quotes             = Objects + "/quotes"
 	QuotesBatchArchive = Quotes + BatchArchive
 	QuotesBatchCreate  = Quotes + BatchCreate
 	QuotesBatchRead    = Quotes + BatchRead
@@ -67,7 +69,7 @@ const (
 	QuotesGDPRDelete   = Quotes + GDPRDelete
 	QuotesSearch       = Quotes + Search
 
-	Discounts             = CRMV3 + "/objects/discounts"
+	Discounts             = Objects + "/discounts"
 	DiscountsBatchArchive = Discounts + BatchArchive
 	DiscountsBatchCreate  = Discounts + BatchCreate
 	DiscountsBatchRead    = Discounts + BatchRead
@@ -76,7 +78,7 @@ const (
 	DiscountsGDPRDelete   = Discounts + GDPRDelete
 	DiscountsSearch       = Discounts + Search
 
-	Fees             = CRMV3 + "/objects/fees"
+	Fees             = Objects + "/fees"
 	FeesBatchArchive = Fees + BatchArchive
 	FeesBatchCreate  = Fees + BatchCreate
 	FeesBatchRead    = Fees + BatchRead
@@ -85,7 +87,7 @@ const (
 	FeesGDPRDelete   = Fees + GDPRDelete
 	FeesSearch       = Fees + Search
 
-	Taxes             = CRMV3 + "/objects/taxes"
+	Taxes             = Objects + "/taxes"
 	TaxesBatchArchive = Taxes + BatchArchive
 	TaxesBatchCreate  = Taxes + BatchCreate
 	TaxesBatchRead    = Taxes + BatchRead
@@ -94,7 +96,7 @@ const (
 	TaxesGDPRDelete   = Taxes + GDPRDelete
 	TaxesSearch       = Taxes + Search
 
-	Tickets             = CRMV3 + "/objects/tickets"
+	Tickets             = Objects + "/tickets"
 	TicketsBatchArchive = Tickets + BatchArchive
 	TicketsBatchCreate  = Tickets + BatchCreate
 	TicketsBatchRead    = Tickets + BatchRead
@@ -103,7 +105,7 @@ const (
 	TicketsGDPRDelete   = Tickets + GDPRDelete
 	TicketsSearch       = Tickets + Search
 
-	Goals             = CRMV3 + "/objects/goal_targets"
+	Goals             = Objects + "/goal_targets"
 	GoalsBatchArchive = Goals + BatchArchive
 	GoalsBatchCreate  = Goals + BatchCreate
 	GoalsBatchRead    = Goals + BatchRead
@@ -111,6 +113,84 @@ const (
 	GoalsMerge        = Goals + Merge
 	GoalsGDPRDelete   = Goals + GDPRDelete
 	GoalsSearch       = Goals + Search
+)
+
+const (
+	// Properties
+
+	Properties = CRMV3 + "/properties"
+
+	ContactProperties             = Properties + "/contact"
+	ContactPropertiesBatchArchive = ContactProperties + BatchArchive
+	ContactPropertiesBatchCreate  = ContactProperties + BatchCreate
+	ContactPropertiesBatchRead    = ContactProperties + BatchRead
+	ContactPropertiesGroups       = ContactProperties + Groups
+
+	CompanyProperties             = Properties + "/company"
+	CompanyPropertiesBatchArchive = CompanyProperties + BatchArchive
+	CompanyPropertiesBatchCreate  = CompanyProperties + BatchCreate
+	CompanyPropertiesBatchRead    = CompanyProperties + BatchRead
+	CompanyPropertiesGroups       = CompanyProperties + Groups
+
+	DealProperties             = Properties + "/deal"
+	DealPropertiesBatchArchive = DealProperties + BatchArchive
+	DealPropertiesBatchCreate  = DealProperties + BatchCreate
+	DealPropertiesBatchRead    = DealProperties + BatchRead
+	DealPropertiesGroups       = DealProperties + Groups
+
+	FeedbackSubmissionProperties             = Properties + "/feedback_submission"
+	FeedbackSubmissionPropertiesBatchArchive = FeedbackSubmissionProperties + BatchArchive
+	FeedbackSubmissionPropertiesBatchCreate  = FeedbackSubmissionProperties + BatchCreate
+	FeedbackSubmissionPropertiesBatchRead    = FeedbackSubmissionProperties + BatchRead
+	FeedbackSubmissionPropertiesGroups       = FeedbackSubmissionProperties + Groups
+
+	LineItemProperties             = Properties + "/line_item"
+	LineItemPropertiesBatchArchive = LineItemProperties + BatchArchive
+	LineItemPropertiesBatchCreate  = LineItemProperties + BatchCreate
+	LineItemPropertiesBatchRead    = LineItemProperties + BatchRead
+	LineItemPropertiesGroups       = LineItemProperties + Groups
+
+	ProductProperties             = Properties + "/product"
+	ProductPropertiesBatchArchive = ProductProperties + BatchArchive
+	ProductPropertiesBatchCreate  = ProductProperties + BatchCreate
+	ProductPropertiesBatchRead    = ProductProperties + BatchRead
+	ProductPropertiesGroups       = ProductProperties + Groups
+
+	QuoteProperties             = Properties + "/quote"
+	QuotePropertiesBatchArchive = QuoteProperties + BatchArchive
+	QuotePropertiesBatchCreate  = QuoteProperties + BatchCreate
+	QuotePropertiesBatchRead    = QuoteProperties + BatchRead
+	QuotePropertiesGroups       = QuoteProperties + Groups
+
+	DiscountProperties             = Properties + "/discount"
+	DiscountPropertiesBatchArchive = DiscountProperties + BatchArchive
+	DiscountPropertiesBatchCreate  = DiscountProperties + BatchCreate
+	DiscountPropertiesBatchRead    = DiscountProperties + BatchRead
+	DiscountPropertiesGroups       = DiscountProperties + Groups
+
+	FeeProperties             = Properties + "/fee"
+	FeePropertiesBatchArchive = FeeProperties + BatchArchive
+	FeePropertiesBatchCreate  = FeeProperties + BatchCreate
+	FeePropertiesBatchRead    = FeeProperties + BatchRead
+	FeePropertiesGroups       = FeeProperties + Groups
+
+	TaxProperties             = Properties + "/tax"
+	TaxPropertiesBatchArchive = TaxProperties + BatchArchive
+	TaxPropertiesBatchCreate  = TaxProperties + BatchCreate
+	TaxPropertiesBatchRead    = TaxProperties + BatchRead
+	TaxPropertiesGroups       = TaxProperties + Groups
+
+	TicketProperties             = Properties + "/ticket"
+	TicketPropertiesBatchArchive = TicketProperties + BatchArchive
+	TicketPropertiesBatchCreate  = TicketProperties + BatchCreate
+	TicketPropertiesBatchRead    = TicketProperties + BatchRead
+	TicketPropertiesGroups       = TicketProperties + Groups
+
+	GoalProperties             = Properties + "/goal_target"
+	GoalPropertiesBatchArchive = GoalProperties + BatchArchive
+	GoalPropertiesBatchCreate  = GoalProperties + BatchCreate
+	GoalPropertiesBatchRead    = GoalProperties + BatchRead
+	GoalPropertiesGroups       = GoalProperties + Groups
 )
 
 const (
@@ -124,4 +204,10 @@ const (
 	Merge      = "/merge"
 	GDPRDelete = "/gdpr-delete"
 	Search     = "/search"
+)
+
+const (
+	// Other common paths
+
+	Groups = "/groups"
 )

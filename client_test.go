@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -12,9 +11,6 @@ import (
 func TestClient(t *testing.T) {
 	// use a different key to avoid conflicts with auth tests
 	const envTokenKey = "TEST_CLIENT_HUBSPOT_ACCESS_TOKEN"
-	// TODO
-	// Replace with a valid access token when real tests are implemented
-	t.Setenv(envTokenKey, uuid.NewString())
 	ts, err := NewEnvTokenSource(envTokenKey)
 	require.NoError(t, err, "expected no error when creating token source")
 
@@ -25,5 +21,13 @@ func TestClient(t *testing.T) {
 	client, err := NewClient(ts, WithContext(ctx))
 	require.NoError(t, err, "expected no error when creating client")
 
-	_ = client // TODO: test client
+	t.Run("Properties", func(t *testing.T) {
+		t.Run("List", func(t *testing.T) {
+			ps, err := client.Properties.Contact.List(ctx,
+				WithArchived(false), WithProperties("name"),
+			)
+			assert.NoError(t, err, "expected no error when listing contact properties")
+			assert.NotEmpty(t, ps, "expected properties to be returned")
+		})
+	})
 }
