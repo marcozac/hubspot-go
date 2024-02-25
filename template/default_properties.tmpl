@@ -1,0 +1,13 @@
+// Code generated, DO NOT EDIT.
+
+package hubspot
+
+{{ range $obj := $ }}
+type {{ $obj.Name }} struct {
+	{{- range $field := $obj.Fields }}
+	// {{ $field.Description }}
+	{{ $field.Name }} {{ $field.Type }} {{ $field.Tag }}
+
+	{{ end }}
+}
+{{ end }}

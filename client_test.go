@@ -8,6 +8,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+// TestClient tests the NewClient function and the returned client's methods.
+//
+// WARNING
+// This test requires a valid access token to be present in the environment.
+// It also requires an high permission level to access the HubSpot API and
+// will perform real read and write requests to the API. It is recommended to
+// generate the access token in a [HubSpot test account].
+//
+// [HubSpot test account]: https://developers.hubspot.com/docs/api/account-types#developer-test-accounts
 func TestClient(t *testing.T) {
 	// use a different key to avoid conflicts with auth tests
 	const envTokenKey = "TEST_CLIENT_HUBSPOT_ACCESS_TOKEN"
