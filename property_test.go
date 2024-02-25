@@ -164,10 +164,12 @@ func TestEnumeration(t *testing.T) {
 func TestDate(t *testing.T) {
 	assert.Equal(t, "2024-02-23", Date(time.Date(2024, 2, 23, 0, 0, 0, 0, time.UTC)).String())
 	type S struct {
-		D Date `json:"d"`
+		D *Date `json:"d"`
+		O *Date `json:"o,omitempty"`
 	}
 	t.Run(("MarshalJSON"), func(t *testing.T) {
-		v := S{D: Date(time.Date(2024, 2, 23, 0, 0, 0, 0, time.UTC))}
+		d := Date(time.Date(2024, 2, 23, 0, 0, 0, 0, time.UTC))
+		v := S{D: &d}
 		data, err := json.Marshal(v)
 		require.NoError(t, err, "json.Marshal must not return an error")
 		assert.Equal(t, []byte(`{"d":"2024-02-23"}`), data)
@@ -175,9 +177,9 @@ func TestDate(t *testing.T) {
 	t.Run("UnmarshalJSON", func(t *testing.T) {
 		var s S
 		assert.NoError(t, json.Unmarshal([]byte(`{ "d": "2024-02-23" }`), &s), `json.Unmarshal: "2024-02-23"`)
-		assert.Equal(t, Date(time.Date(2024, 2, 23, 0, 0, 0, 0, time.UTC)), s.D)
+		assert.Equal(t, Date(time.Date(2024, 2, 23, 0, 0, 0, 0, time.UTC)), *s.D)
 		assert.NoError(t, json.Unmarshal([]byte(`{ "d": "2024-02-22T00:00:00Z" }`), &s), `json.Unmarshal: "2024-02-23T00:00:00Z"`)
-		assert.Equal(t, Date(time.Date(2024, 2, 22, 0, 0, 0, 0, time.UTC)), s.D)
+		assert.Equal(t, Date(time.Date(2024, 2, 22, 0, 0, 0, 0, time.UTC)), *s.D)
 		assert.Error(t, json.Unmarshal([]byte(`{ "d": 1 }`), &s), `json.Unmarshal: 1`)
 	})
 	t.Run("Wrappers", func(t *testing.T) {
@@ -348,10 +350,12 @@ func TestDate(t *testing.T) {
 func TestDateTime(t *testing.T) {
 	assert.Equal(t, "2024-02-23T16:14:31.229Z", DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC)).String())
 	type S struct {
-		D DateTime `json:"d"`
+		D *DateTime `json:"d"`
+		O *DateTime `json:"o,omitempty"`
 	}
 	t.Run(("MarshalJSON"), func(t *testing.T) {
-		v := S{D: DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC))}
+		dt := DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC))
+		v := S{D: &dt}
 		data, err := json.Marshal(v)
 		require.NoError(t, err, "json.Marshal must not return an error")
 		assert.Equal(t, []byte(`{"d":"2024-02-23T16:14:31.229Z"}`), data)
@@ -359,8 +363,8 @@ func TestDateTime(t *testing.T) {
 	t.Run("UnmarshalJSON", func(t *testing.T) {
 		var s S
 		assert.NoError(t, json.Unmarshal([]byte(`{ "d": "2024-02-23T16:14:31.229Z" }`), &s), `json.Unmarshal: "2024-02-23T16:14:31.229Z"`)
-		assert.Equal(t, DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC)), s.D)
-		assert.Equal(t, DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC)), s.D)
+		assert.Equal(t, DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC)), *s.D)
+		assert.Equal(t, DateTime(time.Date(2024, 2, 23, 16, 14, 31, 229000000, time.UTC)), *s.D)
 		assert.Error(t, json.Unmarshal([]byte(`{ "d": "2024-02-22" }`), &s), `json.Unmarshal: "2024-02-22"`)
 		assert.Error(t, json.Unmarshal([]byte(`{ "d": 1 }`), &s), `json.Unmarshal: 1`)
 	})

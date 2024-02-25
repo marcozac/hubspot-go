@@ -19,13 +19,13 @@ type ContactDefaultProperties struct {
 	FieldOfStudy string `json:"field_of_study,omitempty"`
 
 	// Date  this  contact  first  submitted  a  form.
-	FirstConversionDate DateTime `json:"first_conversion_date,omitempty"`
+	FirstConversionDate *DateTime `json:"first_conversion_date,omitempty"`
 
 	// First form this contact submitted.
 	FirstConversionEventName string `json:"first_conversion_event_name,omitempty"`
 
 	// Date first deal was created for contact. Set automatically.
-	FirstDealCreatedDate DateTime `json:"first_deal_created_date,omitempty"`
+	FirstDealCreatedDate *DateTime `json:"first_deal_created_date,omitempty"`
 
 	// Contact's gender. Required for the Facebook Ads Integration. Automatically synced from the Lead Ads tool.
 	Gender string `json:"gender,omitempty"`
@@ -85,19 +85,19 @@ type ContactDefaultProperties struct {
 	HsContentMembershipEmailConfirmed Bool `json:"hs_content_membership_email_confirmed,omitempty"`
 
 	// The time when the contact was first enrolled in the registration follow up email flow
-	HsContentMembershipFollowUpEnqueuedAt DateTime `json:"hs_content_membership_follow_up_enqueued_at,omitempty"`
+	HsContentMembershipFollowUpEnqueuedAt *DateTime `json:"hs_content_membership_follow_up_enqueued_at,omitempty"`
 
 	// Notes relating to the contact's content membership.
 	HsContentMembershipNotes string `json:"hs_content_membership_notes,omitempty"`
 
 	// Datetime at which this user was set up for Content Membership
-	HsContentMembershipRegisteredAt DateTime `json:"hs_content_membership_registered_at,omitempty"`
+	HsContentMembershipRegisteredAt *DateTime `json:"hs_content_membership_registered_at,omitempty"`
 
 	// Domain to which the registration invitation email for Content Membership was sent to
 	HsContentMembershipRegistrationDomainSentTo string `json:"hs_content_membership_registration_domain_sent_to,omitempty"`
 
 	// Datetime at which this user was sent a registration invitation email for Content Membership
-	HsContentMembershipRegistrationEmailSentAt DateTime `json:"hs_content_membership_registration_email_sent_at,omitempty"`
+	HsContentMembershipRegistrationEmailSentAt *DateTime `json:"hs_content_membership_registration_email_sent_at,omitempty"`
 
 	// Status of the contact's content membership.
 	HsContentMembershipStatus Enumeration `json:"hs_content_membership_status,omitempty"`
@@ -118,61 +118,61 @@ type ContactDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// This property captures ads consents from forms and is used by consentmanager to create / update associated data privacy consent objects
 	HsDataPrivacyAdsConsent Bool `json:"hs_data_privacy_ads_consent,omitempty"`
 
 	// The date and time when the contact entered the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredCustomer DateTime `json:"hs_date_entered_customer,omitempty"`
+	HsDateEnteredCustomer *DateTime `json:"hs_date_entered_customer,omitempty"`
 
 	// The date and time when the contact entered the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredEvangelist DateTime `json:"hs_date_entered_evangelist,omitempty"`
+	HsDateEnteredEvangelist *DateTime `json:"hs_date_entered_evangelist,omitempty"`
 
 	// The date and time when the contact entered the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredLead DateTime `json:"hs_date_entered_lead,omitempty"`
+	HsDateEnteredLead *DateTime `json:"hs_date_entered_lead,omitempty"`
 
 	// The date and time when the contact entered the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredMarketingqualifiedlead DateTime `json:"hs_date_entered_marketingqualifiedlead,omitempty"`
+	HsDateEnteredMarketingqualifiedlead *DateTime `json:"hs_date_entered_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the contact entered the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredOpportunity DateTime `json:"hs_date_entered_opportunity,omitempty"`
+	HsDateEnteredOpportunity *DateTime `json:"hs_date_entered_opportunity,omitempty"`
 
 	// The date and time when the contact entered the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredOther DateTime `json:"hs_date_entered_other,omitempty"`
+	HsDateEnteredOther *DateTime `json:"hs_date_entered_other,omitempty"`
 
 	// The date and time when the contact entered the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredSalesqualifiedlead DateTime `json:"hs_date_entered_salesqualifiedlead,omitempty"`
+	HsDateEnteredSalesqualifiedlead *DateTime `json:"hs_date_entered_salesqualifiedlead,omitempty"`
 
 	// The date and time when the contact entered the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredSubscriber DateTime `json:"hs_date_entered_subscriber,omitempty"`
+	HsDateEnteredSubscriber *DateTime `json:"hs_date_entered_subscriber,omitempty"`
 
 	// The date and time when the contact exited the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedCustomer DateTime `json:"hs_date_exited_customer,omitempty"`
+	HsDateExitedCustomer *DateTime `json:"hs_date_exited_customer,omitempty"`
 
 	// The date and time when the contact exited the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedEvangelist DateTime `json:"hs_date_exited_evangelist,omitempty"`
+	HsDateExitedEvangelist *DateTime `json:"hs_date_exited_evangelist,omitempty"`
 
 	// The date and time when the contact exited the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedLead DateTime `json:"hs_date_exited_lead,omitempty"`
+	HsDateExitedLead *DateTime `json:"hs_date_exited_lead,omitempty"`
 
 	// The date and time when the contact exited the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedMarketingqualifiedlead DateTime `json:"hs_date_exited_marketingqualifiedlead,omitempty"`
+	HsDateExitedMarketingqualifiedlead *DateTime `json:"hs_date_exited_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the contact exited the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedOpportunity DateTime `json:"hs_date_exited_opportunity,omitempty"`
+	HsDateExitedOpportunity *DateTime `json:"hs_date_exited_opportunity,omitempty"`
 
 	// The date and time when the contact exited the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedOther DateTime `json:"hs_date_exited_other,omitempty"`
+	HsDateExitedOther *DateTime `json:"hs_date_exited_other,omitempty"`
 
 	// The date and time when the contact exited the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedSalesqualifiedlead DateTime `json:"hs_date_exited_salesqualifiedlead,omitempty"`
+	HsDateExitedSalesqualifiedlead *DateTime `json:"hs_date_exited_salesqualifiedlead,omitempty"`
 
 	// The date and time when the contact exited the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedSubscriber DateTime `json:"hs_date_exited_subscriber,omitempty"`
+	HsDateExitedSubscriber *DateTime `json:"hs_date_exited_subscriber,omitempty"`
 
 	// The last time a shared document (presentation) was accessed by this contact
-	HsDocumentLastRevisited DateTime `json:"hs_document_last_revisited,omitempty"`
+	HsDocumentLastRevisited *DateTime `json:"hs_document_last_revisited,omitempty"`
 
 	// The email address associated with this contact is invalid.
 	HsEmailBadAddress Bool `json:"hs_email_bad_address,omitempty"`
@@ -196,7 +196,7 @@ type ContactDefaultProperties struct {
 	HsEmailQuarantinedReason Enumeration `json:"hs_email_quarantined_reason,omitempty"`
 
 	// When this recipient has reached the limit of email sends per time period, this property indicates the next available time to send. This is automatically set by HubSpot.
-	HsEmailRecipientFatigueRecoveryTime DateTime `json:"hs_email_recipient_fatigue_recovery_time,omitempty"`
+	HsEmailRecipientFatigueRecoveryTime *DateTime `json:"hs_email_recipient_fatigue_recovery_time,omitempty"`
 
 	// The number of marketing emails that have been sent to the current email address since the last engagement (open or link click). This is automatically set by HubSpot.
 	HsEmailSendsSinceLastEngagement Int `json:"hs_email_sends_since_last_engagement,omitempty"`
@@ -220,7 +220,7 @@ type ContactDefaultProperties struct {
 	HsFeedbackLastNpsRating Enumeration `json:"hs_feedback_last_nps_rating,omitempty"`
 
 	// The time that this contact last submitted a NPS survey response. This is automatically set by HubSpot.
-	HsFeedbackLastSurveyDate DateTime `json:"hs_feedback_last_survey_date,omitempty"`
+	HsFeedbackLastSurveyDate *DateTime `json:"hs_feedback_last_survey_date,omitempty"`
 
 	// Whether or not a contact should be shown an NPS web survey. This is automatically set by HubSpot.
 	HsFeedbackShowNpsWebSurvey Bool `json:"hs_feedback_show_nps_web_survey,omitempty"`
@@ -229,10 +229,10 @@ type ContactDefaultProperties struct {
 	HsFirstEngagementObjectId Int `json:"hs_first_engagement_object_id,omitempty"`
 
 	// The date of the first outreach (call, email, meeting or other communication) from a sales rep to the contact.
-	HsFirstOutreachDate DateTime `json:"hs_first_outreach_date,omitempty"`
+	HsFirstOutreachDate *DateTime `json:"hs_first_outreach_date,omitempty"`
 
 	// The create date of the first subscription by the contact.
-	HsFirstSubscriptionCreateDate DateTime `json:"hs_first_subscription_create_date,omitempty"`
+	HsFirstSubscriptionCreateDate *DateTime `json:"hs_first_subscription_create_date,omitempty"`
 
 	//
 	HsGoogleClickId string `json:"hs_google_click_id,omitempty"`
@@ -253,46 +253,46 @@ type ContactDefaultProperties struct {
 	HsIsUnworked Bool `json:"hs_is_unworked,omitempty"`
 
 	// The date of the last sales activity with the contact. This property is set automatically by HubSpot. Note: This field is only updated for contacts with an owner.
-	HsLastSalesActivityDate DateTime `json:"hs_last_sales_activity_date,omitempty"`
+	HsLastSalesActivityDate *DateTime `json:"hs_last_sales_activity_date,omitempty"`
 
 	// The last time a contact engaged with your site or a form, document, meetings link, or tracked email. This doesn't include marketing emails or emails to multiple contacts.
-	HsLastSalesActivityTimestamp DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
+	HsLastSalesActivityTimestamp *DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
 
 	// The type of the last engagement a contact performed. This doesn't include marketing emails or emails to multiple contacts.
 	HsLastSalesActivityType Enumeration `json:"hs_last_sales_activity_type,omitempty"`
 
 	// Most recent timestamp of any property update for this contact. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The most recent time at which an associated lead currently in a disqualified stage was moved to that stage
-	HsLatestDisqualifiedLeadDate DateTime `json:"hs_latest_disqualified_lead_date,omitempty"`
+	HsLatestDisqualifiedLeadDate *DateTime `json:"hs_latest_disqualified_lead_date,omitempty"`
 
 	// The most recent time an associated open lead was moved to a NEW or IN_PROGRESS state
-	HsLatestOpenLeadDate DateTime `json:"hs_latest_open_lead_date,omitempty"`
+	HsLatestOpenLeadDate *DateTime `json:"hs_latest_open_lead_date,omitempty"`
 
 	// The most recent time at which an associated lead currently in a qualified stage was moved to that stage
-	HsLatestQualifiedLeadDate DateTime `json:"hs_latest_qualified_lead_date,omitempty"`
+	HsLatestQualifiedLeadDate *DateTime `json:"hs_latest_qualified_lead_date,omitempty"`
 
 	// The last sequence ended date.
-	HsLatestSequenceEndedDate DateTime `json:"hs_latest_sequence_ended_date,omitempty"`
+	HsLatestSequenceEndedDate *DateTime `json:"hs_latest_sequence_ended_date,omitempty"`
 
 	// The last sequence enrolled.
 	HsLatestSequenceEnrolled Int `json:"hs_latest_sequence_enrolled,omitempty"`
 
 	// The last sequence enrolled date.
-	HsLatestSequenceEnrolledDate DateTime `json:"hs_latest_sequence_enrolled_date,omitempty"`
+	HsLatestSequenceEnrolledDate *DateTime `json:"hs_latest_sequence_enrolled_date,omitempty"`
 
 	// The last sequence finished date.
-	HsLatestSequenceFinishedDate DateTime `json:"hs_latest_sequence_finished_date,omitempty"`
+	HsLatestSequenceFinishedDate *DateTime `json:"hs_latest_sequence_finished_date,omitempty"`
 
 	// The last sequence unenrolled date.
-	HsLatestSequenceUnenrolledDate DateTime `json:"hs_latest_sequence_unenrolled_date,omitempty"`
+	HsLatestSequenceUnenrolledDate *DateTime `json:"hs_latest_sequence_unenrolled_date,omitempty"`
 
 	// The time of the latest session for a contact
-	HsLatestSourceTimestamp DateTime `json:"hs_latest_source_timestamp,omitempty"`
+	HsLatestSourceTimestamp *DateTime `json:"hs_latest_source_timestamp,omitempty"`
 
 	// The create date of the latest subscription by the contact.
-	HsLatestSubscriptionCreateDate DateTime `json:"hs_latest_subscription_create_date,omitempty"`
+	HsLatestSubscriptionCreateDate *DateTime `json:"hs_latest_subscription_create_date,omitempty"`
 
 	// The contact's sales, prospecting or outreach status
 	HsLeadStatus Enumeration `json:"hs_lead_status,omitempty"`
@@ -361,7 +361,7 @@ type ContactDefaultProperties struct {
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// The date the current contact owner first engaged with the contact.
-	HsSaFirstEngagementDate DateTime `json:"hs_sa_first_engagement_date,omitempty"`
+	HsSaFirstEngagementDate *DateTime `json:"hs_sa_first_engagement_date,omitempty"`
 
 	// A description of the current contact owner's first engagement with the contact.
 	HsSaFirstEngagementDescr Enumeration `json:"hs_sa_first_engagement_descr,omitempty"`
@@ -370,10 +370,10 @@ type ContactDefaultProperties struct {
 	HsSaFirstEngagementObjectType Enumeration `json:"hs_sa_first_engagement_object_type,omitempty"`
 
 	// The last time a tracked sales email was clicked by this user
-	HsSalesEmailLastClicked DateTime `json:"hs_sales_email_last_clicked,omitempty"`
+	HsSalesEmailLastClicked *DateTime `json:"hs_sales_email_last_clicked,omitempty"`
 
 	// The last time a tracked sales email was opened by this contact. This property does not update for emails that were sent to more than one contact.
-	HsSalesEmailLastOpened DateTime `json:"hs_sales_email_last_opened,omitempty"`
+	HsSalesEmailLastOpened *DateTime `json:"hs_sales_email_last_opened,omitempty"`
 
 	// Mobile number with country code
 	HsSearchableCalculatedInternationalMobileNumber string `json:"hs_searchable_calculated_international_mobile_number,omitempty"`
@@ -502,52 +502,52 @@ type ContactDefaultProperties struct {
 	HsV2CumulativeTimeInSubscriber Int `json:"hs_v2_cumulative_time_in_subscriber,omitempty"`
 
 	// The date and time when the contact entered the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredCustomer DateTime `json:"hs_v2_date_entered_customer,omitempty"`
+	HsV2DateEnteredCustomer *DateTime `json:"hs_v2_date_entered_customer,omitempty"`
 
 	// The date and time when the contact entered the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredEvangelist DateTime `json:"hs_v2_date_entered_evangelist,omitempty"`
+	HsV2DateEnteredEvangelist *DateTime `json:"hs_v2_date_entered_evangelist,omitempty"`
 
 	// The date and time when the contact entered the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredLead DateTime `json:"hs_v2_date_entered_lead,omitempty"`
+	HsV2DateEnteredLead *DateTime `json:"hs_v2_date_entered_lead,omitempty"`
 
 	// The date and time when the contact entered the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredMarketingqualifiedlead DateTime `json:"hs_v2_date_entered_marketingqualifiedlead,omitempty"`
+	HsV2DateEnteredMarketingqualifiedlead *DateTime `json:"hs_v2_date_entered_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the contact entered the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredOpportunity DateTime `json:"hs_v2_date_entered_opportunity,omitempty"`
+	HsV2DateEnteredOpportunity *DateTime `json:"hs_v2_date_entered_opportunity,omitempty"`
 
 	// The date and time when the contact entered the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredOther DateTime `json:"hs_v2_date_entered_other,omitempty"`
+	HsV2DateEnteredOther *DateTime `json:"hs_v2_date_entered_other,omitempty"`
 
 	// The date and time when the contact entered the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredSalesqualifiedlead DateTime `json:"hs_v2_date_entered_salesqualifiedlead,omitempty"`
+	HsV2DateEnteredSalesqualifiedlead *DateTime `json:"hs_v2_date_entered_salesqualifiedlead,omitempty"`
 
 	// The date and time when the contact entered the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateEnteredSubscriber DateTime `json:"hs_v2_date_entered_subscriber,omitempty"`
+	HsV2DateEnteredSubscriber *DateTime `json:"hs_v2_date_entered_subscriber,omitempty"`
 
 	// The date and time when the contact exited the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedCustomer DateTime `json:"hs_v2_date_exited_customer,omitempty"`
+	HsV2DateExitedCustomer *DateTime `json:"hs_v2_date_exited_customer,omitempty"`
 
 	// The date and time when the contact exited the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedEvangelist DateTime `json:"hs_v2_date_exited_evangelist,omitempty"`
+	HsV2DateExitedEvangelist *DateTime `json:"hs_v2_date_exited_evangelist,omitempty"`
 
 	// The date and time when the contact exited the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedLead DateTime `json:"hs_v2_date_exited_lead,omitempty"`
+	HsV2DateExitedLead *DateTime `json:"hs_v2_date_exited_lead,omitempty"`
 
 	// The date and time when the contact exited the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedMarketingqualifiedlead DateTime `json:"hs_v2_date_exited_marketingqualifiedlead,omitempty"`
+	HsV2DateExitedMarketingqualifiedlead *DateTime `json:"hs_v2_date_exited_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the contact exited the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedOpportunity DateTime `json:"hs_v2_date_exited_opportunity,omitempty"`
+	HsV2DateExitedOpportunity *DateTime `json:"hs_v2_date_exited_opportunity,omitempty"`
 
 	// The date and time when the contact exited the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedOther DateTime `json:"hs_v2_date_exited_other,omitempty"`
+	HsV2DateExitedOther *DateTime `json:"hs_v2_date_exited_other,omitempty"`
 
 	// The date and time when the contact exited the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedSalesqualifiedlead DateTime `json:"hs_v2_date_exited_salesqualifiedlead,omitempty"`
+	HsV2DateExitedSalesqualifiedlead *DateTime `json:"hs_v2_date_exited_salesqualifiedlead,omitempty"`
 
 	// The date and time when the contact exited the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsV2DateExitedSubscriber DateTime `json:"hs_v2_date_exited_subscriber,omitempty"`
+	HsV2DateExitedSubscriber *DateTime `json:"hs_v2_date_exited_subscriber,omitempty"`
 
 	// The total time in seconds spent by the contact in the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline since it last entered this stage
 	HsV2LatestTimeInCustomer Int `json:"hs_v2_latest_time_in_customer,omitempty"`
@@ -580,7 +580,7 @@ type ContactDefaultProperties struct {
 	HsWhatsappPhoneNumber string `json:"hs_whatsapp_phone_number,omitempty"`
 
 	// The most recent date a HubSpot Owner was assigned to a contact. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The city reported by a contact's IP address. This is automatically set by HubSpot and can be used for segmentation and reporting.
 	IpCity string `json:"ip_city,omitempty"`
@@ -607,7 +607,7 @@ type ContactDefaultProperties struct {
 	JobFunction string `json:"job_function,omitempty"`
 
 	// The date any property on this contact was modified
-	Lastmodifieddate DateTime `json:"lastmodifieddate,omitempty"`
+	Lastmodifieddate *DateTime `json:"lastmodifieddate,omitempty"`
 
 	// Contact's marital status. Required for the Facebook Ads Integration. Automatically synced from the Lead Ads tool.
 	MaritalStatus string `json:"marital_status,omitempty"`
@@ -625,7 +625,7 @@ type ContactDefaultProperties struct {
 	NumUniqueConversionEvents Int `json:"num_unique_conversion_events,omitempty"`
 
 	// The date this contact last submitted a form
-	RecentConversionDate DateTime `json:"recent_conversion_date,omitempty"`
+	RecentConversionDate *DateTime `json:"recent_conversion_date,omitempty"`
 
 	// The last form this contact submitted
 	RecentConversionEventName string `json:"recent_conversion_event_name,omitempty"`
@@ -634,7 +634,7 @@ type ContactDefaultProperties struct {
 	RecentDealAmount Int `json:"recent_deal_amount,omitempty"`
 
 	// Date last deal associated with contact was closed-won. Set automatically.
-	RecentDealCloseDate DateTime `json:"recent_deal_close_date,omitempty"`
+	RecentDealCloseDate *DateTime `json:"recent_deal_close_date,omitempty"`
 
 	// Contact's relationship status. Required for the Facebook Ads Integration. Automatically synced from the Lead Ads tool.
 	RelationshipStatus string `json:"relationship_status,omitempty"`
@@ -715,7 +715,7 @@ type ContactDefaultProperties struct {
 	HsPersona Enumeration `json:"hs_persona,omitempty"`
 
 	// The date of the most recent click on a published social message. This is set automatically by HubSpot for each contact.
-	HsSocialLastEngagement DateTime `json:"hs_social_last_engagement,omitempty"`
+	HsSocialLastEngagement *DateTime `json:"hs_social_last_engagement,omitempty"`
 
 	// Total number of events for this contact. Set automatically.
 	HsAnalyticsNumEventCompletions Int `json:"hs_analytics_num_event_completions,omitempty"`
@@ -736,13 +736,13 @@ type ContactDefaultProperties struct {
 	Fax string `json:"fax,omitempty"`
 
 	// First time the contact has been seen. Set automatically.
-	HsAnalyticsFirstTimestamp DateTime `json:"hs_analytics_first_timestamp,omitempty"`
+	HsAnalyticsFirstTimestamp *DateTime `json:"hs_analytics_first_timestamp,omitempty"`
 
 	// The name of the last marketing email sent to the current email address. This is automatically set by HubSpot.
 	HsEmailLastEmailName string `json:"hs_email_last_email_name,omitempty"`
 
 	// The date of the most recent delivery for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailLastSendDate DateTime `json:"hs_email_last_send_date,omitempty"`
+	HsEmailLastSendDate *DateTime `json:"hs_email_last_send_date,omitempty"`
 
 	// The number clicks on links shared on Facebook
 	HsSocialFacebookClicks Int `json:"hs_social_facebook_clicks,omitempty"`
@@ -751,7 +751,7 @@ type ContactDefaultProperties struct {
 	Address string `json:"address,omitempty"`
 
 	// The date of the last meeting that has been scheduled by a contact through the meetings tool. If multiple meetings have been scheduled, the date of the last chronological meeting in the timeline is shown.
-	EngagementsLastMeetingBooked DateTime `json:"engagements_last_meeting_booked,omitempty"`
+	EngagementsLastMeetingBooked *DateTime `json:"engagements_last_meeting_booked,omitempty"`
 
 	// UTM parameter for marketing campaign (e.g. a specific email) responsible for recent meeting booking. Only populated when tracking parameters are included in meeting link.
 	EngagementsLastMeetingBookedCampaign string `json:"engagements_last_meeting_booked_campaign,omitempty"`
@@ -763,16 +763,16 @@ type ContactDefaultProperties struct {
 	EngagementsLastMeetingBookedSource string `json:"engagements_last_meeting_booked_source,omitempty"`
 
 	// First time the contact visited your website. Set automatically.
-	HsAnalyticsFirstVisitTimestamp DateTime `json:"hs_analytics_first_visit_timestamp,omitempty"`
+	HsAnalyticsFirstVisitTimestamp *DateTime `json:"hs_analytics_first_visit_timestamp,omitempty"`
 
 	// The date of the most recent open for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailLastOpenDate DateTime `json:"hs_email_last_open_date,omitempty"`
+	HsEmailLastOpenDate *DateTime `json:"hs_email_last_open_date,omitempty"`
 
 	// The date of the most recent meeting (past or upcoming) logged for, scheduled with, or booked by this contact.
-	HsLatestMeetingActivity DateTime `json:"hs_latest_meeting_activity,omitempty"`
+	HsLatestMeetingActivity *DateTime `json:"hs_latest_meeting_activity,omitempty"`
 
 	// The last time a tracked sales email was replied to by this user. This is set automatically by HubSpot based on user actions in the contact record.
-	HsSalesEmailLastReplied DateTime `json:"hs_sales_email_last_replied,omitempty"`
+	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// The number clicks on links shared on LinkedIn
 	HsSocialLinkedinClicks Int `json:"hs_social_linkedin_clicks,omitempty"`
@@ -781,13 +781,13 @@ type ContactDefaultProperties struct {
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a contact. This is set automatically by HubSpot based on user actions in the contact record.
-	NotesLastContacted DateTime `json:"notes_last_contacted,omitempty"`
+	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, note, sales email, SMS, or WhatsApp message was logged for a contact. This is set automatically by HubSpot based on user actions in the contact record.
-	NotesLastUpdated DateTime `json:"notes_last_updated,omitempty"`
+	NotesLastUpdated *DateTime `json:"notes_last_updated,omitempty"`
 
 	// The date of the next upcoming activity for a contact. This is set automatically by HubSpot based on user actions in the contact record.
-	NotesNextActivityDate DateTime `json:"notes_next_activity_date,omitempty"`
+	NotesNextActivityDate *DateTime `json:"notes_next_activity_date,omitempty"`
 
 	// The number of times a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a contact record. This is set automatically by HubSpot based on user actions in the contact record.
 	NumContactedNotes Int `json:"num_contacted_notes,omitempty"`
@@ -811,10 +811,10 @@ type ContactDefaultProperties struct {
 	City string `json:"city,omitempty"`
 
 	// Timestamp for most recent webpage view on your website.
-	HsAnalyticsLastTimestamp DateTime `json:"hs_analytics_last_timestamp,omitempty"`
+	HsAnalyticsLastTimestamp *DateTime `json:"hs_analytics_last_timestamp,omitempty"`
 
 	// The date of the most recent link click for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailLastClickDate DateTime `json:"hs_email_last_click_date,omitempty"`
+	HsEmailLastClickDate *DateTime `json:"hs_email_last_click_date,omitempty"`
 
 	// The number clicks on links shared on Google Plus
 	HsSocialGooglePlusClicks Int `json:"hs_social_google_plus_clicks,omitempty"`
@@ -832,10 +832,10 @@ type ContactDefaultProperties struct {
 	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
 
 	// Timestamp for start of the most recent session for this contact to your website.
-	HsAnalyticsLastVisitTimestamp DateTime `json:"hs_analytics_last_visit_timestamp,omitempty"`
+	HsAnalyticsLastVisitTimestamp *DateTime `json:"hs_analytics_last_visit_timestamp,omitempty"`
 
 	// The date of the earliest delivery for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailFirstSendDate DateTime `json:"hs_email_first_send_date,omitempty"`
+	HsEmailFirstSendDate *DateTime `json:"hs_email_first_send_date,omitempty"`
 
 	// The number of clicks on published social messages. This is set automatically by HubSpot for each contact.
 	HsSocialNumBroadcastClicks Int `json:"hs_social_num_broadcast_clicks,omitempty"`
@@ -850,7 +850,7 @@ type ContactDefaultProperties struct {
 	HsAnalyticsSource Enumeration `json:"hs_analytics_source,omitempty"`
 
 	// The date of the earliest open for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailFirstOpenDate DateTime `json:"hs_email_first_open_date,omitempty"`
+	HsEmailFirstOpenDate *DateTime `json:"hs_email_first_open_date,omitempty"`
 
 	// The source of the latest session for a contact
 	HsLatestSource Enumeration `json:"hs_latest_source,omitempty"`
@@ -868,7 +868,7 @@ type ContactDefaultProperties struct {
 	HsAnalyticsSourceData1 string `json:"hs_analytics_source_data_1,omitempty"`
 
 	// The date of the earliest link click for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailFirstClickDate DateTime `json:"hs_email_first_click_date,omitempty"`
+	HsEmailFirstClickDate *DateTime `json:"hs_email_first_click_date,omitempty"`
 
 	// Additional information about the latest source for the last session the contact used to find your website. Set automatically.
 	HsLatestSourceData1 string `json:"hs_latest_source_data_1,omitempty"`
@@ -895,7 +895,7 @@ type ContactDefaultProperties struct {
 	HsAnalyticsFirstReferrer string `json:"hs_analytics_first_referrer,omitempty"`
 
 	// The date of the earliest reply for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailFirstReplyDate DateTime `json:"hs_email_first_reply_date,omitempty"`
+	HsEmailFirstReplyDate *DateTime `json:"hs_email_first_reply_date,omitempty"`
 
 	// A contact's job title
 	Jobtitle string `json:"jobtitle,omitempty"`
@@ -907,13 +907,13 @@ type ContactDefaultProperties struct {
 	HsAnalyticsLastReferrer string `json:"hs_analytics_last_referrer,omitempty"`
 
 	// The date of the latest reply for any marketing email to the current email address. This is automatically set by HubSpot.
-	HsEmailLastReplyDate DateTime `json:"hs_email_last_reply_date,omitempty"`
+	HsEmailLastReplyDate *DateTime `json:"hs_email_last_reply_date,omitempty"`
 
 	// A default property to be used for any message or comments a contact may want to leave on a form.
 	Message string `json:"message,omitempty"`
 
 	// Date the  contact  became  a  customer. Set automatically when a deal or opportunity is marked as closed-won. It can also be set manually or programmatically.
-	Closedate DateTime `json:"closedate,omitempty"`
+	Closedate *DateTime `json:"closedate,omitempty"`
 
 	// Average number of pageviews per session for this contact. Set automatically.
 	HsAnalyticsAveragePageViews Int `json:"hs_analytics_average_page_views,omitempty"`
@@ -925,28 +925,28 @@ type ContactDefaultProperties struct {
 	HsAnalyticsRevenue Int `json:"hs_analytics_revenue,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Lead. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageLeadDate DateTime `json:"hs_lifecyclestage_lead_date,omitempty"`
+	HsLifecyclestageLeadDate *DateTime `json:"hs_lifecyclestage_lead_date,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to MQL. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageMarketingqualifiedleadDate DateTime `json:"hs_lifecyclestage_marketingqualifiedlead_date,omitempty"`
+	HsLifecyclestageMarketingqualifiedleadDate *DateTime `json:"hs_lifecyclestage_marketingqualifiedlead_date,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Opportunity. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageOpportunityDate DateTime `json:"hs_lifecyclestage_opportunity_date,omitempty"`
+	HsLifecyclestageOpportunityDate *DateTime `json:"hs_lifecyclestage_opportunity_date,omitempty"`
 
 	// The qualification of contacts to sales readiness. It can be set through imports, forms, workflows, and manually on a per contact basis.
 	Lifecyclestage Enumeration `json:"lifecyclestage,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to SQL. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageSalesqualifiedleadDate DateTime `json:"hs_lifecyclestage_salesqualifiedlead_date,omitempty"`
+	HsLifecyclestageSalesqualifiedleadDate *DateTime `json:"hs_lifecyclestage_salesqualifiedlead_date,omitempty"`
 
 	// The date that a contact entered the system
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Evangelist. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageEvangelistDate DateTime `json:"hs_lifecyclestage_evangelist_date,omitempty"`
+	HsLifecyclestageEvangelistDate *DateTime `json:"hs_lifecyclestage_evangelist_date,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Customer. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageCustomerDate DateTime `json:"hs_lifecyclestage_customer_date,omitempty"`
+	HsLifecyclestageCustomerDate *DateTime `json:"hs_lifecyclestage_customer_date,omitempty"`
 
 	// The number that shows qualification of contacts to sales readiness. It can be set in HubSpot's Lead Scoring app.
 	Hubspotscore Int `json:"hubspotscore,omitempty"`
@@ -955,10 +955,10 @@ type ContactDefaultProperties struct {
 	Company string `json:"company,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Subscriber. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageSubscriberDate DateTime `json:"hs_lifecyclestage_subscriber_date,omitempty"`
+	HsLifecyclestageSubscriberDate *DateTime `json:"hs_lifecyclestage_subscriber_date,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to Other. This is automatically set by HubSpot for each contact.
-	HsLifecyclestageOtherDate DateTime `json:"hs_lifecyclestage_other_date,omitempty"`
+	HsLifecyclestageOtherDate *DateTime `json:"hs_lifecyclestage_other_date,omitempty"`
 
 	// Associated company website.
 	Website string `json:"website,omitempty"`
@@ -990,28 +990,28 @@ type CompanyDefaultProperties struct {
 	AboutUs string `json:"about_us,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property closedate calculated as EARLIEST_VALUE via values of closedate on object type ObjectTypeId{legacyObjectType=CONTACT}
-	ClosedateTimestampEarliestValueA2a17e6e DateTime `json:"closedate_timestamp_earliest_value_a2a17e6e,omitempty"`
+	ClosedateTimestampEarliestValueA2a17e6e *DateTime `json:"closedate_timestamp_earliest_value_a2a17e6e,omitempty"`
 
 	// Number of facebook fans
 	Facebookfans Int `json:"facebookfans,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property first_contact_createdate calculated as EARLIEST_VALUE via values of createdate on object type ObjectTypeId{legacyObjectType=CONTACT}
-	FirstContactCreatedateTimestampEarliestValue78b50eea DateTime `json:"first_contact_createdate_timestamp_earliest_value_78b50eea,omitempty"`
+	FirstContactCreatedateTimestampEarliestValue78b50eea *DateTime `json:"first_contact_createdate_timestamp_earliest_value_78b50eea,omitempty"`
 
 	// The first conversion date across all contacts associated this company or organization
-	FirstConversionDate DateTime `json:"first_conversion_date,omitempty"`
+	FirstConversionDate *DateTime `json:"first_conversion_date,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property first_conversion_date calculated as EARLIEST_VALUE via values of first_conversion_date on object type ObjectTypeId{legacyObjectType=CONTACT}
-	FirstConversionDateTimestampEarliestValue61f58f2c DateTime `json:"first_conversion_date_timestamp_earliest_value_61f58f2c,omitempty"`
+	FirstConversionDateTimestampEarliestValue61f58f2c *DateTime `json:"first_conversion_date_timestamp_earliest_value_61f58f2c,omitempty"`
 
 	// The first form submitted across all contacts associated this company or organization
 	FirstConversionEventName string `json:"first_conversion_event_name,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property first_conversion_event_name calculated as EARLIEST_VALUE via values of first_conversion_event_name on object type ObjectTypeId{legacyObjectType=CONTACT}
-	FirstConversionEventNameTimestampEarliestValue68ddae0a DateTime `json:"first_conversion_event_name_timestamp_earliest_value_68ddae0a,omitempty"`
+	FirstConversionEventNameTimestampEarliestValue68ddae0a *DateTime `json:"first_conversion_event_name_timestamp_earliest_value_68ddae0a,omitempty"`
 
 	// Date the first deal was associated with this company record.
-	FirstDealCreatedDate DateTime `json:"first_deal_created_date,omitempty"`
+	FirstDealCreatedDate *DateTime `json:"first_deal_created_date,omitempty"`
 
 	// The year the company was created. Powered by HubSpot Insights.
 	FoundedYear string `json:"founded_year,omitempty"`
@@ -1023,40 +1023,40 @@ type CompanyDefaultProperties struct {
 	HsAllAssignedBusinessUnitIds Enumeration `json:"hs_all_assigned_business_unit_ids,omitempty"`
 
 	// The first activity for any contact associated with this company or organization
-	HsAnalyticsFirstTimestamp DateTime `json:"hs_analytics_first_timestamp,omitempty"`
+	HsAnalyticsFirstTimestamp *DateTime `json:"hs_analytics_first_timestamp,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_first_timestamp calculated as EARLIEST_VALUE via values of hs_analytics_first_timestamp on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsFirstTimestampTimestampEarliestValue11e3a63a DateTime `json:"hs_analytics_first_timestamp_timestamp_earliest_value_11e3a63a,omitempty"`
+	HsAnalyticsFirstTimestampTimestampEarliestValue11e3a63a *DateTime `json:"hs_analytics_first_timestamp_timestamp_earliest_value_11e3a63a,omitempty"`
 
 	// The campaign responsible for the first touch creation of the first contact associated with this company
 	HsAnalyticsFirstTouchConvertingCampaign string `json:"hs_analytics_first_touch_converting_campaign,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_first_touch_converting_campaign calculated as EARLIEST_VALUE via values of hs_analytics_first_touch_converting_campaign on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsFirstTouchConvertingCampaignTimestampEarliestValue4757fe10 DateTime `json:"hs_analytics_first_touch_converting_campaign_timestamp_earliest_value_4757fe10,omitempty"`
+	HsAnalyticsFirstTouchConvertingCampaignTimestampEarliestValue4757fe10 *DateTime `json:"hs_analytics_first_touch_converting_campaign_timestamp_earliest_value_4757fe10,omitempty"`
 
 	// Time of first session across all contacts associated with this company or organization
-	HsAnalyticsFirstVisitTimestamp DateTime `json:"hs_analytics_first_visit_timestamp,omitempty"`
+	HsAnalyticsFirstVisitTimestamp *DateTime `json:"hs_analytics_first_visit_timestamp,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_first_visit_timestamp calculated as EARLIEST_VALUE via values of hs_analytics_first_visit_timestamp on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsFirstVisitTimestampTimestampEarliestValueAccc17ae DateTime `json:"hs_analytics_first_visit_timestamp_timestamp_earliest_value_accc17ae,omitempty"`
+	HsAnalyticsFirstVisitTimestampTimestampEarliestValueAccc17ae *DateTime `json:"hs_analytics_first_visit_timestamp_timestamp_earliest_value_accc17ae,omitempty"`
 
 	// Time last seen across all contacts associated with this company or organization
-	HsAnalyticsLastTimestamp DateTime `json:"hs_analytics_last_timestamp,omitempty"`
+	HsAnalyticsLastTimestamp *DateTime `json:"hs_analytics_last_timestamp,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_last_timestamp calculated as LATEST_VALUE via values of hs_analytics_last_timestamp on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsLastTimestampTimestampLatestValue4e16365a DateTime `json:"hs_analytics_last_timestamp_timestamp_latest_value_4e16365a,omitempty"`
+	HsAnalyticsLastTimestampTimestampLatestValue4e16365a *DateTime `json:"hs_analytics_last_timestamp_timestamp_latest_value_4e16365a,omitempty"`
 
 	// The campaign responsible for the last touch creation of the first contact associated with this company
 	HsAnalyticsLastTouchConvertingCampaign string `json:"hs_analytics_last_touch_converting_campaign,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_last_touch_converting_campaign calculated as LATEST_VALUE via values of hs_analytics_last_touch_converting_campaign on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsLastTouchConvertingCampaignTimestampLatestValue81a64e30 DateTime `json:"hs_analytics_last_touch_converting_campaign_timestamp_latest_value_81a64e30,omitempty"`
+	HsAnalyticsLastTouchConvertingCampaignTimestampLatestValue81a64e30 *DateTime `json:"hs_analytics_last_touch_converting_campaign_timestamp_latest_value_81a64e30,omitempty"`
 
 	// Time of the last session attributed to any contacts that are associated with this company record.
-	HsAnalyticsLastVisitTimestamp DateTime `json:"hs_analytics_last_visit_timestamp,omitempty"`
+	HsAnalyticsLastVisitTimestamp *DateTime `json:"hs_analytics_last_visit_timestamp,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_last_visit_timestamp calculated as LATEST_VALUE via values of hs_analytics_last_visit_timestamp on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsLastVisitTimestampTimestampLatestValue999a0fce DateTime `json:"hs_analytics_last_visit_timestamp_timestamp_latest_value_999a0fce,omitempty"`
+	HsAnalyticsLastVisitTimestampTimestampLatestValue999a0fce *DateTime `json:"hs_analytics_last_visit_timestamp_timestamp_latest_value_999a0fce,omitempty"`
 
 	// Source of the last session attributed to any contacts that are associated with this company
 	HsAnalyticsLatestSource Enumeration `json:"hs_analytics_latest_source,omitempty"`
@@ -1068,7 +1068,7 @@ type CompanyDefaultProperties struct {
 	HsAnalyticsLatestSourceData2 string `json:"hs_analytics_latest_source_data_2,omitempty"`
 
 	// Timestamp of when latest source occurred
-	HsAnalyticsLatestSourceTimestamp DateTime `json:"hs_analytics_latest_source_timestamp,omitempty"`
+	HsAnalyticsLatestSourceTimestamp *DateTime `json:"hs_analytics_latest_source_timestamp,omitempty"`
 
 	// Total number of page views across all contacts associated with this company or organization
 	HsAnalyticsNumPageViews Int `json:"hs_analytics_num_page_views,omitempty"`
@@ -1089,16 +1089,16 @@ type CompanyDefaultProperties struct {
 	HsAnalyticsSourceData1 string `json:"hs_analytics_source_data_1,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_source_data_1 calculated as EARLIEST_VALUE via values of hs_analytics_source_data_1 on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsSourceData1TimestampEarliestValue9b2f1fa1 DateTime `json:"hs_analytics_source_data_1_timestamp_earliest_value_9b2f1fa1,omitempty"`
+	HsAnalyticsSourceData1TimestampEarliestValue9b2f1fa1 *DateTime `json:"hs_analytics_source_data_1_timestamp_earliest_value_9b2f1fa1,omitempty"`
 
 	// Additional information about the original source for the contact with the earliest activity for this company or organization
 	HsAnalyticsSourceData2 string `json:"hs_analytics_source_data_2,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_source_data_2 calculated as EARLIEST_VALUE via values of hs_analytics_source_data_2 on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsSourceData2TimestampEarliestValue9b2f9400 DateTime `json:"hs_analytics_source_data_2_timestamp_earliest_value_9b2f9400,omitempty"`
+	HsAnalyticsSourceData2TimestampEarliestValue9b2f9400 *DateTime `json:"hs_analytics_source_data_2_timestamp_earliest_value_9b2f9400,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property hs_analytics_source calculated as EARLIEST_VALUE via values of hs_analytics_source on object type ObjectTypeId{legacyObjectType=CONTACT}
-	HsAnalyticsSourceTimestampEarliestValue25a3a52c DateTime `json:"hs_analytics_source_timestamp_earliest_value_25a3a52c,omitempty"`
+	HsAnalyticsSourceTimestampEarliestValue25a3a52c *DateTime `json:"hs_analytics_source_timestamp_earliest_value_25a3a52c,omitempty"`
 
 	// The currency code associated with the annual revenue amount
 	HsAnnualRevenueCurrencyCode string `json:"hs_annual_revenue_currency_code,omitempty"`
@@ -1110,55 +1110,55 @@ type CompanyDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// The date and time when the company entered the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredCustomer DateTime `json:"hs_date_entered_customer,omitempty"`
+	HsDateEnteredCustomer *DateTime `json:"hs_date_entered_customer,omitempty"`
 
 	// The date and time when the company entered the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredEvangelist DateTime `json:"hs_date_entered_evangelist,omitempty"`
+	HsDateEnteredEvangelist *DateTime `json:"hs_date_entered_evangelist,omitempty"`
 
 	// The date and time when the company entered the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredLead DateTime `json:"hs_date_entered_lead,omitempty"`
+	HsDateEnteredLead *DateTime `json:"hs_date_entered_lead,omitempty"`
 
 	// The date and time when the company entered the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredMarketingqualifiedlead DateTime `json:"hs_date_entered_marketingqualifiedlead,omitempty"`
+	HsDateEnteredMarketingqualifiedlead *DateTime `json:"hs_date_entered_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the company entered the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredOpportunity DateTime `json:"hs_date_entered_opportunity,omitempty"`
+	HsDateEnteredOpportunity *DateTime `json:"hs_date_entered_opportunity,omitempty"`
 
 	// The date and time when the company entered the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredOther DateTime `json:"hs_date_entered_other,omitempty"`
+	HsDateEnteredOther *DateTime `json:"hs_date_entered_other,omitempty"`
 
 	// The date and time when the company entered the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredSalesqualifiedlead DateTime `json:"hs_date_entered_salesqualifiedlead,omitempty"`
+	HsDateEnteredSalesqualifiedlead *DateTime `json:"hs_date_entered_salesqualifiedlead,omitempty"`
 
 	// The date and time when the company entered the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateEnteredSubscriber DateTime `json:"hs_date_entered_subscriber,omitempty"`
+	HsDateEnteredSubscriber *DateTime `json:"hs_date_entered_subscriber,omitempty"`
 
 	// The date and time when the company exited the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedCustomer DateTime `json:"hs_date_exited_customer,omitempty"`
+	HsDateExitedCustomer *DateTime `json:"hs_date_exited_customer,omitempty"`
 
 	// The date and time when the company exited the 'Evangelist' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedEvangelist DateTime `json:"hs_date_exited_evangelist,omitempty"`
+	HsDateExitedEvangelist *DateTime `json:"hs_date_exited_evangelist,omitempty"`
 
 	// The date and time when the company exited the 'Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedLead DateTime `json:"hs_date_exited_lead,omitempty"`
+	HsDateExitedLead *DateTime `json:"hs_date_exited_lead,omitempty"`
 
 	// The date and time when the company exited the 'Marketing Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedMarketingqualifiedlead DateTime `json:"hs_date_exited_marketingqualifiedlead,omitempty"`
+	HsDateExitedMarketingqualifiedlead *DateTime `json:"hs_date_exited_marketingqualifiedlead,omitempty"`
 
 	// The date and time when the company exited the 'Opportunity' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedOpportunity DateTime `json:"hs_date_exited_opportunity,omitempty"`
+	HsDateExitedOpportunity *DateTime `json:"hs_date_exited_opportunity,omitempty"`
 
 	// The date and time when the company exited the 'Other' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedOther DateTime `json:"hs_date_exited_other,omitempty"`
+	HsDateExitedOther *DateTime `json:"hs_date_exited_other,omitempty"`
 
 	// The date and time when the company exited the 'Sales Qualified Lead' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedSalesqualifiedlead DateTime `json:"hs_date_exited_salesqualifiedlead,omitempty"`
+	HsDateExitedSalesqualifiedlead *DateTime `json:"hs_date_exited_salesqualifiedlead,omitempty"`
 
 	// The date and time when the company exited the 'Subscriber' stage, 'Lifecycle Stage Pipeline' pipeline
-	HsDateExitedSubscriber DateTime `json:"hs_date_exited_subscriber,omitempty"`
+	HsDateExitedSubscriber *DateTime `json:"hs_date_exited_subscriber,omitempty"`
 
 	// How well this company matches your Ideal Customer Profile. Tier 1 means a great fit for your products/services, Tier 3 might be acceptable, but low priority.
 	HsIdealCustomerProfile Enumeration `json:"hs_ideal_customer_profile,omitempty"`
@@ -1167,28 +1167,28 @@ type CompanyDefaultProperties struct {
 	HsIsTargetAccount Bool `json:"hs_is_target_account,omitempty"`
 
 	// The last date of booked meetings associated with the company
-	HsLastBookedMeetingDate DateTime `json:"hs_last_booked_meeting_date,omitempty"`
+	HsLastBookedMeetingDate *DateTime `json:"hs_last_booked_meeting_date,omitempty"`
 
 	// The last date of logged calls associated with the company
-	HsLastLoggedCallDate DateTime `json:"hs_last_logged_call_date,omitempty"`
+	HsLastLoggedCallDate *DateTime `json:"hs_last_logged_call_date,omitempty"`
 
 	// The last due date of open tasks associated with the company
-	HsLastOpenTaskDate DateTime `json:"hs_last_open_task_date,omitempty"`
+	HsLastOpenTaskDate *DateTime `json:"hs_last_open_task_date,omitempty"`
 
 	// The date of the last sales activity with the company in seconds.
-	HsLastSalesActivityDate DateTime `json:"hs_last_sales_activity_date,omitempty"`
+	HsLastSalesActivityDate *DateTime `json:"hs_last_sales_activity_date,omitempty"`
 
 	// The last time a contact engaged with your site or a form, document, meetings link, or tracked email. This doesn't include marketing emails or emails to multiple contacts.
-	HsLastSalesActivityTimestamp DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
+	HsLastSalesActivityTimestamp *DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
 
 	// The type of the last engagement a company performed. This doesn't include marketing emails or emails to multiple contacts.
 	HsLastSalesActivityType Enumeration `json:"hs_last_sales_activity_type,omitempty"`
 
 	// Most recent timestamp of any property update for this company. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Latest created date of all associated active Subscriptions
-	HsLatestCreatedateOfActiveSubscriptions DateTime `json:"hs_latest_createdate_of_active_subscriptions,omitempty"`
+	HsLatestCreatedateOfActiveSubscriptions *DateTime `json:"hs_latest_createdate_of_active_subscriptions,omitempty"`
 
 	// The list of Company record IDs that have been merged into this Company. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -1254,7 +1254,7 @@ type CompanyDefaultProperties struct {
 	HsTargetAccountProbability Int `json:"hs_target_account_probability,omitempty"`
 
 	// The date when the target account recommendation is snoozed.
-	HsTargetAccountRecommendationSnoozeTime DateTime `json:"hs_target_account_recommendation_snooze_time,omitempty"`
+	HsTargetAccountRecommendationSnoozeTime *DateTime `json:"hs_target_account_recommendation_snooze_time,omitempty"`
 
 	// The state of the target account recommendation
 	HsTargetAccountRecommendationState Enumeration `json:"hs_target_account_recommendation_state,omitempty"`
@@ -1305,7 +1305,7 @@ type CompanyDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The timestamp when an owner was assigned to this company
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// Indicates if the company is publicly traded. Powered by HubSpot Insights.
 	IsPublic Bool `json:"is_public,omitempty"`
@@ -1323,22 +1323,22 @@ type CompanyDefaultProperties struct {
 	NumConversionEventsCardinalitySumD095f14b Int `json:"num_conversion_events_cardinality_sum_d095f14b,omitempty"`
 
 	// The most recent conversion date across all contacts associated this company or organization
-	RecentConversionDate DateTime `json:"recent_conversion_date,omitempty"`
+	RecentConversionDate *DateTime `json:"recent_conversion_date,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property recent_conversion_date calculated as LATEST_VALUE via values of recent_conversion_date on object type ObjectTypeId{legacyObjectType=CONTACT}
-	RecentConversionDateTimestampLatestValue72856da1 DateTime `json:"recent_conversion_date_timestamp_latest_value_72856da1,omitempty"`
+	RecentConversionDateTimestampLatestValue72856da1 *DateTime `json:"recent_conversion_date_timestamp_latest_value_72856da1,omitempty"`
 
 	// The last form submitted across all contacts associated this company or organization
 	RecentConversionEventName string `json:"recent_conversion_event_name,omitempty"`
 
 	// Calculation context property providing timestamp for rollup property recent_conversion_event_name calculated as LATEST_VALUE via values of recent_conversion_event_name on object type ObjectTypeId{legacyObjectType=CONTACT}
-	RecentConversionEventNameTimestampLatestValue66c820bf DateTime `json:"recent_conversion_event_name_timestamp_latest_value_66c820bf,omitempty"`
+	RecentConversionEventNameTimestampLatestValue66c820bf *DateTime `json:"recent_conversion_event_name_timestamp_latest_value_66c820bf,omitempty"`
 
 	// Amount of last closed won deal associated with this company. Set automatically.
 	RecentDealAmount Int `json:"recent_deal_amount,omitempty"`
 
 	// Date of the last "closed won" deal associated with this company record.
-	RecentDealCloseDate DateTime `json:"recent_deal_close_date,omitempty"`
+	RecentDealCloseDate *DateTime `json:"recent_deal_close_date,omitempty"`
 
 	// Time zone where the company or organization is located. Powered by HubSpot Insights.
 	Timezone string `json:"timezone,omitempty"`
@@ -1395,7 +1395,7 @@ type CompanyDefaultProperties struct {
 	GoogleplusPage string `json:"googleplus_page,omitempty"`
 
 	// Last Meeting Booked for any contact associated with this Company/Organization.
-	EngagementsLastMeetingBooked DateTime `json:"engagements_last_meeting_booked,omitempty"`
+	EngagementsLastMeetingBooked *DateTime `json:"engagements_last_meeting_booked,omitempty"`
 
 	// This UTM parameter shows which marketing campaign (e.g. a specific email) referred an associated contact to the meetings tool for their most recent booking. This property is only populated when you add tracking parameters to your meeting link.
 	EngagementsLastMeetingBookedCampaign string `json:"engagements_last_meeting_booked_campaign,omitempty"`
@@ -1407,22 +1407,22 @@ type CompanyDefaultProperties struct {
 	EngagementsLastMeetingBookedSource string `json:"engagements_last_meeting_booked_source,omitempty"`
 
 	// The date of the most recent meeting (past or upcoming) logged for, scheduled with, or booked by a contact associated with this company.
-	HsLatestMeetingActivity DateTime `json:"hs_latest_meeting_activity,omitempty"`
+	HsLatestMeetingActivity *DateTime `json:"hs_latest_meeting_activity,omitempty"`
 
 	// The last time a tracked sales email was replied to by this company
-	HsSalesEmailLastReplied DateTime `json:"hs_sales_email_last_replied,omitempty"`
+	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// The owner of the company
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a company. This is set automatically by HubSpot based on user actions in the company record.
-	NotesLastContacted DateTime `json:"notes_last_contacted,omitempty"`
+	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, note, sales email, SMS, or WhatsApp message was logged for a company. This is set automatically by HubSpot based on user actions in the company record.
-	NotesLastUpdated DateTime `json:"notes_last_updated,omitempty"`
+	NotesLastUpdated *DateTime `json:"notes_last_updated,omitempty"`
 
 	// Date of the next upcoming scheduled sales activity for this company record.
-	NotesNextActivityDate DateTime `json:"notes_next_activity_date,omitempty"`
+	NotesNextActivityDate *DateTime `json:"notes_next_activity_date,omitempty"`
 
 	// The number of times a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a company record. This is set automatically by HubSpot based on user actions in the company record.
 	NumContactedNotes Int `json:"num_contacted_notes,omitempty"`
@@ -1485,13 +1485,13 @@ type CompanyDefaultProperties struct {
 	Hubspotscore Int `json:"hubspotscore,omitempty"`
 
 	// The date the company or organization was added to the database
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// The date the company or organization was closed as a customer
-	Closedate DateTime `json:"closedate,omitempty"`
+	Closedate *DateTime `json:"closedate,omitempty"`
 
 	// The date that the first contact from this company entered the system, which could pre-date the company's create date
-	FirstContactCreatedate DateTime `json:"first_contact_createdate,omitempty"`
+	FirstContactCreatedate *DateTime `json:"first_contact_createdate,omitempty"`
 
 	// The number of days between when the company record was created and when they closed as a customer.
 	DaysToClose Int `json:"days_to_close,omitempty"`
@@ -1550,13 +1550,13 @@ type DealDefaultProperties struct {
 	HsAnalyticsLatestSourceData2Contact string `json:"hs_analytics_latest_source_data_2_contact,omitempty"`
 
 	// Timestamp of when latest source occurred for either a directly or indirectly associated contact
-	HsAnalyticsLatestSourceTimestamp DateTime `json:"hs_analytics_latest_source_timestamp,omitempty"`
+	HsAnalyticsLatestSourceTimestamp *DateTime `json:"hs_analytics_latest_source_timestamp,omitempty"`
 
 	// Timestamp of when latest source occurred for an indirectly associated contact
-	HsAnalyticsLatestSourceTimestampCompany DateTime `json:"hs_analytics_latest_source_timestamp_company,omitempty"`
+	HsAnalyticsLatestSourceTimestampCompany *DateTime `json:"hs_analytics_latest_source_timestamp_company,omitempty"`
 
 	// Timestamp of when latest source occurred for a directly associated contact
-	HsAnalyticsLatestSourceTimestampContact DateTime `json:"hs_analytics_latest_source_timestamp_contact,omitempty"`
+	HsAnalyticsLatestSourceTimestampContact *DateTime `json:"hs_analytics_latest_source_timestamp_contact,omitempty"`
 
 	// Original source for the contact with the earliest activity for this deal.
 	HsAnalyticsSource Enumeration `json:"hs_analytics_source,omitempty"`
@@ -1583,52 +1583,52 @@ type DealDefaultProperties struct {
 	HsClosedWonCount Int `json:"hs_closed_won_count,omitempty"`
 
 	// Returns closedate if this deal is closed won
-	HsClosedWonDate DateTime `json:"hs_closed_won_date,omitempty"`
+	HsClosedWonDate *DateTime `json:"hs_closed_won_date,omitempty"`
 
 	// The user that created this object. This value is automatically set by HubSpot and may not be modified.
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time when the deal entered the 'Appointment Scheduled' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredAppointmentscheduled DateTime `json:"hs_date_entered_appointmentscheduled,omitempty"`
+	HsDateEnteredAppointmentscheduled *DateTime `json:"hs_date_entered_appointmentscheduled,omitempty"`
 
 	// The date and time when the deal entered the 'Closed Lost' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredClosedlost DateTime `json:"hs_date_entered_closedlost,omitempty"`
+	HsDateEnteredClosedlost *DateTime `json:"hs_date_entered_closedlost,omitempty"`
 
 	// The date and time when the deal entered the 'Closed Won' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredClosedwon DateTime `json:"hs_date_entered_closedwon,omitempty"`
+	HsDateEnteredClosedwon *DateTime `json:"hs_date_entered_closedwon,omitempty"`
 
 	// The date and time when the deal entered the 'Contract Sent' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredContractsent DateTime `json:"hs_date_entered_contractsent,omitempty"`
+	HsDateEnteredContractsent *DateTime `json:"hs_date_entered_contractsent,omitempty"`
 
 	// The date and time when the deal entered the 'Decision Maker Bought-In' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredDecisionmakerboughtin DateTime `json:"hs_date_entered_decisionmakerboughtin,omitempty"`
+	HsDateEnteredDecisionmakerboughtin *DateTime `json:"hs_date_entered_decisionmakerboughtin,omitempty"`
 
 	// The date and time when the deal entered the 'Presentation Scheduled' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredPresentationscheduled DateTime `json:"hs_date_entered_presentationscheduled,omitempty"`
+	HsDateEnteredPresentationscheduled *DateTime `json:"hs_date_entered_presentationscheduled,omitempty"`
 
 	// The date and time when the deal entered the 'Qualified To Buy' stage, 'Sales Pipeline' pipeline
-	HsDateEnteredQualifiedtobuy DateTime `json:"hs_date_entered_qualifiedtobuy,omitempty"`
+	HsDateEnteredQualifiedtobuy *DateTime `json:"hs_date_entered_qualifiedtobuy,omitempty"`
 
 	// The date and time when the deal exited the 'Appointment Scheduled' stage, 'Sales Pipeline' pipeline
-	HsDateExitedAppointmentscheduled DateTime `json:"hs_date_exited_appointmentscheduled,omitempty"`
+	HsDateExitedAppointmentscheduled *DateTime `json:"hs_date_exited_appointmentscheduled,omitempty"`
 
 	// The date and time when the deal exited the 'Closed Lost' stage, 'Sales Pipeline' pipeline
-	HsDateExitedClosedlost DateTime `json:"hs_date_exited_closedlost,omitempty"`
+	HsDateExitedClosedlost *DateTime `json:"hs_date_exited_closedlost,omitempty"`
 
 	// The date and time when the deal exited the 'Closed Won' stage, 'Sales Pipeline' pipeline
-	HsDateExitedClosedwon DateTime `json:"hs_date_exited_closedwon,omitempty"`
+	HsDateExitedClosedwon *DateTime `json:"hs_date_exited_closedwon,omitempty"`
 
 	// The date and time when the deal exited the 'Contract Sent' stage, 'Sales Pipeline' pipeline
-	HsDateExitedContractsent DateTime `json:"hs_date_exited_contractsent,omitempty"`
+	HsDateExitedContractsent *DateTime `json:"hs_date_exited_contractsent,omitempty"`
 
 	// The date and time when the deal exited the 'Decision Maker Bought-In' stage, 'Sales Pipeline' pipeline
-	HsDateExitedDecisionmakerboughtin DateTime `json:"hs_date_exited_decisionmakerboughtin,omitempty"`
+	HsDateExitedDecisionmakerboughtin *DateTime `json:"hs_date_exited_decisionmakerboughtin,omitempty"`
 
 	// The date and time when the deal exited the 'Presentation Scheduled' stage, 'Sales Pipeline' pipeline
-	HsDateExitedPresentationscheduled DateTime `json:"hs_date_exited_presentationscheduled,omitempty"`
+	HsDateExitedPresentationscheduled *DateTime `json:"hs_date_exited_presentationscheduled,omitempty"`
 
 	// The date and time when the deal exited the 'Qualified To Buy' stage, 'Sales Pipeline' pipeline
-	HsDateExitedQualifiedtobuy DateTime `json:"hs_date_exited_qualifiedtobuy,omitempty"`
+	HsDateExitedQualifiedtobuy *DateTime `json:"hs_date_exited_qualifiedtobuy,omitempty"`
 
 	// The number of days the deal took to close, without rounding
 	HsDaysToCloseRaw Int `json:"hs_days_to_close_raw,omitempty"`
@@ -1670,7 +1670,7 @@ type DealDefaultProperties struct {
 	HsIsOpenCount Int `json:"hs_is_open_count,omitempty"`
 
 	// Most recent timestamp of any property update for this deal. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Hubspot predicted likelihood between 0 and 1 of the deal to close by the close date.
 	HsLikelihoodToClose Int `json:"hs_likelihood_to_close,omitempty"`
@@ -1838,46 +1838,46 @@ type DealDefaultProperties struct {
 	HsV2CumulativeTimeInQualifiedtobuy Int `json:"hs_v2_cumulative_time_in_qualifiedtobuy,omitempty"`
 
 	// The date and time when the deal entered the 'Appointment Scheduled' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredAppointmentscheduled DateTime `json:"hs_v2_date_entered_appointmentscheduled,omitempty"`
+	HsV2DateEnteredAppointmentscheduled *DateTime `json:"hs_v2_date_entered_appointmentscheduled,omitempty"`
 
 	// The date and time when the deal entered the 'Closed Lost' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredClosedlost DateTime `json:"hs_v2_date_entered_closedlost,omitempty"`
+	HsV2DateEnteredClosedlost *DateTime `json:"hs_v2_date_entered_closedlost,omitempty"`
 
 	// The date and time when the deal entered the 'Closed Won' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredClosedwon DateTime `json:"hs_v2_date_entered_closedwon,omitempty"`
+	HsV2DateEnteredClosedwon *DateTime `json:"hs_v2_date_entered_closedwon,omitempty"`
 
 	// The date and time when the deal entered the 'Contract Sent' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredContractsent DateTime `json:"hs_v2_date_entered_contractsent,omitempty"`
+	HsV2DateEnteredContractsent *DateTime `json:"hs_v2_date_entered_contractsent,omitempty"`
 
 	// The date and time when the deal entered the 'Decision Maker Bought-In' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredDecisionmakerboughtin DateTime `json:"hs_v2_date_entered_decisionmakerboughtin,omitempty"`
+	HsV2DateEnteredDecisionmakerboughtin *DateTime `json:"hs_v2_date_entered_decisionmakerboughtin,omitempty"`
 
 	// The date and time when the deal entered the 'Presentation Scheduled' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredPresentationscheduled DateTime `json:"hs_v2_date_entered_presentationscheduled,omitempty"`
+	HsV2DateEnteredPresentationscheduled *DateTime `json:"hs_v2_date_entered_presentationscheduled,omitempty"`
 
 	// The date and time when the deal entered the 'Qualified To Buy' stage, 'Sales Pipeline' pipeline
-	HsV2DateEnteredQualifiedtobuy DateTime `json:"hs_v2_date_entered_qualifiedtobuy,omitempty"`
+	HsV2DateEnteredQualifiedtobuy *DateTime `json:"hs_v2_date_entered_qualifiedtobuy,omitempty"`
 
 	// The date and time when the deal exited the 'Appointment Scheduled' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedAppointmentscheduled DateTime `json:"hs_v2_date_exited_appointmentscheduled,omitempty"`
+	HsV2DateExitedAppointmentscheduled *DateTime `json:"hs_v2_date_exited_appointmentscheduled,omitempty"`
 
 	// The date and time when the deal exited the 'Closed Lost' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedClosedlost DateTime `json:"hs_v2_date_exited_closedlost,omitempty"`
+	HsV2DateExitedClosedlost *DateTime `json:"hs_v2_date_exited_closedlost,omitempty"`
 
 	// The date and time when the deal exited the 'Closed Won' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedClosedwon DateTime `json:"hs_v2_date_exited_closedwon,omitempty"`
+	HsV2DateExitedClosedwon *DateTime `json:"hs_v2_date_exited_closedwon,omitempty"`
 
 	// The date and time when the deal exited the 'Contract Sent' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedContractsent DateTime `json:"hs_v2_date_exited_contractsent,omitempty"`
+	HsV2DateExitedContractsent *DateTime `json:"hs_v2_date_exited_contractsent,omitempty"`
 
 	// The date and time when the deal exited the 'Decision Maker Bought-In' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedDecisionmakerboughtin DateTime `json:"hs_v2_date_exited_decisionmakerboughtin,omitempty"`
+	HsV2DateExitedDecisionmakerboughtin *DateTime `json:"hs_v2_date_exited_decisionmakerboughtin,omitempty"`
 
 	// The date and time when the deal exited the 'Presentation Scheduled' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedPresentationscheduled DateTime `json:"hs_v2_date_exited_presentationscheduled,omitempty"`
+	HsV2DateExitedPresentationscheduled *DateTime `json:"hs_v2_date_exited_presentationscheduled,omitempty"`
 
 	// The date and time when the deal exited the 'Qualified To Buy' stage, 'Sales Pipeline' pipeline
-	HsV2DateExitedQualifiedtobuy DateTime `json:"hs_v2_date_exited_qualifiedtobuy,omitempty"`
+	HsV2DateExitedQualifiedtobuy *DateTime `json:"hs_v2_date_exited_qualifiedtobuy,omitempty"`
 
 	// The total time in seconds spent by the deal in the 'Appointment Scheduled' stage, 'Sales Pipeline' pipeline since it last entered this stage
 	HsV2LatestTimeInAppointmentscheduled Int `json:"hs_v2_latest_time_in_appointmentscheduled,omitempty"`
@@ -1904,7 +1904,7 @@ type DealDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The date the most recent deal owner was assigned to a deal. This is updated automatically by HubSpot.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The name given to this deal.
 	Dealname string `json:"dealname,omitempty"`
@@ -1919,13 +1919,13 @@ type DealDefaultProperties struct {
 	Pipeline Enumeration `json:"pipeline,omitempty"`
 
 	// Date the deal was closed. This property is set automatically by HubSpot.
-	Closedate DateTime `json:"closedate,omitempty"`
+	Closedate *DateTime `json:"closedate,omitempty"`
 
 	// Date the deal was created. This property is set automatically by HubSpot.
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// The date of the most recent meeting an associated contact has booked through the meetings tool.
-	EngagementsLastMeetingBooked DateTime `json:"engagements_last_meeting_booked,omitempty"`
+	EngagementsLastMeetingBooked *DateTime `json:"engagements_last_meeting_booked,omitempty"`
 
 	// This UTM parameter shows which marketing campaign (e.g. a specific email) referred an associated contact to the meetings tool for their most recent booking. This property is only populated when you add tracking parameters to your meeting link.
 	EngagementsLastMeetingBookedCampaign string `json:"engagements_last_meeting_booked_campaign,omitempty"`
@@ -1937,22 +1937,22 @@ type DealDefaultProperties struct {
 	EngagementsLastMeetingBookedSource string `json:"engagements_last_meeting_booked_source,omitempty"`
 
 	// The date of the most recent meeting (past or upcoming) logged for, scheduled with, or booked by a contact associated with this deal.
-	HsLatestMeetingActivity DateTime `json:"hs_latest_meeting_activity,omitempty"`
+	HsLatestMeetingActivity *DateTime `json:"hs_latest_meeting_activity,omitempty"`
 
 	// The last time a tracked sales email was replied to for this deal
-	HsSalesEmailLastReplied DateTime `json:"hs_sales_email_last_replied,omitempty"`
+	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// User the deal is assigned to. Assign additional users to a deal record by creating a custom user property.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, sales email, or meeting was logged for this deal. This is set automatically by HubSpot based on user actions.
-	NotesLastContacted DateTime `json:"notes_last_contacted,omitempty"`
+	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
 
 	// The last time a note, call, email, meeting, or task was logged for a deal. This is updated automatically by HubSpot.
-	NotesLastUpdated DateTime `json:"notes_last_updated,omitempty"`
+	NotesLastUpdated *DateTime `json:"notes_last_updated,omitempty"`
 
 	// The date of the next upcoming activity for a deal. This property is set automatically by HubSpot based on user action. This includes logging a future call, sales email, or meeting using the Log feature, as well as creating a future task or scheduling a future meeting. This is updated automatically by HubSpot.
-	NotesNextActivityDate DateTime `json:"notes_next_activity_date,omitempty"`
+	NotesNextActivityDate *DateTime `json:"notes_next_activity_date,omitempty"`
 
 	// The total number of sales activities (notes, calls, emails, meetings, or tasks) logged for a deal. This is updated automatically by HubSpot.
 	NumContactedNotes Int `json:"num_contacted_notes,omitempty"`
@@ -1961,7 +1961,7 @@ type DealDefaultProperties struct {
 	NumNotes Int `json:"num_notes,omitempty"`
 
 	// The date the deal was created. This property is set automatically by HubSpot.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// Primary team of the deal owner. This property is set automatically by HubSpot.
 	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
@@ -2038,10 +2038,10 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// Most recent timestamp of any property update for this object. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -2113,7 +2113,7 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -2134,7 +2134,7 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsSurveyChannel Enumeration `json:"hs_survey_channel,omitempty"`
 
 	// The timestamp of the feedback submission
-	HsSubmissionTimestamp DateTime `json:"hs_submission_timestamp,omitempty"`
+	HsSubmissionTimestamp *DateTime `json:"hs_submission_timestamp,omitempty"`
 
 	// The value of the feedback submission
 	HsValue Int `json:"hs_value,omitempty"`
@@ -2178,7 +2178,7 @@ type LineItemDefaultProperties struct {
 	Amount Int `json:"amount,omitempty"`
 
 	// The date the line item was created
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// Full description of product
 	Description string `json:"description,omitempty"`
@@ -2208,10 +2208,10 @@ type LineItemDefaultProperties struct {
 	HsArr Int `json:"hs_arr,omitempty"`
 
 	// End date of a fixed billing period.
-	HsBillingPeriodEndDate Date `json:"hs_billing_period_end_date,omitempty"`
+	HsBillingPeriodEndDate *Date `json:"hs_billing_period_end_date,omitempty"`
 
 	// Start date of a fixed billing period.
-	HsBillingPeriodStartDate Date `json:"hs_billing_period_start_date,omitempty"`
+	HsBillingPeriodStartDate *Date `json:"hs_billing_period_start_date,omitempty"`
 
 	// Number of days billing should be delayed by. It allows the customers to start billing sometime in the future
 	HsBillingStartDelayDays Int `json:"hs_billing_start_delay_days,omitempty"`
@@ -2229,7 +2229,7 @@ type LineItemDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// The discount percentage applied
 	HsDiscountPercentage Int `json:"hs_discount_percentage,omitempty"`
@@ -2241,7 +2241,7 @@ type LineItemDefaultProperties struct {
 	HsImages string `json:"hs_images,omitempty"`
 
 	// The date any property on this product was modified
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Currency code for the line item.
 	HsLineItemCurrencyCode Enumeration `json:"hs_line_item_currency_code,omitempty"`
@@ -2310,7 +2310,7 @@ type LineItemDefaultProperties struct {
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// Recurring billing end date for a line item
-	HsRecurringBillingEndDate Date `json:"hs_recurring_billing_end_date,omitempty"`
+	HsRecurringBillingEndDate *Date `json:"hs_recurring_billing_end_date,omitempty"`
 
 	// Number of payments for the given period on a Line Item
 	HsRecurringBillingNumberOfPayments Int `json:"hs_recurring_billing_number_of_payments,omitempty"`
@@ -2319,7 +2319,7 @@ type LineItemDefaultProperties struct {
 	HsRecurringBillingPeriod string `json:"hs_recurring_billing_period,omitempty"`
 
 	// Recurring billing start date for a line item
-	HsRecurringBillingStartDate Date `json:"hs_recurring_billing_start_date,omitempty"`
+	HsRecurringBillingStartDate *Date `json:"hs_recurring_billing_start_date,omitempty"`
 
 	// If there are fixed number payments or it goes on until cancelled
 	HsRecurringBillingTerms Enumeration `json:"hs_recurring_billing_terms,omitempty"`
@@ -2373,7 +2373,7 @@ type LineItemDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -2402,7 +2402,7 @@ type ProductDefaultProperties struct {
 	Amount Int `json:"amount,omitempty"`
 
 	// The date the product was created
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// Full description of product
 	Description string `json:"description,omitempty"`
@@ -2432,7 +2432,7 @@ type ProductDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// The discount percentage applied
 	HsDiscountPercentage Int `json:"hs_discount_percentage,omitempty"`
@@ -2450,7 +2450,7 @@ type ProductDefaultProperties struct {
 	HsImages string `json:"hs_images,omitempty"`
 
 	// The date any property on this product was modified
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -2489,7 +2489,7 @@ type ProductDefaultProperties struct {
 	HsRecurringBillingPeriod string `json:"hs_recurring_billing_period,omitempty"`
 
 	// Recurring billing start date for a line item
-	HsRecurringBillingStartDate Date `json:"hs_recurring_billing_start_date,omitempty"`
+	HsRecurringBillingStartDate *Date `json:"hs_recurring_billing_start_date,omitempty"`
 
 	// Unique product identifier
 	HsSku string `json:"hs_sku,omitempty"`
@@ -2516,7 +2516,7 @@ type ProductDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -2560,7 +2560,7 @@ type QuoteDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date the quote was created
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// Indicates if total contract value (TCV) should be displayed on the published quote
 	HsDisplayTcvOnQuote Bool `json:"hs_display_tcv_on_quote,omitempty"`
@@ -2569,7 +2569,7 @@ type QuoteDefaultProperties struct {
 	HsDomain string `json:"hs_domain,omitempty"`
 
 	// The date and time the document was signed by all signers
-	HsEsignDate DateTime `json:"hs_esign_date,omitempty"`
+	HsEsignDate *DateTime `json:"hs_esign_date,omitempty"`
 
 	// Path of the expiration template for the quote
 	HsExpirationTemplatePath string `json:"hs_expiration_template_path,omitempty"`
@@ -2581,7 +2581,7 @@ type QuoteDefaultProperties struct {
 	HsLanguage string `json:"hs_language,omitempty"`
 
 	// The last time any property on the quote was modified
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// For internal HubSpot Application use only. Global term for the discount percentage applied.
 	HsLineItemGlobalTermHsDiscountPercentage string `json:"hs_line_item_global_term_hs_discount_percentage,omitempty"`
@@ -2644,7 +2644,7 @@ type QuoteDefaultProperties struct {
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
 	// The date the quote was paid by the customer
-	HsPaymentDate DateTime `json:"hs_payment_date,omitempty"`
+	HsPaymentDate *DateTime `json:"hs_payment_date,omitempty"`
 
 	// Payment status for the quote
 	HsPaymentStatus Enumeration `json:"hs_payment_status,omitempty"`
@@ -2719,7 +2719,7 @@ type QuoteDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The date an owner was assigned to the quote
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The name of the company sending this quote
 	HsSenderCompanyName string `json:"hs_sender_company_name,omitempty"`
@@ -2731,7 +2731,7 @@ type QuoteDefaultProperties struct {
 	HsTitle string `json:"hs_title,omitempty"`
 
 	// The date that this quote expires
-	HsExpirationDate DateTime `json:"hs_expiration_date,omitempty"`
+	HsExpirationDate *DateTime `json:"hs_expiration_date,omitempty"`
 
 	// The domain of the company sending this quote
 	HsSenderCompanyDomain string `json:"hs_sender_company_domain,omitempty"`
@@ -2776,7 +2776,7 @@ type QuoteDefaultProperties struct {
 	HsPrimaryColor string `json:"hs_primary_color,omitempty"`
 
 	// The last time a tracked sales email was replied to for this quote
-	HsSalesEmailLastReplied DateTime `json:"hs_sales_email_last_replied,omitempty"`
+	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// The zip code in which the company sending this quote is located
 	HsSenderCompanyZip string `json:"hs_sender_company_zip,omitempty"`
@@ -2788,13 +2788,13 @@ type QuoteDefaultProperties struct {
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
 
 	// The last timestamp when a call, email or meeting was logged for this quote
-	NotesLastContacted DateTime `json:"notes_last_contacted,omitempty"`
+	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
 
 	// The last time a note, call, email, meeting, or task was logged for a quote. This is set automatically by HubSpot based on user actions in the quote record.
-	NotesLastUpdated DateTime `json:"notes_last_updated,omitempty"`
+	NotesLastUpdated *DateTime `json:"notes_last_updated,omitempty"`
 
 	// The date of the next upcoming activity for this quote
-	NotesNextActivityDate DateTime `json:"notes_next_activity_date,omitempty"`
+	NotesNextActivityDate *DateTime `json:"notes_next_activity_date,omitempty"`
 
 	// The number of times a call, email or meeting was logged for this quote
 	NumContactedNotes Int `json:"num_contacted_notes,omitempty"`
@@ -2874,7 +2874,7 @@ type DiscountDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// How often the discount will be applied.
 	HsDuration Enumeration `json:"hs_duration,omitempty"`
@@ -2883,7 +2883,7 @@ type DiscountDefaultProperties struct {
 	HsLabel string `json:"hs_label,omitempty"`
 
 	// Most recent timestamp of any property update for this object. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -2943,7 +2943,7 @@ type DiscountDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -2969,13 +2969,13 @@ type FeeDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// The name of the fee.
 	HsLabel string `json:"hs_label,omitempty"`
 
 	// Most recent timestamp of any property update for this object. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -3035,7 +3035,7 @@ type FeeDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -3061,13 +3061,13 @@ type TaxDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// The name of the tax.
 	HsLabel string `json:"hs_label,omitempty"`
 
 	// Most recent timestamp of any property update for this object. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -3127,7 +3127,7 @@ type TaxDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -3138,16 +3138,16 @@ type TaxDefaultProperties struct {
 
 type TicketDefaultProperties struct {
 	// The date the ticket was closed
-	ClosedDate DateTime `json:"closed_date,omitempty"`
+	ClosedDate *DateTime `json:"closed_date,omitempty"`
 
 	// VID of contact that created the ticket
 	CreatedBy Int `json:"created_by,omitempty"`
 
 	// The date the ticket was created
-	Createdate DateTime `json:"createdate,omitempty"`
+	Createdate *DateTime `json:"createdate,omitempty"`
 
 	// The date of the first email response from an agent after a ticket was created
-	FirstAgentReplyDate DateTime `json:"first_agent_reply_date,omitempty"`
+	FirstAgentReplyDate *DateTime `json:"first_agent_reply_date,omitempty"`
 
 	// The business units this record is assigned to.
 	HsAllAssignedBusinessUnitIds Enumeration `json:"hs_all_assigned_business_unit_ids,omitempty"`
@@ -3195,34 +3195,34 @@ type TicketDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// Internal read-only property representing the date the ticket was created in HubSpot
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// ID of the custom inbox the ticket is associated with
 	HsCustomInbox Int `json:"hs_custom_inbox,omitempty"`
 
 	// The date and time when the ticket entered the 'New' stage, 'Support Pipeline' pipeline
-	HsDateEntered1 DateTime `json:"hs_date_entered_1,omitempty"`
+	HsDateEntered1 *DateTime `json:"hs_date_entered_1,omitempty"`
 
 	// The date and time when the ticket entered the 'Waiting on contact' stage, 'Support Pipeline' pipeline
-	HsDateEntered2 DateTime `json:"hs_date_entered_2,omitempty"`
+	HsDateEntered2 *DateTime `json:"hs_date_entered_2,omitempty"`
 
 	// The date and time when the ticket entered the 'Waiting on us' stage, 'Support Pipeline' pipeline
-	HsDateEntered3 DateTime `json:"hs_date_entered_3,omitempty"`
+	HsDateEntered3 *DateTime `json:"hs_date_entered_3,omitempty"`
 
 	// The date and time when the ticket entered the 'Closed' stage, 'Support Pipeline' pipeline
-	HsDateEntered4 DateTime `json:"hs_date_entered_4,omitempty"`
+	HsDateEntered4 *DateTime `json:"hs_date_entered_4,omitempty"`
 
 	// The date and time when the ticket exited the 'New' stage, 'Support Pipeline' pipeline
-	HsDateExited1 DateTime `json:"hs_date_exited_1,omitempty"`
+	HsDateExited1 *DateTime `json:"hs_date_exited_1,omitempty"`
 
 	// The date and time when the ticket exited the 'Waiting on contact' stage, 'Support Pipeline' pipeline
-	HsDateExited2 DateTime `json:"hs_date_exited_2,omitempty"`
+	HsDateExited2 *DateTime `json:"hs_date_exited_2,omitempty"`
 
 	// The date and time when the ticket exited the 'Waiting on us' stage, 'Support Pipeline' pipeline
-	HsDateExited3 DateTime `json:"hs_date_exited_3,omitempty"`
+	HsDateExited3 *DateTime `json:"hs_date_exited_3,omitempty"`
 
 	// The date and time when the ticket exited the 'Closed' stage, 'Support Pipeline' pipeline
-	HsDateExited4 DateTime `json:"hs_date_exited_4,omitempty"`
+	HsDateExited4 *DateTime `json:"hs_date_exited_4,omitempty"`
 
 	// Unique ids corresponding to tickets in a system outside of HubSpot
 	HsExternalObjectIds Enumeration `json:"hs_external_object_ids,omitempty"`
@@ -3234,16 +3234,16 @@ type TicketDefaultProperties struct {
 	HsFeedbackLastCesRating Enumeration `json:"hs_feedback_last_ces_rating,omitempty"`
 
 	// The time that this contact last submitted a CES survey response. This is automatically set by HubSpot.
-	HsFeedbackLastSurveyDate DateTime `json:"hs_feedback_last_survey_date,omitempty"`
+	HsFeedbackLastSurveyDate *DateTime `json:"hs_feedback_last_survey_date,omitempty"`
 
 	// Files attached to a support form by a contact.
 	HsFileUpload string `json:"hs_file_upload,omitempty"`
 
 	// The date of the first response from an agent out of all associated conversations
-	HsFirstAgentMessageSentAt DateTime `json:"hs_first_agent_message_sent_at,omitempty"`
+	HsFirstAgentMessageSentAt *DateTime `json:"hs_first_agent_message_sent_at,omitempty"`
 
 	// A calculated property to help with sorting in the Helpdesk
-	HsHelpdeskSortTimestamp DateTime `json:"hs_helpdesk_sort_timestamp,omitempty"`
+	HsHelpdeskSortTimestamp *DateTime `json:"hs_helpdesk_sort_timestamp,omitempty"`
 
 	// Is this Ticket rendered in the Help Desk
 	HsInHelpdesk Bool `json:"hs_in_helpdesk,omitempty"`
@@ -3258,25 +3258,25 @@ type TicketDefaultProperties struct {
 	HsLastEmailActivity Enumeration `json:"hs_last_email_activity,omitempty"`
 
 	// The date of the last email activity with the contact associated with the ticket.
-	HsLastEmailDate DateTime `json:"hs_last_email_date,omitempty"`
+	HsLastEmailDate *DateTime `json:"hs_last_email_date,omitempty"`
 
 	// Whether the last message came from visitor
 	HsLastMessageFromVisitor Bool `json:"hs_last_message_from_visitor,omitempty"`
 
 	// The date of the last response from the visitor
-	HsLastMessageReceivedAt DateTime `json:"hs_last_message_received_at,omitempty"`
+	HsLastMessageReceivedAt *DateTime `json:"hs_last_message_received_at,omitempty"`
 
 	// The date of the last response from an agent or bot
-	HsLastMessageSentAt DateTime `json:"hs_last_message_sent_at,omitempty"`
+	HsLastMessageSentAt *DateTime `json:"hs_last_message_sent_at,omitempty"`
 
 	// The last time a note, call, email, meeting, or task was logged for a ticket. This is updated automatically by HubSpot.
-	HsLastactivitydate DateTime `json:"hs_lastactivitydate,omitempty"`
+	HsLastactivitydate *DateTime `json:"hs_lastactivitydate,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a ticket. This is set automatically by HubSpot based on user actions in the ticket record.
-	HsLastcontacted DateTime `json:"hs_lastcontacted,omitempty"`
+	HsLastcontacted *DateTime `json:"hs_lastcontacted,omitempty"`
 
 	// Most recent timestamp of any property update for this ticket. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Agents who have seen the newest message across all conversations associated to the ticket
 	HsLatestMessageSeenByAgentIds Enumeration `json:"hs_latest_message_seen_by_agent_ids,omitempty"`
@@ -3294,7 +3294,7 @@ type TicketDefaultProperties struct {
 	HsMsteamsMessageId string `json:"hs_msteams_message_id,omitempty"`
 
 	// The date of the next upcoming activity for a ticket. This property is set automatically by HubSpot based on user action. This includes logging a future call, email, or meeting using the Log feature, as well as creating a future task or scheduling a future meeting. This is updated automatically by HubSpot.
-	HsNextactivitydate DateTime `json:"hs_nextactivitydate,omitempty"`
+	HsNextactivitydate *DateTime `json:"hs_nextactivitydate,omitempty"`
 
 	// Number of companies associated with this ticket
 	HsNumAssociatedCompanies Int `json:"hs_num_associated_companies,omitempty"`
@@ -3396,19 +3396,19 @@ type TicketDefaultProperties struct {
 	HsTimeIn4 Int `json:"hs_time_in_4,omitempty"`
 
 	// When the ticket falls out of Time to Close SLA.
-	HsTimeToCloseSlaAt DateTime `json:"hs_time_to_close_sla_at,omitempty"`
+	HsTimeToCloseSlaAt *DateTime `json:"hs_time_to_close_sla_at,omitempty"`
 
 	// Current Time to Close SLA status of ticket
 	HsTimeToCloseSlaStatus Enumeration `json:"hs_time_to_close_sla_status,omitempty"`
 
 	// When the ticket falls out of the Time to First Response SLA
-	HsTimeToFirstResponseSlaAt DateTime `json:"hs_time_to_first_response_sla_at,omitempty"`
+	HsTimeToFirstResponseSlaAt *DateTime `json:"hs_time_to_first_response_sla_at,omitempty"`
 
 	// Current Time to First Response SLA status.
 	HsTimeToFirstResponseSlaStatus Enumeration `json:"hs_time_to_first_response_sla_status,omitempty"`
 
 	// When the ticket falls out of Time to Next Response SLA
-	HsTimeToNextResponseSlaAt DateTime `json:"hs_time_to_next_response_sla_at,omitempty"`
+	HsTimeToNextResponseSlaAt *DateTime `json:"hs_time_to_next_response_sla_at,omitempty"`
 
 	// Current Time to Next Response SLA status
 	HsTimeToNextResponseSlaStatus Enumeration `json:"hs_time_to_next_response_sla_status,omitempty"`
@@ -3432,13 +3432,13 @@ type TicketDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The date an owner was assigned to the ticket
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The date of the last reply or note
-	LastEngagementDate DateTime `json:"last_engagement_date,omitempty"`
+	LastEngagementDate *DateTime `json:"last_engagement_date,omitempty"`
 
 	// The date of the last customer response
-	LastReplyDate DateTime `json:"last_reply_date,omitempty"`
+	LastReplyDate *DateTime `json:"last_reply_date,omitempty"`
 
 	// Answer to NPS follow up question
 	NpsFollowUpAnswer string `json:"nps_follow_up_answer,omitempty"`
@@ -3474,19 +3474,19 @@ type TicketDefaultProperties struct {
 	Tags Enumeration `json:"tags,omitempty"`
 
 	// The last time a tracked sales email was replied to for this ticket
-	HsSalesEmailLastReplied DateTime `json:"hs_sales_email_last_replied,omitempty"`
+	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// User the ticket is assigned to. Assign additional users to a ticket record by creating a custom user property.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, note, sales email, SMS, or WhatsApp message was logged for a ticket. This is set automatically by HubSpot based on user actions in the ticket record.
-	NotesLastContacted DateTime `json:"notes_last_contacted,omitempty"`
+	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
 
 	// The last time a note, call, email, meeting, or task was logged for a ticket. This is set automatically by HubSpot based on user actions in the ticket record.
-	NotesLastUpdated DateTime `json:"notes_last_updated,omitempty"`
+	NotesLastUpdated *DateTime `json:"notes_last_updated,omitempty"`
 
 	// The date of the next upcoming activity for this ticket
-	NotesNextActivityDate DateTime `json:"notes_next_activity_date,omitempty"`
+	NotesNextActivityDate *DateTime `json:"notes_next_activity_date,omitempty"`
 
 	// The number of times a call, email or meeting was logged for this ticket
 	NumContactedNotes Int `json:"num_contacted_notes,omitempty"`
@@ -3548,7 +3548,7 @@ type GoalDefaultProperties struct {
 	HsCreatedByUserId Int `json:"hs_created_by_user_id,omitempty"`
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
-	HsCreatedate DateTime `json:"hs_createdate,omitempty"`
+	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// DEPRECATED - DO NOT USE! Code for the currency conversion
 	HsCurrency string `json:"hs_currency,omitempty"`
@@ -3563,10 +3563,10 @@ type GoalDefaultProperties struct {
 	HsEditUpdatesNotificationFrequency Enumeration `json:"hs_edit_updates_notification_frequency,omitempty"`
 
 	// The last day covered by the Goal Target's date range.
-	HsEndDate Date `json:"hs_end_date,omitempty"`
+	HsEndDate *Date `json:"hs_end_date,omitempty"`
 
 	// The last day covered by the Goal Target's date range.
-	HsEndDatetime DateTime `json:"hs_end_datetime,omitempty"`
+	HsEndDatetime *DateTime `json:"hs_end_datetime,omitempty"`
 
 	// Represents the number of months the fiscal year is away from a standard calendar year (0 means the fiscal year starts in January).
 	HsFiscalYearOffset Int `json:"hs_fiscal_year_offset,omitempty"`
@@ -3647,10 +3647,10 @@ type GoalDefaultProperties struct {
 	HsKpiValueCalculatedAt Int `json:"hs_kpi_value_calculated_at,omitempty"`
 
 	// The time that latest KPI value was calculated
-	HsKpiValueLastCalculatedAt DateTime `json:"hs_kpi_value_last_calculated_at,omitempty"`
+	HsKpiValueLastCalculatedAt *DateTime `json:"hs_kpi_value_last_calculated_at,omitempty"`
 
 	// Most recent timestamp of any property update for this object. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
-	HsLastmodifieddate DateTime `json:"hs_lastmodifieddate,omitempty"`
+	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Migrated value describing if the goal is active or soft deleted.
 	HsLegacyActive Enumeration `json:"hs_legacy_active,omitempty"`
@@ -3749,7 +3749,7 @@ type GoalDefaultProperties struct {
 	HsShouldRecalculate Enumeration `json:"hs_should_recalculate,omitempty"`
 
 	// The first day that goal target's date range covers
-	HsStartDatetime DateTime `json:"hs_start_datetime,omitempty"`
+	HsStartDatetime *DateTime `json:"hs_start_datetime,omitempty"`
 
 	// Goal Target Filter Group(s) for all filters except time-based filters
 	HsStaticKpiFilterGroups string `json:"hs_static_kpi_filter_groups,omitempty"`
@@ -3797,7 +3797,7 @@ type GoalDefaultProperties struct {
 	HsWasImported Bool `json:"hs_was_imported,omitempty"`
 
 	// The most recent date an owner was assigned to this object. This is set automatically by HubSpot and can be used for segmentation and reporting.
-	HubspotOwnerAssigneddate DateTime `json:"hubspot_owner_assigneddate,omitempty"`
+	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
 	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
@@ -3806,7 +3806,7 @@ type GoalDefaultProperties struct {
 	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
 
 	// The first day that goal target's date range covers
-	HsStartDate Date `json:"hs_start_date,omitempty"`
+	HsStartDate *Date `json:"hs_start_date,omitempty"`
 
 	// Progress percent is represented by the kpi value as a percent of the target amount
 	HsKpiProgressPercent Int `json:"hs_kpi_progress_percent,omitempty"`

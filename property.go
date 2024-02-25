@@ -380,16 +380,21 @@ func (e *Enumeration) UnmarshalJSON(data []byte) error {
 //
 // It returns a string in the format "2006-01-02" when formatted with String()
 // and marshals to and from JSON as a string in the same format.
+//
 // The other methods are essentially wrappers around the time.Time ones.
+//
+// In order to respect the JSON "omitempty" tag for the zero value, Date must
+// be a pointer in the struct definition. See [LineItemDefaultProperties] for
+// an example.
 type Date time.Time
 
 func (d Date) String() string {
 	return time.Time(d).Format(time.DateOnly)
 }
 
-var _ json.Marshaler = Date{}
+var _ json.Marshaler = (*Date)(nil)
 
-func (d Date) MarshalJSON() ([]byte, error) {
+func (d *Date) MarshalJSON() ([]byte, error) {
 	return util.MarshalStringerAsJSON(d)
 }
 
@@ -599,16 +604,21 @@ func (d Date) ZoneBounds() (start time.Time, end time.Time) {
 // It returns a string in the format "2006-01-02T15:04:05.999Z07:00" (ISO 8601
 // with millisecond precision) when formatted with String() and marshals to and
 // from JSON as a string in the same format.
+//
 // The other methods are essentially wrappers around the time.Time ones.
+//
+// In order to respect the JSON "omitempty" tag for the zero value, DateTime
+// must be a pointer in the struct definition. See [ContactDefaultProperties]
+// for an example.
 type DateTime time.Time
 
 func (d DateTime) String() string {
 	return time.Time(d).Format(util.RFC3339Milli)
 }
 
-var _ json.Marshaler = DateTime{}
+var _ json.Marshaler = (*DateTime)(nil)
 
-func (d DateTime) MarshalJSON() ([]byte, error) {
+func (d *DateTime) MarshalJSON() ([]byte, error) {
 	return util.MarshalStringerAsJSON(d)
 }
 

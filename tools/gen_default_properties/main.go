@@ -153,9 +153,11 @@ func run() error { //nolint:funlen
 					f.Type = "Int"
 				}
 			case hubspot.PropertyTypeDate:
-				f.Type = "Date"
+				// must to be a pointer to respect the omitempty tag
+				f.Type = "*Date"
 			case hubspot.PropertyTypeDateTime:
-				f.Type = "DateTime"
+				// must to be a pointer to respect the omitempty tag
+				f.Type = "*DateTime"
 			case hubspot.PropertyTypeEnumeration:
 				f.Type = "Enumeration"
 			case hubspot.PropertyTypeBool:
