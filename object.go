@@ -40,10 +40,10 @@ type GenericPublicObject[
 	AE AssociationEdge | Results[AssociationEdge] | PaginatedResults[AssociationEdge],
 ] struct {
 	// ID is the HubSpot object ID.
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 
 	// Properties is the object's properties.
-	Properties P `json:"properties"`
+	Properties P `json:"properties,omitempty"`
 
 	// PropertiesWithHistory is the object's properties with history.
 	//
@@ -61,7 +61,7 @@ type GenericPublicObject[
 	// 			}
 	// 		]
 	// 	}
-	PropertiesWithHistory map[string][]PWH `json:"propertiesWithHistory"`
+	PropertiesWithHistory map[string][]PWH `json:"propertiesWithHistory,omitempty"`
 
 	// Associations is the object's associations.
 	//
@@ -76,7 +76,7 @@ type GenericPublicObject[
 	// 			}
 	// 		]
 	// 	}
-	Associations map[string][]AE `json:"associations"`
+	Associations map[string][]AE `json:"associations,omitempty"`
 
 	CreatedAt DateTime `json:"createdAt,omitempty"`
 

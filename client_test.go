@@ -101,6 +101,19 @@ func TestClient(t *testing.T) {
 			assert.NotNil(t, c, "expected contact to be returned")
 			assert.Equal(t, jdContact.ID, c.ID, "expected contact ID to match")
 		})
+
+		t.Run("Create", func(t *testing.T) {
+			c, err := client.Contacts.Create(ctx, &ContactPropertiesTest{
+				ContactDefaultProperties: ContactDefaultProperties{
+					Email:     "foo@example.com",
+					Firstname: "Foo",
+					Lastname:  "Bar",
+				},
+			})
+			assert.NoError(t, err, "expected no error when creating contact")
+			require.NotNil(t, c, "expected contact to be returned")
+			assert.Equal(t, "Foo", c.Properties.Firstname, "expected contact firstname to match")
+		})
 	})
 }
 

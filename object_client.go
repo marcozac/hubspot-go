@@ -1,9 +1,12 @@
 package hubspot
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
+
+	"github.com/marcozac/hubspot-go/util"
 )
 
 // NewObjectClient returns a new object client for the given object type.
@@ -113,6 +116,34 @@ func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...Request
 	}
 	defer resp.Body.Close()
 	result := new(ObjectRead[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Create creates a new object with the given properties and, optionally, the
+// given associations.
+func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...AssociationForCreate) (*ObjectCreate[PE], error) {
+	rb := &ObjectCreateRequestBody[PE]{
+		Properties:   properties,
+		Associations: associations,
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(rb); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, oc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req)
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(ObjectCreate[PE])
 	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
 		return nil, err
 	}

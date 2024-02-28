@@ -363,3 +363,16 @@ type ObjectRead[PE ObjectPropertiesEmbedder] GenericPublicObject[
 	PropertyWithHistory,
 	PaginatedResults[AssociationEdge],
 ]
+
+// ObjectCreate is a generic struct that contains a single object returned by
+// the HubSpot API. Associations are usually not present in the response.
+type ObjectCreate[PE ObjectPropertiesEmbedder] GenericPublicObject[
+	PE,
+	PropertyWithHistory,
+	AssociationEdge,
+]
+
+type ObjectCreateRequestBody[PE ObjectPropertiesEmbedder] struct {
+	Properties   *PE                    `json:"properties,omitempty"`
+	Associations []AssociationForCreate `json:"associations,omitempty"`
+}

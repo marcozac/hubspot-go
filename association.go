@@ -3,9 +3,9 @@ package hubspot
 const (
 	// Association categories.
 
-	AssociationCategoryHubSpotDefined    = "HUBSPOT_DEFINED"
-	AssociationCategoryUserDefined       = "USER_DEFINED"
-	AssociationCategotyIntegratorDefined = "INTEGRATOR_DEFINED"
+	AssociationCategoryHubSpotDefined    AssociationCategory = "HUBSPOT_DEFINED"
+	AssociationCategoryUserDefined       AssociationCategory = "USER_DEFINED"
+	AssociationCategotyIntegratorDefined AssociationCategory = "INTEGRATOR_DEFINED"
 )
 
 const (
@@ -149,8 +149,8 @@ type (
 		// The ID of the association type.
 		ID int `json:"typeId,omitempty"`
 
-		// The ID of the association type. It is the same as typeId,
-		// used in some requests and responses.
+		// AssociationTypeId is the same as ID, used as an alias in
+		// some requests and responses.
 		AssociationTypeId int `json:"associationTypeId,omitempty"`
 
 		// The label of the association type.
@@ -164,7 +164,11 @@ type (
 		Name string `json:"name,omitempty"`
 
 		// The category of the association type.
-		Category string `json:"category,omitempty"`
+		Category AssociationCategory `json:"category,omitempty"`
+
+		// AssociationCategory is the same as Category, as an alias in
+		// some requests and responses.
+		AssociationCategory AssociationCategory `json:"associationCategory,omitempty"`
 	}
 
 	// AssociationEdge represents the relationship between two objects.
@@ -180,5 +184,38 @@ type (
 		//
 		// Example: "contact_to_company"
 		Type string `json:"type,omitempty"`
+	}
+
+	// AssociationCategory is the category of an association.
+	AssociationCategory string
+
+	// AssociationForCreate is the association used in object creation requests.
+	AssociationForCreate struct {
+		// Types is the list of association types.
+		Types []AssociationTypeForCreate `json:"types,omitempty"`
+
+		// To is the object to which the association is being made.
+		To AssociationEdgeForCreate `json:"to,omitempty"`
+	}
+
+	// AssociationTypeForCreate is the type of association used in object
+	// creation requests.
+	AssociationTypeForCreate struct {
+		// AssociationTypeId is the same as ID, used as an alias in
+		// some requests and responses.
+		AssociationTypeId int `json:"associationTypeId,omitempty"`
+
+		// AssociationCategory is the same as Category, as an alias in
+		// some requests and responses.
+		AssociationCategory AssociationCategory `json:"associationCategory,omitempty"`
+	}
+
+	// AssociationEdgeForCreate is an association edge used in object
+	// creation requests.
+	AssociationEdgeForCreate struct {
+		// The ID of the associated object.
+		//
+		// Example: "123"
+		ID string `json:"id"`
 	}
 )
