@@ -1,0 +1,30 @@
+// Code generated, DO NOT EDIT.
+
+package hubspot
+
+import (
+	"net/http"
+
+	"github.com/marcozac/hubspot-go/endpoint"
+)
+
+{{ range $oc := $ }}
+{{ $propertiesEmbedderName := $oc.Name | printf "%sPropertiesEmbedder" }}
+{{ $clientFuncName := $oc.EndpointTarget | printf "New%sClient" }}
+
+// {{ $clientFuncName }} returns a new client for the HubSpot
+// {{ $oc.EndpointTarget }} API.
+//
+// The given HTTP client is used to make requests to the HubSpot API and must
+// be configured to use the appropriate authentication method. You can use
+// [NewHTTPClient] to create a new HTTP client from an OAuth2 token source.
+//
+// The properties type may be provided as a type param or inferred from the
+// optional pe parameter. In the latter case, the given value is used only
+// for type inference and has no effect on the client.
+//
+// See the [{{ $propertiesEmbedderName }}] example.
+func {{ $clientFuncName }}[PE {{ $propertiesEmbedderName }}](httpClient *http.Client, pe ...PE) *ObjectClient[PE] {
+	return NewObjectClient(endpoint.{{ $oc.EndpointTarget }}, httpClient, pe...)
+}
+{{ end }}

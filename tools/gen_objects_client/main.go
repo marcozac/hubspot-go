@@ -16,7 +16,7 @@ func main() {
 }
 
 func run() error {
-	tmpl, err := template.ParseFiles("template/object_client.tmpl")
+	tmpl, err := template.ParseGlob("template/*.tmpl")
 	if err != nil {
 		return err
 	}
@@ -70,7 +70,13 @@ func run() error {
 			EndpointTarget: "Goals",
 		},
 	}
-	return util.WriteTemplateToFile(tmpl, "object_client.go", clients)
+	if err := util.WriteTemplateToFile(tmpl.Lookup("properties_embedder.tmpl"), "properties_embedder.go", clients); err != nil {
+		return err
+	}
+	if err := util.WriteTemplateToFile(tmpl.Lookup("hs_object_client.tmpl"), "hs_object_client.go", clients); err != nil {
+		return err
+	}
+	return nil
 }
 
 type ObjectClient struct {
