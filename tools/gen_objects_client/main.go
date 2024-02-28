@@ -3,11 +3,10 @@
 package main
 
 import (
-	"bytes"
-	"go/format"
 	"log"
-	"os"
 	"text/template"
+
+	"github.com/marcozac/hubspot-go/util"
 )
 
 func main() {
@@ -71,23 +70,7 @@ func run() error {
 			EndpointTarget: "Goals",
 		},
 	}
-	buf := new(bytes.Buffer)
-	if err := tmpl.Execute(buf, clients); err != nil {
-		return err
-	}
-	data, err := format.Source(buf.Bytes())
-	if err != nil {
-		return err
-	}
-	f, err := os.Create("object_client.go")
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	if _, err := f.Write(data); err != nil {
-		return err
-	}
-	return nil
+	return util.WriteTemplateToFile(tmpl, "object_client.go", clients)
 }
 
 type ObjectClient struct {

@@ -27,16 +27,14 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"go/format"
 	"log"
-	"os"
 	"strings"
 	"text/template"
 
 	"github.com/marcozac/hubspot-go"
+	"github.com/marcozac/hubspot-go/util"
 )
 
 func main() {
@@ -168,23 +166,7 @@ func run() error { //nolint:funlen
 			dp.Fields = append(dp.Fields, f)
 		}
 	}
-	buf := new(bytes.Buffer)
-	if err := tmpl.Execute(buf, dps); err != nil {
-		return err
-	}
-	data, err := format.Source(buf.Bytes())
-	if err != nil {
-		return err
-	}
-	f, err := os.Create("default_properties.go")
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	if _, err := f.Write(data); err != nil {
-		return err
-	}
-	return nil
+	return util.WriteTemplateToFile(tmpl, "default_properties.go", dps)
 }
 
 type ObjectDefaultProperties struct {
