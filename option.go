@@ -5,10 +5,15 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+
+	"golang.org/x/time/rate"
+
+	"github.com/marcozac/hubspot-go/limiter"
 )
 
 type clientConfig struct {
-	ctx context.Context
+	ctx     context.Context
+	limiter *rate.Limiter
 }
 
 type ClientOption func(*clientConfig)
@@ -26,13 +31,26 @@ func WithContext(ctx context.Context) ClientOption {
 	}
 }
 
+// WithLimiter sets the rate limiter for the client.
+//
+// The rate limiter is used to control the rate of requests made to the
+// HubSpot API. If the limiter is nil, no rate limiting is applied.
+//
+// A small set of predefined limiters is available in the limiter package.
+func WithLimiter(limiter *rate.Limiter) ClientOption {
+	return func(c *clientConfig) {
+		c.limiter = limiter
+	}
+}
+
 // applyClientOptions applies the given options to the given client config,
 // returning the same reference if the given config is not nil. Otherwise, a
 // new config is created and returned with the options applied.
 func applyClientOptions(cfg *clientConfig, opts ...ClientOption) *clientConfig {
 	if cfg == nil {
 		cfg = &clientConfig{
-			ctx: context.Background(),
+			ctx:     context.Background(),
+			limiter: limiter.NewInf(),
 		}
 	}
 	for _, opt := range opts {
