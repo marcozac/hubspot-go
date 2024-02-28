@@ -1,10 +1,21 @@
 package endpoint
 
 const (
-	BaseURL = "https://api.hubapi.com"
+	BaseURL      = "https://api.hubapi.com"
+	AuthorizeURL = "https://app.hubspot.com/oauth/authorize"
 
 	CRMV3 = BaseURL + "/crm/v3"
 	CRMV4 = BaseURL + "/crm/v4"
+)
+
+const (
+	// OAuth
+
+	OAuth = BaseURL + "/oauth/v1"
+
+	OAuthToken         = OAuth + "/token"
+	OAuthAccessTokens  = OAuth + "/access-tokens"
+	OAuthRefreshTokens = OAuth + "/refresh-tokens"
 )
 
 const (
