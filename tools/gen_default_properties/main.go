@@ -35,6 +35,8 @@ import (
 
 	"github.com/marcozac/hubspot-go"
 	"github.com/marcozac/hubspot-go/util"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
