@@ -62,6 +62,11 @@ func TestClient(t *testing.T) {
 	})
 
 	t.Run("Contacts", func(t *testing.T) {
+		var jdContact *GenericPublicObject[
+			ContactPropertiesTest,
+			PaginatedResults[PropertyWithHistory],
+			PaginatedResults[AssociationEdge],
+		]
 		t.Run("List", func(t *testing.T) {
 			cs, err := client.Contacts.List(ctx,
 				WithArchived(false),
@@ -83,7 +88,18 @@ func TestClient(t *testing.T) {
 					assert.Equal(t, "Doe", r.Properties.Lastname)
 					assert.Equal(t, "foo", r.Properties.MyCustomPropertyFromUI)
 				}
+				// Assign the contact to the variable for the next tests.
+				jdContact = &r
 			}
+		})
+
+		// Do not run the next tests if the example contact was not found.
+		require.NotNil(t, jdContact, "expected the example contact to be found")
+		t.Run("Read", func(t *testing.T) {
+			c, err := client.Contacts.Read(ctx, jdContact.ID)
+			assert.NoError(t, err, "expected no error when reading contact")
+			assert.NotNil(t, c, "expected contact to be returned")
+			assert.Equal(t, jdContact.ID, c.ID, "expected contact ID to match")
 		})
 	})
 }

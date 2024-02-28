@@ -74,9 +74,47 @@ func (oc *ObjectClient[PE]) List(ctx context.Context, opts ...RequestOption) (*O
 		return nil, err
 	}
 	defer resp.Body.Close()
-	var results ObjectListResults[PE]
-	if err := json.NewDecoder(resp.Body).Decode(&results); err != nil {
+	results := new(ObjectListResults[PE])
+	if err := json.NewDecoder(resp.Body).Decode(results); err != nil {
 		return nil, err
 	}
-	return &results, nil
+	return results, nil
+}
+
+// Read returns the object with the given ID.
+//
+// Object ID is usually a number. If it is declared as a [Int], [Int64], etc.
+// it is possible to use the String method to convert it to a string.
+//
+// Allowed options:
+//   - WithArchived: include only archived objects in the response
+//   - WithProperties: include only the specified properties in the response
+//   - WithPropertiesWithHistory: include the history of the specified
+//     properties in the response
+//   - WithAssociations: include only the specified associations in the response
+//
+// Any other option is ignored.
+func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...RequestOption) (*ObjectRead[PE], error) {
+	cfg := applyRequestOptions(nil, opts...)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, oc.endpoint+"/"+id, nil)
+	if err != nil {
+		return nil, err
+	}
+	applyQueryOptions(cfg, req.URL,
+		applyArchivedQuery,
+		applyPropertiesQuery,
+		applyPropertiesWithHistoryQuery,
+		applyAssociationsQuery,
+		applyIDPropertyQuery,
+	)
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(ObjectRead[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

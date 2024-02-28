@@ -83,6 +83,10 @@ type RequestConfig struct {
 
 	// After is the paging cursor token used to get the next page of results.
 	After string
+
+	// IDProperty is the name of a property whose values are unique for the
+	// object type.
+	IDProperty string
 }
 
 type RequestOption func(*RequestConfig)
@@ -142,6 +146,15 @@ func WithAfter(after string) RequestOption {
 	}
 }
 
+// WithIDProperty sets the ID property option for the request.
+//
+// See [RequestConfig.IDProperty] for more information.
+func WithIDProperty(name string) RequestOption {
+	return func(c *RequestConfig) {
+		c.IDProperty = name
+	}
+}
+
 // applyRequestOptions applies the given options to the given request config,
 // returning the same reference if the given config is not nil. Otherwise, a
 // new config is created and returned with the options applied.
@@ -162,6 +175,7 @@ const (
 	QueryKeyAssociations          = "associations"
 	QueryKeyLimit                 = "limit"
 	QueryKeyAfter                 = "after"
+	QueryKeyIDProperty            = "idProperty"
 )
 
 // queryOption is a function that applies a query parameter to the given
@@ -264,5 +278,17 @@ func applyLimitQuery(cfg *RequestConfig, query url.Values) {
 func applyAfterQuery(cfg *RequestConfig, query url.Values) {
 	if cfg.After != "" {
 		query.Set(QueryKeyAfter, cfg.After)
+	}
+}
+
+// applyIDPropertyQuery checks the IDProperty field of the given request
+// config and adds the appropriate query parameter to the given url.Values.
+// If the cfg.IDProperty field is empty, this function does nothing.
+//
+// NOTE: this function performs a write operation on the given url.Values
+// (map), so it is not safe to call concurrently.
+func applyIDPropertyQuery(cfg *RequestConfig, query url.Values) {
+	if cfg.IDProperty != "" {
+		query.Set(QueryKeyIDProperty, cfg.IDProperty)
 	}
 }

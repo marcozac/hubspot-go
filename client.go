@@ -347,8 +347,19 @@ type PagingPrev struct {
 	Before string `json:"before,omitempty"`
 }
 
+// ObjectListResults is a generic struct that contains a paginated list of
+// objects returned by the HubSpot API. Associations and PropertiesWithHistory
+// are also paginated.
 type ObjectListResults[PE ObjectPropertiesEmbedder] PaginatedResults[GenericPublicObject[
 	PE,
 	PaginatedResults[PropertyWithHistory],
 	PaginatedResults[AssociationEdge],
 ]]
+
+// ObjectRead is a generic struct that contains a single object returned by the
+// HubSpot API. Associations are also paginated.
+type ObjectRead[PE ObjectPropertiesEmbedder] GenericPublicObject[
+	PE,
+	PropertyWithHistory,
+	PaginatedResults[AssociationEdge],
+]
