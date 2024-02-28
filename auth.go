@@ -9,6 +9,8 @@ import (
 	"sync"
 
 	"golang.org/x/oauth2"
+
+	"github.com/marcozac/hubspot-go/endpoint"
 )
 
 func NewEnvTokenSource(key string) (*EnvTokenSource, error) {
@@ -152,4 +154,49 @@ func (e *EnvTokenSourceEncrypted) decrypt() ([]byte, error) {
 	stream := cipher.NewCFBDecrypter(e.cb, iv)
 	stream.XORKeyStream(ciphertext, ciphertext)
 	return ciphertext, nil
+}
+
+// OAuth2Endpoint is the OAuth 2.0 endpoint for HubSpot.
+// It can be used to set the Endpoint field of an oauth2.Config.
+var OAuth2Endpoint = oauth2.Endpoint{
+	AuthURL:   endpoint.AuthorizeURL,
+	TokenURL:  endpoint.OAuthToken,
+	AuthStyle: oauth2.AuthStyleInParams,
+}
+
+// Token is an OAuth 2.0 as retrieved from [endpoint.OAuthToken] after a successful
+// code exchange or refresh.
+type Token struct {
+	AccessToken  string `json:"access_token,omitempty"`
+	RefreshToken string `json:"refresh_token,omitempty"`
+	IDToken      string `json:"id_token,omitempty"`
+	TokenType    string `json:"token_type,omitempty"`
+	ExpiresIn    int    `json:"expires_in,omitempty"`
+}
+
+// AccessToken is an OAuth 2.0 access token as retrieved from
+// [endpoint.OAuthAccessTokens].
+type AccessToken struct {
+	HubID     int      `json:"hub_id,omitempty"`
+	UserID    int      `json:"user_id,omitempty"`
+	Scopes    []string `json:"scopes,omitempty"`
+	TokenType string   `json:"token_type,omitempty"`
+	User      string   `json:"user,omitempty"`
+	HubDomain string   `json:"hub_domain,omitempty"`
+	AppID     int      `json:"app_id,omitempty"`
+	ExpiresIn int      `json:"expires_in,omitempty"`
+	Token     string   `json:"token,omitempty"`
+}
+
+// RefreshToken is an OAuth 2.0 refresh token as retrieved from
+// [endpoint.OAuthRefreshTokens].
+type RefreshToken struct {
+	HubID     int      `json:"hub_id,omitempty"`
+	UserID    int      `json:"user_id,omitempty"`
+	Scopes    []string `json:"scopes,omitempty"`
+	TokenType string   `json:"token_type,omitempty"`
+	User      string   `json:"user,omitempty"`
+	HubDomain string   `json:"hub_domain,omitempty"`
+	ClientID  string   `json:"client_id,omitempty"`
+	Token     string   `json:"token,omitempty"`
 }

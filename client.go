@@ -177,6 +177,8 @@ type Client[
 ] struct {
 	HTTPClient *http.Client
 
+	OAuth OAuthClient
+
 	Contacts  *ObjectClient[ContactProperties]
 	Companies *ObjectClient[CompanyProperties]
 	Deals     *ObjectClient[DealProperties]
@@ -191,6 +193,75 @@ type Client[
 	Goals     *ObjectClient[GoalProperties]
 
 	Properties *PropertiesClient
+}
+
+// OAuthClient is a client for the HubSpot OAuth API.
+//
+// It can be used to get access tokens, refresh tokens, and delete refresh tokens.
+//
+// Token exchange and refresh are not implemented and should be handled by the
+// oauth2 package from golang.org/x/oauth2. For example, you can configure an
+// oauth2.Config with the HubSpot OAuth 2.0 endpoint and use the Exchange method
+// to get an access token from an authorization code or a refresh token.
+type OAuthClient struct{}
+
+func (OAuthClient) GetAccessToken(ctx context.Context, token string) (*AccessToken, error) {
+	url := endpoint.OAuthAccessTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	at := new(AccessToken)
+	if err := json.NewDecoder(resp.Body).Decode(at); err != nil {
+		return nil, err
+	}
+	return at, nil
+}
+
+func (OAuthClient) GetRefreshToken(ctx context.Context, token string) (*RefreshToken, error) {
+	url := endpoint.OAuthRefreshTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	rt := new(RefreshToken)
+	if err := json.NewDecoder(resp.Body).Decode(rt); err != nil {
+		return nil, err
+	}
+	return rt, nil
+}
+
+func (OAuthClient) DeleteGetRefreshToken(ctx context.Context, token string) error {
+	url := endpoint.OAuthRefreshTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, url, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
 }
 
 func NewPropertiesClient(hc *http.Client) *PropertiesClient {
