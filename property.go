@@ -175,6 +175,15 @@ type (
 		// Archived is true if the group is archived.
 		Archived bool `json:"archived,omitempty"`
 	}
+
+	PropertyWithHistory struct {
+		SourceID        string   `json:"sourceId,omitempty"`
+		SourceLabel     string   `json:"sourceLabel,omitempty"`
+		SourceType      string   `json:"sourceType,omitempty"`
+		UpdatedByUserID int64    `json:"updatedByUserId,omitempty"`
+		Value           string   `json:"value,omitempty"`
+		Timestamp       DateTime `json:"timestamp,omitempty"`
+	}
 )
 
 type Bool bool

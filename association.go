@@ -171,7 +171,14 @@ type (
 	// It is used in requests and responses with different representations,
 	// see the method-specific documentation for details.
 	AssociationEdge struct {
-		// The ID of the object to which the association is being made.
+		// The ID of the associated object.
+		//
+		// Example: "123"
 		ID int `json:"id"`
+
+		// The type of the association.
+		//
+		// Example: "contact_to_company"
+		Type string `json:"type,omitempty"`
 	}
 )

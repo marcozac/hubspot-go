@@ -8,6 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+var NewTestClient = NewTypedClient[
+	ContactPropertiesTest,
+	CompanyDefaultProperties,
+	DealDefaultProperties,
+	FeedbackSubmissionDefaultProperties,
+	LineItemDefaultProperties,
+	ProductDefaultProperties,
+	QuoteDefaultProperties,
+	DiscountDefaultProperties,
+	FeeDefaultProperties,
+	TaxDefaultProperties,
+	TicketDefaultProperties,
+	GoalDefaultProperties,
+]
+
 // TestClient tests the NewClient function and the returned client's methods.
 //
 // WARNING
@@ -23,11 +38,11 @@ func TestClient(t *testing.T) {
 	ts, err := NewEnvTokenSource(envTokenKey)
 	require.NoError(t, err, "expected no error when creating token source")
 
-	_, err = NewClient(nil)
-	assert.Error(t, err, "expected error when token source is not provided")
+	_, err = NewTestClient(nil)
+	assert.ErrorIs(t, err, ErrTokenSourceRequired)
 
 	ctx := context.Background()
-	client, err := NewClient(ts, WithContext(ctx))
+	client, err := NewTestClient(ts, WithContext(ctx))
 	require.NoError(t, err, "expected no error when creating client")
 
 	t.Run("Properties", func(t *testing.T) {
@@ -39,4 +54,40 @@ func TestClient(t *testing.T) {
 			assert.NotEmpty(t, ps, "expected properties to be returned")
 		})
 	})
+
+	t.Run("Contacts", func(t *testing.T) {
+		t.Run("List", func(t *testing.T) {
+			cs, err := client.Contacts.List(ctx,
+				WithArchived(false),
+				WithProperties(
+					"email",
+					"firstname",
+					"lastname",
+					"my_custom_prop_from_ui",
+				),
+			)
+			assert.NoError(t, err, "expected no error when listing contacts")
+			require.NotNil(t, cs, "expected contacts to be returned")
+
+			for _, r := range cs.Results {
+				// HubSpot uses the email address as the unique identifier for
+				// contacts, so we can use it to find the example contact.
+				if r.Properties.Email == "johndoe@example.com" {
+					assert.Equal(t, "John", r.Properties.Firstname)
+					assert.Equal(t, "Doe", r.Properties.Lastname)
+					assert.Equal(t, "foo", r.Properties.MyCustomPropertyFromUI)
+				}
+			}
+		})
+	})
+}
+
+type ContactPropertiesTest struct {
+	// Embed the default properties to ensure that the custom properties are
+	// added to the default ones.
+	ContactDefaultProperties
+
+	// MyCustomPropertyFromUI is a custom property added from the HubSpot UI
+	// for testing purposes.
+	MyCustomPropertyFromUI string `json:"my_custom_prop_from_ui,omitempty"`
 }
