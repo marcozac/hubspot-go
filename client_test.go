@@ -6,6 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 var NewTestClient = NewTypedClient[
@@ -26,10 +28,14 @@ var NewTestClient = NewTypedClient[
 // TestClient tests the NewClient function and the returned client's methods.
 //
 // WARNING
-// This test requires a valid access token to be present in the environment.
+// This test requires a valid access token to be present in the environment
+// variable "TEST_CLIENT_HUBSPOT_ACCESS_TOKEN".
 // It also requires an high permission level to access the HubSpot API and
 // will perform real read and write requests to the API. It is recommended to
 // generate the access token in a [HubSpot test account].
+//
+// The environment variable "TEST_CLIENT_HUBSPOT_ACCESS_TOKEN" may be provided
+// in a .env file in the root of the project.
 //
 // [HubSpot test account]: https://developers.hubspot.com/docs/api/account-types#developer-test-accounts
 func TestClient(t *testing.T) {
