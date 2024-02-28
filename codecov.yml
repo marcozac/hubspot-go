@@ -1,0 +1,3 @@
+ignore:
+  # Ignore middleware files. They are tested running the server.
+  - 'middleware'
