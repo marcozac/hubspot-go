@@ -8,15 +8,21 @@ import (
 	"golang.org/x/oauth2"
 
 	"github.com/marcozac/hubspot-go/endpoint"
+	"github.com/marcozac/hubspot-go/limiter"
 )
 
 // NewHTTPClient returns a new HTTP client that uses the given token source to
 // authenticate requests to the HubSpot API.
+//
+// The client is also wrapped with a rate limiter that limits the number of
+// requests per second to the HubSpot API. By default, the rate limiter allows
+// infinite requests per second. You can use the WithLimiter option to set a
+// different rate limit.
 func NewHTTPClient(ts oauth2.TokenSource, opts ...ClientOption) *http.Client {
 	cfg := applyClientOptions(nil, opts...)
-	// TODO
-	// Add the limit and retry middlewares to the HTTP client.
-	return oauth2.NewClient(cfg.ctx, ts)
+	oc := oauth2.NewClient(cfg.ctx, ts)
+	// Wrap the HTTP client with a rate limiter.
+	return limiter.WrapHTTPClient(oc, cfg.limiter)
 }
 
 // NewDefaultClient returns a new HubSpot client with the given token source and
