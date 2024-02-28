@@ -209,5 +209,6 @@ func (oc *ObjectClient[PE]) Archive(ctx context.Context, id string) error {
 	if err := HubSpotResponseError(resp); err != nil {
 		return err
 	}
+	resp.Body.Close()
 	return nil
 }
