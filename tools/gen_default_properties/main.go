@@ -56,7 +56,7 @@ func run() error { //nolint:funlen
 	if err != nil {
 		return err
 	}
-	client, err := hubspot.NewClient(ts, hubspot.WithContext(ctx))
+	client, err := hubspot.NewDefaultClient(ts, hubspot.WithContext(ctx))
 	if err != nil {
 		return err
 	}
