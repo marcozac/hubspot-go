@@ -284,6 +284,10 @@ func (poc *PropertiesObjectClient) List(ctx context.Context, opts ...RequestOpti
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
 	defer resp.Body.Close()
 	var results Results[Property]
 	if err := json.NewDecoder(resp.Body).Decode(&results); err != nil {

@@ -76,6 +76,10 @@ func (oc *ObjectClient[PE]) List(ctx context.Context, opts ...RequestOption) (*O
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
 	defer resp.Body.Close()
 	results := new(ObjectListResults[PE])
 	if err := json.NewDecoder(resp.Body).Decode(results); err != nil {
@@ -114,6 +118,10 @@ func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...Request
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
 	defer resp.Body.Close()
 	result := new(ObjectRead[PE])
 	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
@@ -140,6 +148,10 @@ func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associat
 	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
 	resp, err := oc.hc.Do(req)
 	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
@@ -171,6 +183,10 @@ func (oc *ObjectClient[PE]) Update(ctx context.Context, id string, properties *P
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
 	defer resp.Body.Close()
 	result := new(ObjectMutation[PE])
 	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
@@ -189,6 +205,9 @@ func (oc *ObjectClient[PE]) Archive(ctx context.Context, id string) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
 	return nil
 }
