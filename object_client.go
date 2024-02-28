@@ -124,8 +124,8 @@ func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...Request
 
 // Create creates a new object with the given properties and, optionally, the
 // given associations.
-func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...AssociationForCreate) (*ObjectCreate[PE], error) {
-	rb := &ObjectCreateRequestBody[PE]{
+func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...AssociationForCreate) (*ObjectMutation[PE], error) {
+	rb := &ObjectMutationRequestBody[PE]{
 		Properties:   properties,
 		Associations: associations,
 	}
@@ -137,15 +137,58 @@ func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associat
 	if err != nil {
 		return nil, err
 	}
-	util.SetJSONHeader(req)
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
 	resp, err := oc.hc.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(ObjectCreate[PE])
+	result := new(ObjectMutation[PE])
 	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
 		return nil, err
 	}
 	return result, nil
+}
+
+// Update updates the properties of the object with the given ID.
+//
+// According to the HubSpot API, read only and non-writable properties are
+// ignored. To clear a property, set its value to an empty string.
+func (oc *ObjectClient[PE]) Update(ctx context.Context, id string, properties *PE) (*ObjectMutation[PE], error) {
+	rb := &ObjectMutationRequestBody[PE]{
+		Properties: properties,
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(rb); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, oc.endpoint+"/"+id, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(ObjectMutation[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Archive archives the object with the given ID.
+func (oc *ObjectClient[PE]) Archive(ctx context.Context, id string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, oc.endpoint+"/"+id, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	return nil
 }

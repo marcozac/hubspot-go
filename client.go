@@ -364,15 +364,19 @@ type ObjectRead[PE ObjectPropertiesEmbedder] GenericPublicObject[
 	PaginatedResults[AssociationEdge],
 ]
 
-// ObjectCreate is a generic struct that contains a single object returned by
-// the HubSpot API. Associations are usually not present in the response.
-type ObjectCreate[PE ObjectPropertiesEmbedder] GenericPublicObject[
+// ObjectMutation is a generic struct that contains a single object returned by
+// the HubSpot API after a create or update operation. Associations are usually
+// not present in the response.
+type ObjectMutation[PE ObjectPropertiesEmbedder] GenericPublicObject[
 	PE,
 	PropertyWithHistory,
 	AssociationEdge,
 ]
 
-type ObjectCreateRequestBody[PE ObjectPropertiesEmbedder] struct {
+// ObjectMutationRequestBody is a generic struct that contains the request body
+// for creating or updating an object in the HubSpot API. Associations should
+// be set only when creating an object.
+type ObjectMutationRequestBody[PE ObjectPropertiesEmbedder] struct {
 	Properties   *PE                    `json:"properties,omitempty"`
 	Associations []AssociationForCreate `json:"associations,omitempty"`
 }
