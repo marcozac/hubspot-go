@@ -7,6 +7,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/oauth2 v0.17.0
+	golang.org/x/time v0.5.0
 )
 
 require (
