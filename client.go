@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"golang.org/x/oauth2"
@@ -441,6 +442,36 @@ func (poc *PropertiesObjectClient) Create(ctx context.Context, prop *Property) (
 		return nil, err
 	}
 	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(Property)
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Update updates the given property. The property name must be set in the
+// property struct, that cannot be nil.
+func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (*Property, error) {
+	if prop == nil {
+		return nil, fmt.Errorf("property: %w", ErrNilParam)
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(prop); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, poc.endpoint+"/"+prop.Name, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	if err := HubSpotResponseError(resp); err != nil {
 		return nil, err
 	}

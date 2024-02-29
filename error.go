@@ -32,6 +32,9 @@ var (
 	// ErrTokenSourceRequired is returned when a token source is required but
 	// not provided.
 	ErrTokenSourceRequired = errors.New("token source is required")
+
+	// ErrNilParam is an error returned when a required parameter is nil.
+	ErrNilParam = errors.New("parameter cannot be nil")
 )
 
 var _ error = (*HubSpotError)(nil)
