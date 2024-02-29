@@ -571,6 +571,13 @@ func (pgc *PropertyGroupClient) Read(ctx context.Context, name string) (*Propert
 }
 
 // Create creates a new property group.
+//
+// At the moment of writing, the required fields in [HubSpot's docs] are:
+//   - Name
+//   - Label
+//
+// Missing fields are not checked, to avoid breaking changes in the future
+// versions of the HubSpot API, and may cause errors in the response.
 func (pgc *PropertyGroupClient) Create(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
 	buf := new(bytes.Buffer)
 	if err := json.NewEncoder(buf).Encode(group); err != nil {

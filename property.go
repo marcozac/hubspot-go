@@ -47,16 +47,16 @@ type (
 		Name string `json:"name"`
 
 		// Label is the label of the property as displayed in the HubSpot UI.
-		Label string `json:"label"`
+		Label string `json:"label,omitempty"`
 
 		// GroupName is the name of the group the property belongs to.
-		GroupName string `json:"groupName"`
+		GroupName string `json:"groupName,omitempty"`
 
 		// Type is the type of the property, e.g. "string", "number", "enumeration".
-		Type PropertyType `json:"type"`
+		Type PropertyType `json:"type,omitempty"`
 
 		// FieldType is the type of the field, e.g. "text", "select", "checkbox".
-		FieldType PropertyFieldType `json:"fieldType"`
+		FieldType PropertyFieldType `json:"fieldType,omitempty"`
 
 		// ReferencedObjectType is the type of the object the property references.
 		//
