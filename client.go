@@ -281,61 +281,73 @@ func NewPropertiesClient(hc *http.Client) *PropertiesClient {
 		Contact: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ContactProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.ContactPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.ContactPropertiesGroups, hc),
 		},
 		Company: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.CompanyProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.CompanyPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.CompanyPropertiesGroups, hc),
 		},
 		Deal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DealProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.DealPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.DealPropertiesGroups, hc),
 		},
 		FeedbackSubmission: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeedbackSubmissionProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.FeedbackSubmissionPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.FeedbackSubmissionPropertiesGroups, hc),
 		},
 		LineItem: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.LineItemProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.LineItemPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.LineItemPropertiesGroups, hc),
 		},
 		Product: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ProductProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.ProductPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.ProductPropertiesGroups, hc),
 		},
 		Quote: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.QuoteProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.QuotePropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.QuotePropertiesGroups, hc),
 		},
 		Discount: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DiscountProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.DiscountPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.DiscountPropertiesGroups, hc),
 		},
 		Fee: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeeProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.FeePropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.FeePropertiesGroups, hc),
 		},
 		Tax: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TaxProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.TaxPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.TaxPropertiesGroups, hc),
 		},
 		Ticket: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TicketProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.TicketPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.TicketPropertiesGroups, hc),
 		},
 		Goal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.GoalProperties,
+			Batch:    NewPropertiesBatchClient(endpoint.GoalPropertiesBatch, hc),
 			Groups:   NewPropertyGroupClient(endpoint.GoalPropertiesGroups, hc),
 		},
 	}
@@ -360,6 +372,7 @@ type PropertiesObjectClient struct {
 	endpoint string
 	hc       *http.Client
 
+	Batch  *PropertiesBatchClient
 	Groups *PropertyGroupClient
 }
 
@@ -519,6 +532,31 @@ func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) err
 	resp.Body.Close()
 	return nil
 }
+
+func NewPropertiesBatchClient(baseEndpoint string, httpClient *http.Client) *PropertiesBatchClient {
+	return &PropertiesBatchClient{
+		baseEndpoint: baseEndpoint,
+		hc:           httpClient,
+	}
+}
+
+type (
+	PropertiesBatchClient = BatchClient[
+		PropertiesBatchReadInput,
+		PropertiesBatchCreateInput,
+		BatchInput[any], // not available
+		PropertiesBatchArchiveInput,
+		Property,
+	]
+
+	PropertiesBatchReadInput    = BatchInput[PropertiesBatchNameInput]
+	PropertiesBatchArchiveInput = PropertiesBatchReadInput
+	PropertiesBatchCreateInput  = BatchInput[Property]
+
+	PropertiesBatchNameInput struct {
+		Name string `json:"name"`
+	}
+)
 
 // NewPropertyGroupClient returns a new property group client that uses the
 // given HTTP client to make requests to the endpoint.
