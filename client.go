@@ -281,50 +281,62 @@ func NewPropertiesClient(hc *http.Client) *PropertiesClient {
 		Contact: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ContactProperties,
+			Groups:   NewPropertyGroupClient(endpoint.ContactPropertiesGroups, hc),
 		},
 		Company: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.CompanyProperties,
+			Groups:   NewPropertyGroupClient(endpoint.CompanyPropertiesGroups, hc),
 		},
 		Deal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DealProperties,
+			Groups:   NewPropertyGroupClient(endpoint.DealPropertiesGroups, hc),
 		},
 		FeedbackSubmission: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeedbackSubmissionProperties,
+			Groups:   NewPropertyGroupClient(endpoint.FeedbackSubmissionPropertiesGroups, hc),
 		},
 		LineItem: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.LineItemProperties,
+			Groups:   NewPropertyGroupClient(endpoint.LineItemPropertiesGroups, hc),
 		},
 		Product: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ProductProperties,
+			Groups:   NewPropertyGroupClient(endpoint.ProductPropertiesGroups, hc),
 		},
 		Quote: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.QuoteProperties,
+			Groups:   NewPropertyGroupClient(endpoint.QuotePropertiesGroups, hc),
 		},
 		Discount: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DiscountProperties,
+			Groups:   NewPropertyGroupClient(endpoint.DiscountPropertiesGroups, hc),
 		},
 		Fee: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeeProperties,
+			Groups:   NewPropertyGroupClient(endpoint.FeePropertiesGroups, hc),
 		},
 		Tax: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TaxProperties,
+			Groups:   NewPropertyGroupClient(endpoint.TaxPropertiesGroups, hc),
 		},
 		Ticket: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TicketProperties,
+			Groups:   NewPropertyGroupClient(endpoint.TicketPropertiesGroups, hc),
 		},
 		Goal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.GoalProperties,
+			Groups:   NewPropertyGroupClient(endpoint.GoalPropertiesGroups, hc),
 		},
 	}
 }
@@ -347,6 +359,8 @@ type PropertiesClient struct {
 type PropertiesObjectClient struct {
 	endpoint string
 	hc       *http.Client
+
+	Groups *PropertyGroupClient
 }
 
 // List returns a list of properties for the object type.
@@ -498,6 +512,15 @@ func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) err
 	}
 	resp.Body.Close()
 	return nil
+}
+
+// NewPropertyGroupClient returns a new property group client that uses the
+// given HTTP client to make requests to the endpoint.
+func NewPropertyGroupClient(endpoint string, httpClient *http.Client) *PropertyGroupClient {
+	return &PropertyGroupClient{
+		endpoint: endpoint,
+		hc:       httpClient,
+	}
 }
 
 type PropertyGroupClient struct {
