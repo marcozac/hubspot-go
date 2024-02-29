@@ -463,7 +463,7 @@ func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (
 	if err := json.NewEncoder(buf).Encode(prop); err != nil {
 		return nil, err
 	}
-	req, err := http.NewRequestWithContext(ctx, http.MethodPut, poc.endpoint+"/"+prop.Name, buf)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, poc.endpoint+"/"+prop.Name, buf)
 	if err != nil {
 		return nil, err
 	}
@@ -490,6 +490,126 @@ func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) err
 		return err
 	}
 	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
+}
+
+type PropertyGroupClient struct {
+	endpoint string
+	hc       *http.Client
+}
+
+// List returns a list of property groups for the object type.
+func (pgc *PropertyGroupClient) List(ctx context.Context) ([]PropertyGroup, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, pgc.endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	var results Results[PropertyGroup]
+	if err := json.NewDecoder(resp.Body).Decode(&results); err != nil {
+		return nil, err
+	}
+	return results.Results, nil
+}
+
+// Read returns the property group with the given name.
+func (pgc *PropertyGroupClient) Read(ctx context.Context, name string) (*PropertyGroup, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, pgc.endpoint+"/"+name, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(PropertyGroup)
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Create creates a new property group.
+func (pgc *PropertyGroupClient) Create(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(group); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, pgc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(PropertyGroup)
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Update updates the given property group. The property group name must be set
+// in the property group struct, that cannot be nil.
+func (pgc *PropertyGroupClient) Update(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
+	if group == nil {
+		return nil, fmt.Errorf("property group: %w", ErrNilParam)
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(group); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, pgc.endpoint+"/"+group.Name, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(PropertyGroup)
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Archive archives the property group with the given name.
+func (pgc *PropertyGroupClient) Archive(ctx context.Context, name string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, pgc.endpoint+"/"+name, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := pgc.hc.Do(req)
 	if err != nil {
 		return err
 	}
