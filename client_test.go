@@ -282,6 +282,99 @@ func TestClient(t *testing.T) {
 			err := client.Contacts.Archive(ctx, createdContact.ID)
 			assert.NoError(t, err, "expected no error when deleting contact")
 		})
+
+		t.Run("Batch", func(t *testing.T) {
+			var contacts []ObjectMutation[ContactPropertiesTest]
+			t.Run("Create", func(t *testing.T) {
+				out, err := client.Contacts.Batch.Create(ctx, &ObjectBatchCreateInput[ContactPropertiesTest]{
+					Inputs: []ObjectMutationRequestBody[ContactPropertiesTest]{
+						{
+							Properties: &ContactPropertiesTest{
+								ContactDefaultProperties: ContactDefaultProperties{
+									Email: "foo_batch_1@example.com",
+								},
+							},
+						},
+						{
+							Properties: &ContactPropertiesTest{
+								ContactDefaultProperties: ContactDefaultProperties{
+									Email: "foo_batch_2@example.com",
+								},
+							},
+						},
+					},
+				})
+
+				require.NoError(t, err, "expected no error when creating contacts in batch")
+				contacts = out.Results.Results
+			})
+
+			// Do not run the next tests if the contacts were not created.
+			require.NotEmpty(t, contacts, "expected contacts to be created")
+
+			t.Run("Update", func(t *testing.T) {
+				inputs := make([]ObjectBatchUpdateInputStruct[ContactPropertiesTest], 0, len(contacts))
+				for _, c := range contacts {
+					inputs = append(inputs, ObjectBatchUpdateInputStruct[ContactPropertiesTest]{
+						ID: c.ID,
+						Properties: ContactPropertiesTest{
+							ContactDefaultProperties: ContactDefaultProperties{
+								Firstname: "John",
+								Lastname:  "Doe",
+							},
+						},
+					})
+				}
+				ucs, err := client.Contacts.Batch.Update(ctx, &ObjectBatchUpdateInput[ContactPropertiesTest]{
+					Inputs: inputs,
+				})
+				require.NoError(t, err, "expected no error when updating contacts in batch")
+				require.NotNil(t, ucs.Results, "expected results to be returned")
+				assert.Equal(t, 2, len(ucs.Results.Results), "expected 2 results to be returned")
+				for _, c := range ucs.Results.Results {
+					assert.Equal(t, "John", c.Properties.Firstname, "expected contact firstname to match")
+					assert.Equal(t, "Doe", c.Properties.Lastname, "expected contact lastname to match")
+				}
+				contacts = ucs.Results.Results
+			})
+
+			// Do not run the next tests if the contacts were not created.
+			require.NotEmpty(t, contacts, "expected contacts to be created")
+
+			t.Run("Read", func(t *testing.T) {
+				inputs := make([]ObjectBatchIDInput, 0, len(contacts))
+				for _, c := range contacts {
+					inputs = append(inputs, ObjectBatchIDInput{
+						ID: c.ID,
+					})
+				}
+				rcs, err := client.Contacts.Batch.Read(ctx, &ObjectBatchReadInput[ContactPropertiesTest]{
+					Properties: []string{"email", "firstname", "lastname"},
+					BatchInput: BatchInput[ObjectBatchIDInput]{
+						Inputs: inputs,
+					},
+				})
+				require.NoError(t, err, "expected no error when reading contacts in batch")
+				require.NotNil(t, rcs.Results, "expected results to be returned")
+				assert.Equal(t, 2, len(rcs.Results.Results), "expected 2 results to be returned")
+				for _, c := range rcs.Results.Results {
+					assert.Equal(t, "John", c.Properties.Firstname, "expected contact firstname to match")
+					assert.Equal(t, "Doe", c.Properties.Lastname, "expected contact lastname to match")
+				}
+			})
+			t.Run("Archive", func(t *testing.T) {
+				inputs := make([]ObjectBatchIDInput, 0, len(contacts))
+				for _, c := range contacts {
+					inputs = append(inputs, ObjectBatchIDInput{
+						ID: c.ID,
+					})
+				}
+				err := client.Contacts.Batch.Archive(ctx, &ObjectBatchArchiveInput{
+					Inputs: inputs,
+				})
+				assert.NoError(t, err, "expected no error when archiving contacts in batch")
+			})
+		})
 	})
 }
 

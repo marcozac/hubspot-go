@@ -550,8 +550,8 @@ type (
 	]
 
 	PropertiesBatchReadInput    = BatchInput[PropertiesBatchNameInput]
-	PropertiesBatchCreateInput  = BatchInput[Property]
 	PropertiesBatchArchiveInput = PropertiesBatchReadInput
+	PropertiesBatchCreateInput  = BatchInput[Property]
 
 	PropertiesBatchNameInput struct {
 		Name string `json:"name"`
