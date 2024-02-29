@@ -78,13 +78,13 @@ type GenericPublicObject[
 	// 	}
 	Associations map[string][]AE `json:"associations,omitempty"`
 
-	CreatedAt DateTime `json:"createdAt,omitempty"`
+	CreatedAt *DateTime `json:"createdAt,omitempty"`
 
-	UpdatedAt DateTime `json:"updatedAt,omitempty"`
+	UpdatedAt *DateTime `json:"updatedAt,omitempty"`
 
 	Archived bool `json:"archived,omitempty"`
 
-	ArchivedAt DateTime `json:"archivedAt,omitempty"`
+	ArchivedAt *DateTime `json:"archivedAt,omitempty"`
 }
 
 type CustomObject struct{}

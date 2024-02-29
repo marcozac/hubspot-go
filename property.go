@@ -113,13 +113,13 @@ type (
 		CreatedUserId string `json:"createdUserId,omitempty"`
 
 		// UpdatedAt is the time the property was last updated.
-		UpdatedAt DateTime `json:"updatedAt,omitempty"`
+		UpdatedAt *DateTime `json:"updatedAt,omitempty"`
 
 		// UpdatedUserId is the ID of the user who last updated the property.
 		UpdatedUserId string `json:"updatedUserId,omitempty"`
 
 		// CreatedAt is the time the property was created.
-		CreatedAt DateTime `json:"createdAt,omitempty"`
+		CreatedAt *DateTime `json:"createdAt,omitempty"`
 	}
 
 	// PropertyType is the type of a property.
@@ -177,12 +177,12 @@ type (
 	}
 
 	PropertyWithHistory struct {
-		SourceID        string   `json:"sourceId,omitempty"`
-		SourceLabel     string   `json:"sourceLabel,omitempty"`
-		SourceType      string   `json:"sourceType,omitempty"`
-		UpdatedByUserID int64    `json:"updatedByUserId,omitempty"`
-		Value           string   `json:"value,omitempty"`
-		Timestamp       DateTime `json:"timestamp,omitempty"`
+		SourceID        string    `json:"sourceId,omitempty"`
+		SourceLabel     string    `json:"sourceLabel,omitempty"`
+		SourceType      string    `json:"sourceType,omitempty"`
+		UpdatedByUserID int64     `json:"updatedByUserId,omitempty"`
+		Value           string    `json:"value,omitempty"`
+		Timestamp       *DateTime `json:"timestamp,omitempty"`
 	}
 )
 
