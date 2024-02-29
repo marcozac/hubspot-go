@@ -7,6 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/marcozac/hubspot-go/limiter"
+
 	_ "github.com/joho/godotenv/autoload"
 )
 
@@ -48,16 +50,121 @@ func TestClient(t *testing.T) {
 	assert.ErrorIs(t, err, ErrTokenSourceRequired)
 
 	ctx := context.Background()
-	client, err := NewTestClient(ts, WithContext(ctx))
+	// Use the default limiter to avoid hitting the rate limit during tests.
+	client, err := NewTestClient(ts, WithContext(ctx), WithLimiter(limiter.NewDefault10()))
 	require.NoError(t, err, "expected no error when creating client")
 
 	t.Run("Properties", func(t *testing.T) {
+		var group *PropertyGroup
+		t.Run("Groups", func(t *testing.T) {
+			t.Run("Create", func(t *testing.T) {
+				v, err := client.Properties.Contact.Groups.Create(ctx, &PropertyGroup{
+					Name:  "test_group",
+					Label: "Test Group",
+				})
+				assert.NoError(t, err, "expected no error when creating property group")
+				require.NotNil(t, v, "expected property group to be returned")
+				group = v
+			})
+
+			// Do not run the next tests if the group was not created.
+			require.NotNil(t, group, "expected the group to be created")
+
+			t.Run("Update", func(t *testing.T) {
+				v, err := client.Properties.Contact.Groups.Update(ctx, &PropertyGroup{
+					Name:  group.Name,
+					Label: "Test Group 2",
+				})
+				assert.NoError(t, err, "expected no error when updating property group")
+				require.NotNil(t, v, "expected property group to be returned")
+				assert.Equal(t, "Test Group 2", v.Label, "expected property group label to match")
+				group = v
+			})
+
+			t.Run("Read", func(t *testing.T) {
+				v, err := client.Properties.Contact.Groups.Read(ctx, group.Name)
+				assert.NoError(t, err, "expected no error when reading property group")
+				require.NotNil(t, v, "expected property group to be returned")
+				assert.Equal(t, group.Name, v.Name, "expected property group name to match")
+			})
+
+			t.Run("List", func(t *testing.T) {
+				gs, err := client.Properties.Contact.Groups.List(ctx)
+				assert.NoError(t, err, "expected no error when listing property groups")
+				assert.NotEmpty(t, gs, "expected property groups to be returned")
+				var found bool
+				for _, g := range gs {
+					if g.Name == group.Name {
+						found = true
+						break
+					}
+				}
+				assert.True(t, found, "expected property group to be found")
+			})
+		})
+
+		// Do not run the next tests if the group was not created.
+		require.NotNil(t, group, "expected the group to be created")
+
+		var prop *Property
+		t.Run("Create", func(t *testing.T) {
+			p, err := client.Properties.Contact.Create(ctx, &Property{
+				Name:      "test_property",
+				Label:     "Test Property",
+				GroupName: group.Name,
+				Type:      PropertyTypeString,
+				FieldType: PropertyFieldTypeText,
+			})
+			assert.NoError(t, err, "expected no error when creating contact property")
+			require.NotNil(t, p, "expected property to be returned")
+			prop = p
+		})
+
+		// Do not run the next tests if the property was not found.
+		require.NotNil(t, prop, "expected the property to be created")
+
+		t.Run("Update", func(t *testing.T) {
+			p, err := client.Properties.Contact.Update(ctx, &Property{
+				Name:  prop.Name,
+				Label: "Test Property 2",
+			})
+			assert.NoError(t, err, "expected no error when updating contact property")
+			require.NotNil(t, p, "expected property to be returned")
+			assert.Equal(t, "Test Property 2", p.Label, "expected property label to match")
+			prop = p
+		})
+
+		t.Run("Read", func(t *testing.T) {
+			p, err := client.Properties.Contact.Read(ctx, prop.Name)
+			assert.NoError(t, err, "expected no error when reading contact property")
+			require.NotNil(t, p, "expected property to be returned")
+			assert.Equal(t, prop.Name, p.Name, "expected property name to match")
+		})
+
 		t.Run("List", func(t *testing.T) {
-			ps, err := client.Properties.Contact.List(ctx,
-				WithArchived(false), WithProperties("name"),
-			)
+			ps, err := client.Properties.Contact.List(ctx)
 			assert.NoError(t, err, "expected no error when listing contact properties")
-			assert.NotEmpty(t, ps, "expected properties to be returned")
+			require.NotNil(t, ps, "expected properties to be returned")
+			var found bool
+			for _, p := range ps {
+				if p.Name == prop.Name {
+					found = true
+					break
+				}
+			}
+			assert.True(t, found, "expected property to be found")
+		})
+
+		// Archive the test property
+		t.Run("Archive", func(t *testing.T) {
+			err := client.Properties.Contact.Archive(ctx, prop.Name)
+			assert.NoError(t, err, "expected no error when archiving contact property")
+		})
+
+		// Archive the test group
+		t.Run("ArchiveGroup", func(t *testing.T) {
+			err := client.Properties.Contact.Groups.Archive(ctx, group.Name)
+			assert.NoError(t, err, "expected no error when archiving property group")
 		})
 	})
 
