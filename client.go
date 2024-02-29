@@ -1,6 +1,7 @@
 package hubspot
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 
 	"github.com/marcozac/hubspot-go/endpoint"
 	"github.com/marcozac/hubspot-go/limiter"
+	"github.com/marcozac/hubspot-go/util"
 )
 
 // NewHTTPClient returns a new HTTP client that uses the given token source to
@@ -404,6 +406,50 @@ func (poc *PropertiesObjectClient) Read(ctx context.Context, name string, opts .
 		return nil, err
 	}
 	return prop, nil
+}
+
+// Create creates a new property.
+//
+// At the moment of writing, the required fields in [HubSpot's docs] are:
+//   - Name
+//   - Label
+//   - GroupName
+//   - Type
+//   - FieldType
+//
+// In options:
+//   - Hidden
+//   - Label
+//   - Value
+//
+// Missing fields are not checked, to avoid breaking changes in the future
+// versions of the HubSpot API, and may cause errors in the response.
+//
+// [HubSpot's docs]: https://developers.hubspot.com/docs/api/crm/properties
+func (poc *PropertiesObjectClient) Create(ctx context.Context, prop *Property) (*Property, error) {
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(prop); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, poc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(Property)
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Results is a generic struct that contains a list of results of type T

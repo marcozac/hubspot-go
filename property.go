@@ -71,7 +71,7 @@ type (
 		Description string `json:"description,omitempty"`
 
 		// DisplayOrder is the order in which the property is displayed.
-		DisplayOrder int `json:"displayOrder,omitempty"`
+		DisplayOrder int32 `json:"displayOrder,omitempty"`
 
 		// Options is a list of options for enumeration properties.
 		Options []PropertyOption `json:"options,omitempty"`

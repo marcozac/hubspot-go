@@ -106,6 +106,8 @@ type HubSpotErrorContext struct {
 //
 // It checks the response status code and, if it is less than 400, it decodes
 // the response body into a [HubSpotError].
+//
+// When reporting an error, it always closes the response body.
 func HubSpotResponseError(resp *http.Response) error {
 	if resp.StatusCode < 400 {
 		return nil
