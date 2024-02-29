@@ -36,6 +36,10 @@ var (
 
 var _ error = (*HubSpotError)(nil)
 
+// HubSpotError represents an error returned by the HubSpot API.
+//
+// It may include a list of sub-errors that can be unwrapped to get more
+// detailed information about the error.
 type HubSpotError struct {
 	SubCategory   string              `json:"subCategory,omitempty"`
 	Context       HubSpotErrorContext `json:"context,omitempty"`
@@ -57,23 +61,10 @@ func (e *HubSpotError) Unwrap() error {
 	return nil
 }
 
-type HubSpotSubError struct {
-	SubCategory string              `json:"subCategory,omitempty"`
-	Code        string              `json:"code,omitempty"`
-	In          string              `json:"in,omitempty"`
-	Context     HubSpotErrorContext `json:"context,omitempty"`
-	Message     string              `json:"message,omitempty"`
-}
-
-func (e *HubSpotSubError) Error() string {
-	return e.Message
-}
-
-type HubSpotErrorContext struct {
-	MissingScopes       []string `json:"missingScopes,omitempty"`
-	InvalidPropertyName []string `json:"invalidPropertyName,omitempty"`
-}
-
+// HubSpotSubErrors represents a list of sub-errors returned by the HubSpot API.
+// The error message is a concatenation of all the sub-errors' messages.
+//
+// It may be unwrapped to get the list of sub-errors excluding the first one.
 type HubSpotSubErrors []HubSpotSubError
 
 func (e HubSpotSubErrors) Error() string {
@@ -92,6 +83,29 @@ func (e HubSpotSubErrors) Unwrap() error {
 	return nil
 }
 
+// HubSpotSubError represents a sub-error returned by the HubSpot API.
+type HubSpotSubError struct {
+	SubCategory string              `json:"subCategory,omitempty"`
+	Code        string              `json:"code,omitempty"`
+	In          string              `json:"in,omitempty"`
+	Context     HubSpotErrorContext `json:"context,omitempty"`
+	Message     string              `json:"message,omitempty"`
+}
+
+func (e *HubSpotSubError) Error() string {
+	return e.Message
+}
+
+type HubSpotErrorContext struct {
+	MissingScopes       []string `json:"missingScopes,omitempty"`
+	InvalidPropertyName []string `json:"invalidPropertyName,omitempty"`
+}
+
+// HubSpotResponseError checks the response for errors and returns an error if
+// any are found.
+//
+// It checks the response status code and, if it is less than 400, it decodes
+// the response body into a [HubSpotError].
 func HubSpotResponseError(resp *http.Response) error {
 	if resp.StatusCode < 400 {
 		return nil

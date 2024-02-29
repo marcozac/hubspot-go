@@ -52,12 +52,24 @@ func TestClient(t *testing.T) {
 	require.NoError(t, err, "expected no error when creating client")
 
 	t.Run("Properties", func(t *testing.T) {
+		var prop *Property
 		t.Run("List", func(t *testing.T) {
 			ps, err := client.Properties.Contact.List(ctx,
 				WithArchived(false), WithProperties("name"),
 			)
 			assert.NoError(t, err, "expected no error when listing contact properties")
 			assert.NotEmpty(t, ps, "expected properties to be returned")
+			prop = &ps[0]
+		})
+
+		// Do not run the next tests if the property was not found.
+		require.NotNil(t, prop, "expected the property to be created")
+
+		t.Run("Read", func(t *testing.T) {
+			p, err := client.Properties.Contact.Read(ctx, prop.Name)
+			assert.NoError(t, err, "expected no error when reading contact property")
+			require.NotNil(t, p, "expected property to be returned")
+			assert.Equal(t, prop.Name, p.Name, "expected property name to match")
 		})
 	})
 

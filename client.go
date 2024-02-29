@@ -376,6 +376,36 @@ func (poc *PropertiesObjectClient) List(ctx context.Context, opts ...RequestOpti
 	return results.Results, nil
 }
 
+// Read returns the property with the given name.
+//
+// Allowed options:
+//   - WithArchived: include only archived objects in the response
+//   - WithProperties: include only the specified properties in the response
+//
+// Any other option is ignored.
+func (poc *PropertiesObjectClient) Read(ctx context.Context, name string, opts ...RequestOption) (*Property, error) {
+	cfg := applyRequestOptions(nil, opts...)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, poc.endpoint+"/"+name, nil)
+	if err != nil {
+		return nil, err
+	}
+	applyQueryOptions(cfg, req.URL, applyArchivedQuery, applyPropertiesQuery)
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	prop := new(Property)
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
+		return nil, err
+	}
+	return prop, nil
+}
+
 // Results is a generic struct that contains a list of results of type T
 // returned by the HubSpot API.
 type Results[T any] struct {
