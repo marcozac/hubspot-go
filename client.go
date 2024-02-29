@@ -483,6 +483,23 @@ func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (
 	return result, nil
 }
 
+// Archive archives the property with the given name.
+func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, poc.endpoint+"/"+name, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
+}
+
 // Results is a generic struct that contains a list of results of type T
 // returned by the HubSpot API.
 type Results[T any] struct {
