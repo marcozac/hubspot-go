@@ -148,6 +148,61 @@ func TestClient(t *testing.T) {
 			assert.True(t, found, "expected property to be found")
 		})
 
+		t.Run("Batch", func(t *testing.T) {
+			var props []Property
+			t.Run("Create", func(t *testing.T) {
+				out, err := client.Properties.Contact.Batch.Create(ctx, &PropertiesBatchCreateInput{
+					Inputs: []Property{
+						{
+							Name:      "test_batch_property_1",
+							Label:     "Test Batch Property 1",
+							GroupName: group.Name,
+							Type:      PropertyTypeString,
+							FieldType: PropertyFieldTypeText,
+						},
+						{
+							Name:      "test_batch_property_2",
+							Label:     "Test Batch Property 2",
+							GroupName: group.Name,
+							Type:      PropertyTypeString,
+							FieldType: PropertyFieldTypeText,
+						},
+					},
+				})
+				assert.NoError(t, err, "expected no error when creating contact properties in batch")
+				require.NotEmpty(t, out.Results, "expected results to be returned")
+				props = out.Results.Results
+			})
+
+			t.Run("Read", func(t *testing.T) {
+				inputs := make([]PropertiesBatchNameInput, 0, len(props))
+				for _, p := range props {
+					inputs = append(inputs, PropertiesBatchNameInput{
+						Name: p.Name,
+					})
+				}
+				out, err := client.Properties.Contact.Batch.Read(ctx, &PropertiesBatchReadInput{
+					Inputs: inputs,
+				})
+				assert.NoError(t, err, "expected no error when reading contact properties in batch")
+				require.NotEmpty(t, out.Results, "expected results to be returned")
+				assert.Equal(t, 2, len(out.Results.Results), "expected 2 results to be returned")
+			})
+
+			t.Run("Archive", func(t *testing.T) {
+				inputs := make([]PropertiesBatchNameInput, 0, len(props))
+				for _, p := range props {
+					inputs = append(inputs, PropertiesBatchNameInput{
+						Name: p.Name,
+					})
+				}
+				err := client.Properties.Contact.Batch.Archive(ctx, &PropertiesBatchArchiveInput{
+					Inputs: inputs,
+				})
+				assert.NoError(t, err, "expected no error when archiving contact properties in batch")
+			})
+		})
+
 		// Archive the test property
 		t.Run("Archive", func(t *testing.T) {
 			err := client.Properties.Contact.Archive(ctx, prop.Name)
