@@ -425,6 +425,10 @@ func (poc *PropertiesObjectClient) Read(ctx context.Context, name string, opts .
 
 // Create creates a new property.
 //
+// The given property is modified in place with the response from the API
+// and returned. If you need to keep the original property, you should create
+// a copy of it before calling this method.
+//
 // At the moment of writing, the required fields in [HubSpot's docs] are:
 //   - Name
 //   - Label
@@ -460,15 +464,18 @@ func (poc *PropertiesObjectClient) Create(ctx context.Context, prop *Property) (
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(Property)
-	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return prop, nil
 }
 
 // Update updates the given property. The property name must be set in the
 // property struct, that cannot be nil.
+//
+// The given property is modified in place with the response from the API
+// and returned. If you need to keep the original property, you should create
+// a copy of it before calling this method.
 func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (*Property, error) {
 	if prop == nil {
 		return nil, fmt.Errorf("property: %w", ErrNilParam)
@@ -490,11 +497,10 @@ func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(Property)
-	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return prop, nil
 }
 
 // Archive archives the property with the given name.
@@ -563,14 +569,18 @@ func (pgc *PropertyGroupClient) Read(ctx context.Context, name string) (*Propert
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(PropertyGroup)
-	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+	pg := new(PropertyGroup)
+	if err := json.NewDecoder(resp.Body).Decode(pg); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return pg, nil
 }
 
 // Create creates a new property group.
+//
+// The given property group is modified in place with the response from the API
+// and returned. If you need to keep the original property group, you should
+// create a copy of it before calling this method.
 //
 // At the moment of writing, the required fields in [HubSpot's docs] are:
 //   - Name
@@ -596,15 +606,18 @@ func (pgc *PropertyGroupClient) Create(ctx context.Context, group *PropertyGroup
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(PropertyGroup)
-	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(group); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return group, nil
 }
 
 // Update updates the given property group. The property group name must be set
 // in the property group struct, that cannot be nil.
+//
+// The given property group is modified in place with the response from the API
+// and returned. If you need to keep the original property group, you should
+// create a copy of it before calling this method.
 func (pgc *PropertyGroupClient) Update(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
 	if group == nil {
 		return nil, fmt.Errorf("property group: %w", ErrNilParam)
@@ -626,11 +639,10 @@ func (pgc *PropertyGroupClient) Update(ctx context.Context, group *PropertyGroup
 		return nil, err
 	}
 	defer resp.Body.Close()
-	result := new(PropertyGroup)
-	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(group); err != nil {
 		return nil, err
 	}
-	return result, nil
+	return group, nil
 }
 
 // Archive archives the property group with the given name.

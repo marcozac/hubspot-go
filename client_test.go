@@ -56,29 +56,26 @@ func TestClient(t *testing.T) {
 
 	t.Run("Properties", func(t *testing.T) {
 		var group *PropertyGroup
+
 		t.Run("Groups", func(t *testing.T) {
 			t.Run("Create", func(t *testing.T) {
-				v, err := client.Properties.Contact.Groups.Create(ctx, &PropertyGroup{
+				var err error
+				group, err = client.Properties.Contact.Groups.Create(ctx, &PropertyGroup{
 					Name:  "test_group",
 					Label: "Test Group",
 				})
 				assert.NoError(t, err, "expected no error when creating property group")
-				require.NotNil(t, v, "expected property group to be returned")
-				group = v
 			})
 
 			// Do not run the next tests if the group was not created.
 			require.NotNil(t, group, "expected the group to be created")
 
 			t.Run("Update", func(t *testing.T) {
-				v, err := client.Properties.Contact.Groups.Update(ctx, &PropertyGroup{
-					Name:  group.Name,
-					Label: "Test Group 2",
-				})
+				group.Label = "Test Group 2"
+				_, err := client.Properties.Contact.Groups.Update(ctx, group)
 				assert.NoError(t, err, "expected no error when updating property group")
-				require.NotNil(t, v, "expected property group to be returned")
-				assert.Equal(t, "Test Group 2", v.Label, "expected property group label to match")
-				group = v
+				require.NotNil(t, group, "expected property group to be returned")
+				assert.Equal(t, "Test Group 2", group.Label, "expected property group label to match")
 			})
 
 			t.Run("Read", func(t *testing.T) {
@@ -108,7 +105,8 @@ func TestClient(t *testing.T) {
 
 		var prop *Property
 		t.Run("Create", func(t *testing.T) {
-			p, err := client.Properties.Contact.Create(ctx, &Property{
+			var err error
+			prop, err = client.Properties.Contact.Create(ctx, &Property{
 				Name:      "test_property",
 				Label:     "Test Property",
 				GroupName: group.Name,
@@ -116,22 +114,17 @@ func TestClient(t *testing.T) {
 				FieldType: PropertyFieldTypeText,
 			})
 			assert.NoError(t, err, "expected no error when creating contact property")
-			require.NotNil(t, p, "expected property to be returned")
-			prop = p
 		})
 
 		// Do not run the next tests if the property was not found.
 		require.NotNil(t, prop, "expected the property to be created")
 
 		t.Run("Update", func(t *testing.T) {
-			p, err := client.Properties.Contact.Update(ctx, &Property{
-				Name:  prop.Name,
-				Label: "Test Property 2",
-			})
+			prop.Label = "Test Property 2"
+			p, err := client.Properties.Contact.Update(ctx, prop)
 			assert.NoError(t, err, "expected no error when updating contact property")
 			require.NotNil(t, p, "expected property to be returned")
 			assert.Equal(t, "Test Property 2", p.Label, "expected property label to match")
-			prop = p
 		})
 
 		t.Run("Read", func(t *testing.T) {
