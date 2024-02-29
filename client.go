@@ -28,21 +28,7 @@ func NewHTTPClient(ts oauth2.TokenSource, opts ...ClientOption) *http.Client {
 // NewDefaultClient returns a new HubSpot client with the given token source and
 // options. It is a wrapper around NewTypedClient that uses the default
 // properties for each object type.
-func NewDefaultClient(ts oauth2.TokenSource, opts ...ClientOption) (*Client[
-	ContactDefaultProperties,
-	CompanyDefaultProperties,
-	DealDefaultProperties,
-	FeedbackSubmissionDefaultProperties,
-	LineItemDefaultProperties,
-	ProductDefaultProperties,
-	QuoteDefaultProperties,
-	DiscountDefaultProperties,
-	FeeDefaultProperties,
-	TaxDefaultProperties,
-	TicketDefaultProperties,
-	GoalDefaultProperties,
-], error,
-) {
+func NewDefaultClient(ts oauth2.TokenSource, opts ...ClientOption) (*DefaultClient, error) {
 	return NewTypedClient[
 		ContactDefaultProperties,
 		CompanyDefaultProperties,
@@ -200,6 +186,23 @@ type Client[
 
 	Properties *PropertiesClient
 }
+
+// DefaultClient is a client for the HubSpot API with the default properties for
+// each object type.
+type DefaultClient = Client[
+	ContactDefaultProperties,
+	CompanyDefaultProperties,
+	DealDefaultProperties,
+	FeedbackSubmissionDefaultProperties,
+	LineItemDefaultProperties,
+	ProductDefaultProperties,
+	QuoteDefaultProperties,
+	DiscountDefaultProperties,
+	FeeDefaultProperties,
+	TaxDefaultProperties,
+	TicketDefaultProperties,
+	GoalDefaultProperties,
+]
 
 // OAuthClient is a client for the HubSpot OAuth API.
 //
