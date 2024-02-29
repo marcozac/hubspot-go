@@ -1,14 +1,17 @@
 package hubspot
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"golang.org/x/oauth2"
 
 	"github.com/marcozac/hubspot-go/endpoint"
 	"github.com/marcozac/hubspot-go/limiter"
+	"github.com/marcozac/hubspot-go/util"
 )
 
 // NewHTTPClient returns a new HTTP client that uses the given token source to
@@ -28,21 +31,7 @@ func NewHTTPClient(ts oauth2.TokenSource, opts ...ClientOption) *http.Client {
 // NewDefaultClient returns a new HubSpot client with the given token source and
 // options. It is a wrapper around NewTypedClient that uses the default
 // properties for each object type.
-func NewDefaultClient(ts oauth2.TokenSource, opts ...ClientOption) (*Client[
-	ContactDefaultProperties,
-	CompanyDefaultProperties,
-	DealDefaultProperties,
-	FeedbackSubmissionDefaultProperties,
-	LineItemDefaultProperties,
-	ProductDefaultProperties,
-	QuoteDefaultProperties,
-	DiscountDefaultProperties,
-	FeeDefaultProperties,
-	TaxDefaultProperties,
-	TicketDefaultProperties,
-	GoalDefaultProperties,
-], error,
-) {
+func NewDefaultClient(ts oauth2.TokenSource, opts ...ClientOption) (*DefaultClient, error) {
 	return NewTypedClient[
 		ContactDefaultProperties,
 		CompanyDefaultProperties,
@@ -201,6 +190,23 @@ type Client[
 	Properties *PropertiesClient
 }
 
+// DefaultClient is a client for the HubSpot API with the default properties for
+// each object type.
+type DefaultClient = Client[
+	ContactDefaultProperties,
+	CompanyDefaultProperties,
+	DealDefaultProperties,
+	FeedbackSubmissionDefaultProperties,
+	LineItemDefaultProperties,
+	ProductDefaultProperties,
+	QuoteDefaultProperties,
+	DiscountDefaultProperties,
+	FeeDefaultProperties,
+	TaxDefaultProperties,
+	TicketDefaultProperties,
+	GoalDefaultProperties,
+]
+
 // OAuthClient is a client for the HubSpot OAuth API.
 //
 // It can be used to get access tokens, refresh tokens, and delete refresh tokens.
@@ -275,50 +281,62 @@ func NewPropertiesClient(hc *http.Client) *PropertiesClient {
 		Contact: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ContactProperties,
+			Groups:   NewPropertyGroupClient(endpoint.ContactPropertiesGroups, hc),
 		},
 		Company: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.CompanyProperties,
+			Groups:   NewPropertyGroupClient(endpoint.CompanyPropertiesGroups, hc),
 		},
 		Deal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DealProperties,
+			Groups:   NewPropertyGroupClient(endpoint.DealPropertiesGroups, hc),
 		},
 		FeedbackSubmission: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeedbackSubmissionProperties,
+			Groups:   NewPropertyGroupClient(endpoint.FeedbackSubmissionPropertiesGroups, hc),
 		},
 		LineItem: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.LineItemProperties,
+			Groups:   NewPropertyGroupClient(endpoint.LineItemPropertiesGroups, hc),
 		},
 		Product: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.ProductProperties,
+			Groups:   NewPropertyGroupClient(endpoint.ProductPropertiesGroups, hc),
 		},
 		Quote: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.QuoteProperties,
+			Groups:   NewPropertyGroupClient(endpoint.QuotePropertiesGroups, hc),
 		},
 		Discount: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.DiscountProperties,
+			Groups:   NewPropertyGroupClient(endpoint.DiscountPropertiesGroups, hc),
 		},
 		Fee: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.FeeProperties,
+			Groups:   NewPropertyGroupClient(endpoint.FeePropertiesGroups, hc),
 		},
 		Tax: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TaxProperties,
+			Groups:   NewPropertyGroupClient(endpoint.TaxPropertiesGroups, hc),
 		},
 		Ticket: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.TicketProperties,
+			Groups:   NewPropertyGroupClient(endpoint.TicketPropertiesGroups, hc),
 		},
 		Goal: &PropertiesObjectClient{
 			hc:       hc,
 			endpoint: endpoint.GoalProperties,
+			Groups:   NewPropertyGroupClient(endpoint.GoalPropertiesGroups, hc),
 		},
 	}
 }
@@ -341,6 +359,8 @@ type PropertiesClient struct {
 type PropertiesObjectClient struct {
 	endpoint string
 	hc       *http.Client
+
+	Groups *PropertyGroupClient
 }
 
 // List returns a list of properties for the object type.
@@ -371,6 +391,275 @@ func (poc *PropertiesObjectClient) List(ctx context.Context, opts ...RequestOpti
 		return nil, err
 	}
 	return results.Results, nil
+}
+
+// Read returns the property with the given name.
+//
+// Allowed options:
+//   - WithArchived: include only archived objects in the response
+//   - WithProperties: include only the specified properties in the response
+//
+// Any other option is ignored.
+func (poc *PropertiesObjectClient) Read(ctx context.Context, name string, opts ...RequestOption) (*Property, error) {
+	cfg := applyRequestOptions(nil, opts...)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, poc.endpoint+"/"+name, nil)
+	if err != nil {
+		return nil, err
+	}
+	applyQueryOptions(cfg, req.URL, applyArchivedQuery, applyPropertiesQuery)
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	prop := new(Property)
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
+		return nil, err
+	}
+	return prop, nil
+}
+
+// Create creates a new property.
+//
+// The given property is modified in place with the response from the API
+// and returned. If you need to keep the original property, you should create
+// a copy of it before calling this method.
+//
+// At the moment of writing, the required fields in [HubSpot's docs] are:
+//   - Name
+//   - Label
+//   - GroupName
+//   - Type
+//   - FieldType
+//
+// In options:
+//   - Hidden
+//   - Label
+//   - Value
+//
+// Missing fields are not checked, to avoid breaking changes in the future
+// versions of the HubSpot API, and may cause errors in the response.
+//
+// [HubSpot's docs]: https://developers.hubspot.com/docs/api/crm/properties
+func (poc *PropertiesObjectClient) Create(ctx context.Context, prop *Property) (*Property, error) {
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(prop); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, poc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
+		return nil, err
+	}
+	return prop, nil
+}
+
+// Update updates the given property. The property name must be set in the
+// property struct, that cannot be nil.
+//
+// The given property is modified in place with the response from the API
+// and returned. If you need to keep the original property, you should create
+// a copy of it before calling this method.
+func (poc *PropertiesObjectClient) Update(ctx context.Context, prop *Property) (*Property, error) {
+	if prop == nil {
+		return nil, fmt.Errorf("property: %w", ErrNilParam)
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(prop); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, poc.endpoint+"/"+prop.Name, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := json.NewDecoder(resp.Body).Decode(prop); err != nil {
+		return nil, err
+	}
+	return prop, nil
+}
+
+// Archive archives the property with the given name.
+func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, poc.endpoint+"/"+name, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := poc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
+}
+
+// NewPropertyGroupClient returns a new property group client that uses the
+// given HTTP client to make requests to the endpoint.
+func NewPropertyGroupClient(endpoint string, httpClient *http.Client) *PropertyGroupClient {
+	return &PropertyGroupClient{
+		endpoint: endpoint,
+		hc:       httpClient,
+	}
+}
+
+type PropertyGroupClient struct {
+	endpoint string
+	hc       *http.Client
+}
+
+// List returns a list of property groups for the object type.
+func (pgc *PropertyGroupClient) List(ctx context.Context) ([]PropertyGroup, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, pgc.endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	var results Results[PropertyGroup]
+	if err := json.NewDecoder(resp.Body).Decode(&results); err != nil {
+		return nil, err
+	}
+	return results.Results, nil
+}
+
+// Read returns the property group with the given name.
+func (pgc *PropertyGroupClient) Read(ctx context.Context, name string) (*PropertyGroup, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, pgc.endpoint+"/"+name, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	pg := new(PropertyGroup)
+	if err := json.NewDecoder(resp.Body).Decode(pg); err != nil {
+		return nil, err
+	}
+	return pg, nil
+}
+
+// Create creates a new property group.
+//
+// The given property group is modified in place with the response from the API
+// and returned. If you need to keep the original property group, you should
+// create a copy of it before calling this method.
+//
+// At the moment of writing, the required fields in [HubSpot's docs] are:
+//   - Name
+//   - Label
+//
+// Missing fields are not checked, to avoid breaking changes in the future
+// versions of the HubSpot API, and may cause errors in the response.
+func (pgc *PropertyGroupClient) Create(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(group); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, pgc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := json.NewDecoder(resp.Body).Decode(group); err != nil {
+		return nil, err
+	}
+	return group, nil
+}
+
+// Update updates the given property group. The property group name must be set
+// in the property group struct, that cannot be nil.
+//
+// The given property group is modified in place with the response from the API
+// and returned. If you need to keep the original property group, you should
+// create a copy of it before calling this method.
+func (pgc *PropertyGroupClient) Update(ctx context.Context, group *PropertyGroup) (*PropertyGroup, error) {
+	if group == nil {
+		return nil, fmt.Errorf("property group: %w", ErrNilParam)
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(group); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, pgc.endpoint+"/"+group.Name, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if err := json.NewDecoder(resp.Body).Decode(group); err != nil {
+		return nil, err
+	}
+	return group, nil
+}
+
+// Archive archives the property group with the given name.
+func (pgc *PropertyGroupClient) Archive(ctx context.Context, name string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, pgc.endpoint+"/"+name, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
 }
 
 // Results is a generic struct that contains a list of results of type T

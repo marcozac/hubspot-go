@@ -47,16 +47,16 @@ type (
 		Name string `json:"name"`
 
 		// Label is the label of the property as displayed in the HubSpot UI.
-		Label string `json:"label"`
+		Label string `json:"label,omitempty"`
 
 		// GroupName is the name of the group the property belongs to.
-		GroupName string `json:"groupName"`
+		GroupName string `json:"groupName,omitempty"`
 
 		// Type is the type of the property, e.g. "string", "number", "enumeration".
-		Type PropertyType `json:"type"`
+		Type PropertyType `json:"type,omitempty"`
 
 		// FieldType is the type of the field, e.g. "text", "select", "checkbox".
-		FieldType PropertyFieldType `json:"fieldType"`
+		FieldType PropertyFieldType `json:"fieldType,omitempty"`
 
 		// ReferencedObjectType is the type of the object the property references.
 		//
@@ -71,7 +71,7 @@ type (
 		Description string `json:"description,omitempty"`
 
 		// DisplayOrder is the order in which the property is displayed.
-		DisplayOrder int `json:"displayOrder,omitempty"`
+		DisplayOrder int32 `json:"displayOrder,omitempty"`
 
 		// Options is a list of options for enumeration properties.
 		Options []PropertyOption `json:"options,omitempty"`
@@ -113,13 +113,13 @@ type (
 		CreatedUserId string `json:"createdUserId,omitempty"`
 
 		// UpdatedAt is the time the property was last updated.
-		UpdatedAt DateTime `json:"updatedAt,omitempty"`
+		UpdatedAt *DateTime `json:"updatedAt,omitempty"`
 
 		// UpdatedUserId is the ID of the user who last updated the property.
 		UpdatedUserId string `json:"updatedUserId,omitempty"`
 
 		// CreatedAt is the time the property was created.
-		CreatedAt DateTime `json:"createdAt,omitempty"`
+		CreatedAt *DateTime `json:"createdAt,omitempty"`
 	}
 
 	// PropertyType is the type of a property.
@@ -177,12 +177,12 @@ type (
 	}
 
 	PropertyWithHistory struct {
-		SourceID        string   `json:"sourceId,omitempty"`
-		SourceLabel     string   `json:"sourceLabel,omitempty"`
-		SourceType      string   `json:"sourceType,omitempty"`
-		UpdatedByUserID int64    `json:"updatedByUserId,omitempty"`
-		Value           string   `json:"value,omitempty"`
-		Timestamp       DateTime `json:"timestamp,omitempty"`
+		SourceID        string    `json:"sourceId,omitempty"`
+		SourceLabel     string    `json:"sourceLabel,omitempty"`
+		SourceType      string    `json:"sourceType,omitempty"`
+		UpdatedByUserID int64     `json:"updatedByUserId,omitempty"`
+		Value           string    `json:"value,omitempty"`
+		Timestamp       *DateTime `json:"timestamp,omitempty"`
 	}
 )
 
