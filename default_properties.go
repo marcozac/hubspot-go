@@ -34,13 +34,13 @@ type ContactDefaultProperties struct {
 	GraduationDate string `json:"graduation_date,omitempty"`
 
 	// A set of additional email addresses for a contact
-	HsAdditionalEmails Enumeration `json:"hs_additional_emails,omitempty"`
+	HsAdditionalEmails string `json:"hs_additional_emails,omitempty"`
 
 	// The business units this record is assigned to.
 	HsAllAssignedBusinessUnitIds Enumeration `json:"hs_all_assigned_business_unit_ids,omitempty"`
 
 	// A set of all vids, canonical or otherwise, for a contact
-	HsAllContactVids Enumeration `json:"hs_all_contact_vids,omitempty"`
+	HsAllContactVids string `json:"hs_all_contact_vids,omitempty"`
 
 	// Campaign responsible for the first touch creation of this contact.
 	HsAnalyticsFirstTouchConvertingCampaign string `json:"hs_analytics_first_touch_converting_campaign,omitempty"`
@@ -55,10 +55,10 @@ type ContactDefaultProperties struct {
 	HsBuyingRole Enumeration `json:"hs_buying_role,omitempty"`
 
 	// A set of all form submissions for a contact
-	HsCalculatedFormSubmissions Enumeration `json:"hs_calculated_form_submissions,omitempty"`
+	HsCalculatedFormSubmissions string `json:"hs_calculated_form_submissions,omitempty"`
 
 	// Merged vids with timestamps of a contact
-	HsCalculatedMergedVids Enumeration `json:"hs_calculated_merged_vids,omitempty"`
+	HsCalculatedMergedVids string `json:"hs_calculated_merged_vids,omitempty"`
 
 	// Mobile number in international format
 	HsCalculatedMobileNumber string `json:"hs_calculated_mobile_number,omitempty"`
@@ -76,7 +76,7 @@ type ContactDefaultProperties struct {
 	HsCalculatedPhoneNumberRegionCode string `json:"hs_calculated_phone_number_region_code,omitempty"`
 
 	// Whether contact has clicked on a LinkedIn Ad
-	HsClickedLinkedinAd Enumeration `json:"hs_clicked_linkedin_ad,omitempty"`
+	HsClickedLinkedinAd Bool `json:"hs_clicked_linkedin_ad,omitempty"`
 
 	// Email used to send private content information to members
 	HsContentMembershipEmail string `json:"hs_content_membership_email,omitempty"`
@@ -100,7 +100,7 @@ type ContactDefaultProperties struct {
 	HsContentMembershipRegistrationEmailSentAt *DateTime `json:"hs_content_membership_registration_email_sent_at,omitempty"`
 
 	// Status of the contact's content membership.
-	HsContentMembershipStatus Enumeration `json:"hs_content_membership_status,omitempty"`
+	HsContentMembershipStatus string `json:"hs_content_membership_status,omitempty"`
 
 	// A Conversations visitor's email address
 	HsConversationsVisitorEmail string `json:"hs_conversations_visitor_email,omitempty"`
@@ -178,7 +178,7 @@ type ContactDefaultProperties struct {
 	HsEmailBadAddress Bool `json:"hs_email_bad_address,omitempty"`
 
 	// The reason why the email address has been quarantined.
-	HsEmailCustomerQuarantinedReason Enumeration `json:"hs_email_customer_quarantined_reason,omitempty"`
+	HsEmailCustomerQuarantinedReason string `json:"hs_email_customer_quarantined_reason,omitempty"`
 
 	// A contact's email address domain
 	HsEmailDomain string `json:"hs_email_domain,omitempty"`
@@ -187,13 +187,13 @@ type ContactDefaultProperties struct {
 	HsEmailHardBounceReason string `json:"hs_email_hard_bounce_reason,omitempty"`
 
 	// The issue that caused a contact to hard bounce from your emails. If this is an error or a temporary issue, you can unbounce this contact from the contact record.
-	HsEmailHardBounceReasonEnum Enumeration `json:"hs_email_hard_bounce_reason_enum,omitempty"`
+	HsEmailHardBounceReasonEnum string `json:"hs_email_hard_bounce_reason_enum,omitempty"`
 
 	// Indicates that the current email address has been quarantined for anti-abuse reasons and any marketing email sends to it will be blocked. This is automatically set by HubSpot.
 	HsEmailQuarantined Bool `json:"hs_email_quarantined,omitempty"`
 
 	// The automated reason why the email address has been quarantined.
-	HsEmailQuarantinedReason Enumeration `json:"hs_email_quarantined_reason,omitempty"`
+	HsEmailQuarantinedReason string `json:"hs_email_quarantined_reason,omitempty"`
 
 	// When this recipient has reached the limit of email sends per time period, this property indicates the next available time to send. This is automatically set by HubSpot.
 	HsEmailRecipientFatigueRecoveryTime *DateTime `json:"hs_email_recipient_fatigue_recovery_time,omitempty"`
@@ -202,7 +202,7 @@ type ContactDefaultProperties struct {
 	HsEmailSendsSinceLastEngagement Int `json:"hs_email_sends_since_last_engagement,omitempty"`
 
 	// The status of a contact's eligibility to receive marketing email. This is automatically set by HubSpot.
-	HsEmailconfirmationstatus Enumeration `json:"hs_emailconfirmationstatus,omitempty"`
+	HsEmailconfirmationstatus string `json:"hs_emailconfirmationstatus,omitempty"`
 
 	// Whether contact has clicked a Facebook ad
 	HsFacebookAdClicked Bool `json:"hs_facebook_ad_clicked,omitempty"`
@@ -217,7 +217,7 @@ type ContactDefaultProperties struct {
 	HsFeedbackLastNpsFollowUp string `json:"hs_feedback_last_nps_follow_up,omitempty"`
 
 	// Last NPS survey rating that this contact gave
-	HsFeedbackLastNpsRating Enumeration `json:"hs_feedback_last_nps_rating,omitempty"`
+	HsFeedbackLastNpsRating string `json:"hs_feedback_last_nps_rating,omitempty"`
 
 	// The time that this contact last submitted a NPS survey response. This is automatically set by HubSpot.
 	HsFeedbackLastSurveyDate *DateTime `json:"hs_feedback_last_survey_date,omitempty"`
@@ -259,7 +259,7 @@ type ContactDefaultProperties struct {
 	HsLastSalesActivityTimestamp *DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
 
 	// The type of the last engagement a contact performed. This doesn't include marketing emails or emails to multiple contacts.
-	HsLastSalesActivityType Enumeration `json:"hs_last_sales_activity_type,omitempty"`
+	HsLastSalesActivityType string `json:"hs_last_sales_activity_type,omitempty"`
 
 	// Most recent timestamp of any property update for this contact. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
 	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
@@ -295,13 +295,13 @@ type ContactDefaultProperties struct {
 	HsLatestSubscriptionCreateDate *DateTime `json:"hs_latest_subscription_create_date,omitempty"`
 
 	// The contact's sales, prospecting or outreach status
-	HsLeadStatus Enumeration `json:"hs_lead_status,omitempty"`
+	HsLeadStatus string `json:"hs_lead_status,omitempty"`
 
 	// Legal basis for processing contact's data; 'Not applicable' will exempt the contact from GDPR protections
 	HsLegalBasis Enumeration `json:"hs_legal_basis,omitempty"`
 
 	//
-	HsLinkedinAdClicked Enumeration `json:"hs_linkedin_ad_clicked,omitempty"`
+	HsLinkedinAdClicked Bool `json:"hs_linkedin_ad_clicked,omitempty"`
 
 	// A contact's linkedin id
 	HsLinkedinid string `json:"hs_linkedinid,omitempty"`
@@ -310,16 +310,19 @@ type ContactDefaultProperties struct {
 	HsMarketableReasonId string `json:"hs_marketable_reason_id,omitempty"`
 
 	// The type of the activity that set the contact as a marketing contact
-	HsMarketableReasonType Enumeration `json:"hs_marketable_reason_type,omitempty"`
+	HsMarketableReasonType string `json:"hs_marketable_reason_type,omitempty"`
 
 	// The marketing status of a contact
-	HsMarketableStatus Enumeration `json:"hs_marketable_status,omitempty"`
+	HsMarketableStatus Bool `json:"hs_marketable_status,omitempty"`
 
 	// Specifies if this contact will be set as non-marketing on renewal
-	HsMarketableUntilRenewal Enumeration `json:"hs_marketable_until_renewal,omitempty"`
+	HsMarketableUntilRenewal Bool `json:"hs_marketable_until_renewal,omitempty"`
 
 	// The list of Contact record IDs that have been merged into this Contact. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
+
+	// The type of the next upcoming activity for a contact. This is set automatically by HubSpot based on user actions in the contact record.
+	HsNotesNextActivityType string `json:"hs_notes_next_activity_type,omitempty"`
 
 	// The unique ID for this record. This value is automatically set by HubSpot and may not be modified.
 	HsObjectId Int64 `json:"hs_object_id,omitempty"`
@@ -340,22 +343,22 @@ type ContactDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
-	//
+	// The object ID of the current pinned engagement. This will only be shown if there is already an association to the engagement.
 	HsPinnedEngagementId Int `json:"hs_pinned_engagement_id,omitempty"`
 
 	// The pipeline with which this contact is currently associated
-	HsPipeline Enumeration `json:"hs_pipeline,omitempty"`
+	HsPipeline string `json:"hs_pipeline,omitempty"`
 
 	// The probability that a contact will become a customer within the next 90 days. This score is based on standard contact properties and behavior.
 	HsPredictivecontactscoreV2 Int `json:"hs_predictivecontactscore_v2,omitempty"`
 
 	// A ranking system of contacts evenly assigned into four tiers. Contacts in tier one are more likely to become customers than contacts in tier four.
-	HsPredictivescoringtier Enumeration `json:"hs_predictivescoringtier,omitempty"`
+	HsPredictivescoringtier string `json:"hs_predictivescoringtier,omitempty"`
 
 	// Is the object read only
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
@@ -364,10 +367,10 @@ type ContactDefaultProperties struct {
 	HsSaFirstEngagementDate *DateTime `json:"hs_sa_first_engagement_date,omitempty"`
 
 	// A description of the current contact owner's first engagement with the contact.
-	HsSaFirstEngagementDescr Enumeration `json:"hs_sa_first_engagement_descr,omitempty"`
+	HsSaFirstEngagementDescr string `json:"hs_sa_first_engagement_descr,omitempty"`
 
 	// The object type of the current contact owner's first engagement with the contact.
-	HsSaFirstEngagementObjectType Enumeration `json:"hs_sa_first_engagement_object_type,omitempty"`
+	HsSaFirstEngagementObjectType string `json:"hs_sa_first_engagement_object_type,omitempty"`
 
 	// The last time a tracked sales email was clicked by this user
 	HsSalesEmailLastClicked *DateTime `json:"hs_sales_email_last_clicked,omitempty"`
@@ -457,7 +460,7 @@ type ContactDefaultProperties struct {
 	HsTimeToMoveFromSubscriberToCustomer Int `json:"hs_time_to_move_from_subscriber_to_customer,omitempty"`
 
 	// The contact’s time zone. This can be set automatically by HubSpot based on other contact properties. It can also be set manually for each contact.
-	HsTimezone Enumeration `json:"hs_timezone,omitempty"`
+	HsTimezone string `json:"hs_timezone,omitempty"`
 
 	// A contact's twitter id
 	HsTwitterid string `json:"hs_twitterid,omitempty"`
@@ -664,19 +667,19 @@ type ContactDefaultProperties struct {
 	HsEmailDelivered Int `json:"hs_email_delivered,omitempty"`
 
 	// Indicates that the current email address has opted out of this email type.
-	HsEmailOptout299470044 Enumeration `json:"hs_email_optout_299470044,omitempty"`
+	HsEmailOptout299470044 Bool `json:"hs_email_optout_299470044,omitempty"`
 
 	// Indicates that the current email address has opted out of this email type.
-	HsEmailOptout299470045 Enumeration `json:"hs_email_optout_299470045,omitempty"`
+	HsEmailOptout299470045 Bool `json:"hs_email_optout_299470045,omitempty"`
 
 	// Indicates that the current email address has opted out of this email type.
-	HsEmailOptout299470046 Enumeration `json:"hs_email_optout_299470046,omitempty"`
+	HsEmailOptout299470046 Bool `json:"hs_email_optout_299470046,omitempty"`
 
 	// The contact's Twitter handle.
 	Twitterhandle string `json:"twitterhandle,omitempty"`
 
 	// True when contact is enrolled in a workflow.
-	Currentlyinworkflow Enumeration `json:"currentlyinworkflow,omitempty"`
+	Currentlyinworkflow Bool `json:"currentlyinworkflow,omitempty"`
 
 	// The number of Twitter followers a contact has
 	Followercount Int `json:"followercount,omitempty"`
@@ -712,7 +715,7 @@ type ContactDefaultProperties struct {
 	HsEmailBounce Int `json:"hs_email_bounce,omitempty"`
 
 	// A contact's persona
-	HsPersona Enumeration `json:"hs_persona,omitempty"`
+	HsPersona string `json:"hs_persona,omitempty"`
 
 	// The date of the most recent click on a published social message. This is set automatically by HubSpot for each contact.
 	HsSocialLastEngagement *DateTime `json:"hs_social_last_engagement,omitempty"`
@@ -778,7 +781,7 @@ type ContactDefaultProperties struct {
 	HsSocialLinkedinClicks Int `json:"hs_social_linkedin_clicks,omitempty"`
 
 	// The owner of a contact. This can be any HubSpot user or Salesforce integration user, and can be set manually or via Workflows.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a contact. This is set automatically by HubSpot based on user actions in the contact record.
 	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
@@ -820,7 +823,7 @@ type ContactDefaultProperties struct {
 	HsSocialGooglePlusClicks Int `json:"hs_social_google_plus_clicks,omitempty"`
 
 	// The team of the owner of a contact.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// A contact's LinkedIn bio
 	Linkedinbio string `json:"linkedinbio,omitempty"`
@@ -829,7 +832,7 @@ type ContactDefaultProperties struct {
 	Twitterbio string `json:"twitterbio,omitempty"`
 
 	// The value of all owner referencing properties for this object, both default and custom
-	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
+	HsAllOwnerIds string `json:"hs_all_owner_ids,omitempty"`
 
 	// Timestamp for start of the most recent session for this contact to your website.
 	HsAnalyticsLastVisitTimestamp *DateTime `json:"hs_analytics_last_visit_timestamp,omitempty"`
@@ -844,16 +847,16 @@ type ContactDefaultProperties struct {
 	State string `json:"state,omitempty"`
 
 	// The team ids corresponding to all owner referencing properties for this object, both default and custom
-	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
+	HsAllTeamIds string `json:"hs_all_team_ids,omitempty"`
 
 	// First known source the contact used to find your website. Set automatically, but may be updated manually.
-	HsAnalyticsSource Enumeration `json:"hs_analytics_source,omitempty"`
+	HsAnalyticsSource string `json:"hs_analytics_source,omitempty"`
 
 	// The date of the earliest open for any marketing email to the current email address. This is automatically set by HubSpot.
 	HsEmailFirstOpenDate *DateTime `json:"hs_email_first_open_date,omitempty"`
 
 	// The source of the latest session for a contact
-	HsLatestSource Enumeration `json:"hs_latest_source,omitempty"`
+	HsLatestSource string `json:"hs_latest_source,omitempty"`
 
 	// The contact's zip code. This might be set via import, form, or integration.
 	Zip string `json:"zip,omitempty"`
@@ -862,7 +865,7 @@ type ContactDefaultProperties struct {
 	Country string `json:"country,omitempty"`
 
 	// The team ids, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllAccessibleTeamIds Enumeration `json:"hs_all_accessible_team_ids,omitempty"`
+	HsAllAccessibleTeamIds string `json:"hs_all_accessible_team_ids,omitempty"`
 
 	// Additional information about the source the contact used to find your website. Set automatically.
 	HsAnalyticsSourceData1 string `json:"hs_analytics_source_data_1,omitempty"`
@@ -883,7 +886,7 @@ type ContactDefaultProperties struct {
 	HsEmailIsIneligible Bool `json:"hs_email_is_ineligible,omitempty"`
 
 	// Set your contact's preferred language for communications. This property can be changed from an import, form, or integration.
-	HsLanguage Enumeration `json:"hs_language,omitempty"`
+	HsLanguage string `json:"hs_language,omitempty"`
 
 	// Additional information about the source for the last session the contact used to find your website. Set automatically.
 	HsLatestSourceData2 string `json:"hs_latest_source_data_2,omitempty"`
@@ -934,7 +937,7 @@ type ContactDefaultProperties struct {
 	HsLifecyclestageOpportunityDate *DateTime `json:"hs_lifecyclestage_opportunity_date,omitempty"`
 
 	// The qualification of contacts to sales readiness. It can be set through imports, forms, workflows, and manually on a per contact basis.
-	Lifecyclestage Enumeration `json:"lifecyclestage,omitempty"`
+	Lifecyclestage string `json:"lifecyclestage,omitempty"`
 
 	// The date when a contact's lifecycle stage changed to SQL. This is automatically set by HubSpot for each contact.
 	HsLifecyclestageSalesqualifiedleadDate *DateTime `json:"hs_lifecyclestage_salesqualifiedlead_date,omitempty"`
@@ -964,7 +967,7 @@ type ContactDefaultProperties struct {
 	Website string `json:"website,omitempty"`
 
 	// The number of company employees
-	Numemployees Enumeration `json:"numemployees,omitempty"`
+	Numemployees string `json:"numemployees,omitempty"`
 
 	// Annual company revenue
 	Annualrevenue string `json:"annualrevenue,omitempty"`
@@ -979,7 +982,7 @@ type ContactDefaultProperties struct {
 	Associatedcompanylastupdated Int `json:"associatedcompanylastupdated,omitempty"`
 
 	// The rating of this contact based on their predictive lead score
-	HsPredictivecontactscorebucket Enumeration `json:"hs_predictivecontactscorebucket,omitempty"`
+	HsPredictivecontactscorebucket string `json:"hs_predictivecontactscorebucket,omitempty"`
 
 	// A score calculated by HubSpot that represents a contact's likelihood to become a customer
 	HsPredictivecontactscore Int `json:"hs_predictivecontactscore,omitempty"`
@@ -1059,7 +1062,7 @@ type CompanyDefaultProperties struct {
 	HsAnalyticsLastVisitTimestampTimestampLatestValue999a0fce *DateTime `json:"hs_analytics_last_visit_timestamp_timestamp_latest_value_999a0fce,omitempty"`
 
 	// Source of the last session attributed to any contacts that are associated with this company
-	HsAnalyticsLatestSource Enumeration `json:"hs_analytics_latest_source,omitempty"`
+	HsAnalyticsLatestSource string `json:"hs_analytics_latest_source,omitempty"`
 
 	// Additional source details of the last session attributed to any contacts that are associated with this company
 	HsAnalyticsLatestSourceData1 string `json:"hs_analytics_latest_source_data_1,omitempty"`
@@ -1083,7 +1086,7 @@ type CompanyDefaultProperties struct {
 	HsAnalyticsNumVisitsCardinalitySum53d952a6 Int `json:"hs_analytics_num_visits_cardinality_sum_53d952a6,omitempty"`
 
 	// Original source for the contact with the earliest activity for this company or organization
-	HsAnalyticsSource Enumeration `json:"hs_analytics_source,omitempty"`
+	HsAnalyticsSource string `json:"hs_analytics_source,omitempty"`
 
 	// Additional information about the original source for the contact with the earliest activity for this company or organization
 	HsAnalyticsSourceData1 string `json:"hs_analytics_source_data_1,omitempty"`
@@ -1111,6 +1114,9 @@ type CompanyDefaultProperties struct {
 
 	// The date and time at which this object was created. This value is automatically set by HubSpot and may not be modified.
 	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
+
+	// This property stores the average sentiment of open support tickets at a given time
+	HsCustomerSuccessTicketSentiment Int `json:"hs_customer_success_ticket_sentiment,omitempty"`
 
 	// The date and time when the company entered the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
 	HsDateEnteredCustomer *DateTime `json:"hs_date_entered_customer,omitempty"`
@@ -1161,7 +1167,7 @@ type CompanyDefaultProperties struct {
 	HsDateExitedSubscriber *DateTime `json:"hs_date_exited_subscriber,omitempty"`
 
 	// How well this company matches your Ideal Customer Profile. Tier 1 means a great fit for your products/services, Tier 3 might be acceptable, but low priority.
-	HsIdealCustomerProfile Enumeration `json:"hs_ideal_customer_profile,omitempty"`
+	HsIdealCustomerProfile string `json:"hs_ideal_customer_profile,omitempty"`
 
 	// Identifies whether this company is being marketed and sold to as part of your account-based strategy.
 	HsIsTargetAccount Bool `json:"hs_is_target_account,omitempty"`
@@ -1182,7 +1188,7 @@ type CompanyDefaultProperties struct {
 	HsLastSalesActivityTimestamp *DateTime `json:"hs_last_sales_activity_timestamp,omitempty"`
 
 	// The type of the last engagement a company performed. This doesn't include marketing emails or emails to multiple contacts.
-	HsLastSalesActivityType Enumeration `json:"hs_last_sales_activity_type,omitempty"`
+	HsLastSalesActivityType string `json:"hs_last_sales_activity_type,omitempty"`
 
 	// Most recent timestamp of any property update for this company. This includes HubSpot internal properties, which can be visible or hidden. This property is updated automatically.
 	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
@@ -1192,6 +1198,9 @@ type CompanyDefaultProperties struct {
 
 	// The list of Company record IDs that have been merged into this Company. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
+
+	// The type of the next upcoming scheduled sales activity for this company record.
+	HsNotesNextActivityType string `json:"hs_notes_next_activity_type,omitempty"`
 
 	// The number of contacts associated with this company with the role of blocker.
 	HsNumBlockers Int `json:"hs_num_blockers,omitempty"`
@@ -1224,16 +1233,16 @@ type CompanyDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
-	// The object ID of the current pinned engagement. This value is automatically set by HubSpot and may not be modified.
+	// The object ID of the current pinned engagement. This will only be shown if there is already an association to the engagement.
 	HsPinnedEngagementId Int `json:"hs_pinned_engagement_id,omitempty"`
 
 	// The pipeline with which this company is currently associated
-	HsPipeline Enumeration `json:"hs_pipeline,omitempty"`
+	HsPipeline string `json:"hs_pipeline,omitempty"`
 
 	// The highest probability that a contact associated with this company will become a customer within the next 90 days. This score is based on standard contact properties and behavior.
 	HsPredictivecontactscoreV2 Int `json:"hs_predictivecontactscore_v2,omitempty"`
@@ -1248,7 +1257,7 @@ type CompanyDefaultProperties struct {
 	HsSourceObjectId Int `json:"hs_source_object_id,omitempty"`
 
 	// The Target Account property is a means to flag high priority companies if you are following an account based strategy
-	HsTargetAccount Enumeration `json:"hs_target_account,omitempty"`
+	HsTargetAccount string `json:"hs_target_account,omitempty"`
 
 	// The probability a company is marked as a target account
 	HsTargetAccountProbability Int `json:"hs_target_account_probability,omitempty"`
@@ -1257,7 +1266,7 @@ type CompanyDefaultProperties struct {
 	HsTargetAccountRecommendationSnoozeTime *DateTime `json:"hs_target_account_recommendation_snooze_time,omitempty"`
 
 	// The state of the target account recommendation
-	HsTargetAccountRecommendationState Enumeration `json:"hs_target_account_recommendation_state,omitempty"`
+	HsTargetAccountRecommendationState string `json:"hs_target_account_recommendation_state,omitempty"`
 
 	// The total time in seconds spent by the company in the 'Customer' stage, 'Lifecycle Stage Pipeline' pipeline
 	HsTimeInCustomer Int `json:"hs_time_in_customer,omitempty"`
@@ -1413,7 +1422,7 @@ type CompanyDefaultProperties struct {
 	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// The owner of the company
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, sales email, SMS, or WhatsApp message was logged for a company. This is set automatically by HubSpot based on user actions in the company record.
 	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
@@ -1437,10 +1446,10 @@ type CompanyDefaultProperties struct {
 	Country string `json:"country,omitempty"`
 
 	// The team of the owner of the company.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// The value of all owner referencing properties for this object, both default and custom
-	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
+	HsAllOwnerIds string `json:"hs_all_owner_ids,omitempty"`
 
 	// The main website of the company or organization. This property is used to identify unique companies. Powered by HubSpot Insights.
 	Website string `json:"website,omitempty"`
@@ -1449,31 +1458,31 @@ type CompanyDefaultProperties struct {
 	Domain string `json:"domain,omitempty"`
 
 	// The team ids corresponding to all owner referencing properties for this object, both default and custom
-	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
+	HsAllTeamIds string `json:"hs_all_team_ids,omitempty"`
 
 	// The team ids, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllAccessibleTeamIds Enumeration `json:"hs_all_accessible_team_ids,omitempty"`
+	HsAllAccessibleTeamIds string `json:"hs_all_accessible_team_ids,omitempty"`
 
 	// The total number of employees who work for the company or organization. Powered by HubSpot Insights.
 	Numberofemployees Int `json:"numberofemployees,omitempty"`
 
 	// The type of business the company performs. By default, this property has approximately 150 pre-defined options to select from. While these options cannot be deleted as they used by HubSpot Insights, you can add new custom options to meet your needs.
-	Industry Enumeration `json:"industry,omitempty"`
+	Industry string `json:"industry,omitempty"`
 
 	// The actual or estimated annual revenue of the company. Powered by HubSpot Insights.
 	Annualrevenue Int `json:"annualrevenue,omitempty"`
 
 	// The qualification of companies to sales readiness throughout the buying journey
-	Lifecyclestage Enumeration `json:"lifecyclestage,omitempty"`
+	Lifecyclestage string `json:"lifecyclestage,omitempty"`
 
 	// The company's sales, prospecting or outreach status
-	HsLeadStatus Enumeration `json:"hs_lead_status,omitempty"`
+	HsLeadStatus string `json:"hs_lead_status,omitempty"`
 
 	// The parent company of this company
 	HsParentCompanyId Int `json:"hs_parent_company_id,omitempty"`
 
 	// The optional classification of this company record - prospect, partner, etc.
-	Type Enumeration `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 
 	// A short statement about the company's mission and goals. Powered by HubSpot Insights.
 	Description string `json:"description,omitempty"`
@@ -1508,7 +1517,7 @@ type DealDefaultProperties struct {
 	DaysToClose Int `json:"days_to_close,omitempty"`
 
 	// Currency code for the deal.
-	DealCurrencyCode Enumeration `json:"deal_currency_code,omitempty"`
+	DealCurrencyCode string `json:"deal_currency_code,omitempty"`
 
 	// The annual contract value (ACV) of this deal.
 	HsAcv Int `json:"hs_acv,omitempty"`
@@ -1520,16 +1529,16 @@ type DealDefaultProperties struct {
 	HsAllCollaboratorOwnerIds Enumeration `json:"hs_all_collaborator_owner_ids,omitempty"`
 
 	// The owner ids of all associated Deal Splits. This property is set automatically by HubSpot.
-	HsAllDealSplitOwnerIds Enumeration `json:"hs_all_deal_split_owner_ids,omitempty"`
+	HsAllDealSplitOwnerIds string `json:"hs_all_deal_split_owner_ids,omitempty"`
 
 	// Source for the contact either directly or indirectly associated with the last session activity for this deal
-	HsAnalyticsLatestSource Enumeration `json:"hs_analytics_latest_source,omitempty"`
+	HsAnalyticsLatestSource Int `json:"hs_analytics_latest_source,omitempty"`
 
 	// Source for the company with an associated contact with the last session activity for this deal
-	HsAnalyticsLatestSourceCompany Enumeration `json:"hs_analytics_latest_source_company,omitempty"`
+	HsAnalyticsLatestSourceCompany string `json:"hs_analytics_latest_source_company,omitempty"`
 
 	// Source for the directly associated contact with the last session activity for this deal
-	HsAnalyticsLatestSourceContact Enumeration `json:"hs_analytics_latest_source_contact,omitempty"`
+	HsAnalyticsLatestSourceContact string `json:"hs_analytics_latest_source_contact,omitempty"`
 
 	// Additional source details of the last session attributed to any contacts that are directly or indirectly associated with this deal
 	HsAnalyticsLatestSourceData1 string `json:"hs_analytics_latest_source_data_1,omitempty"`
@@ -1559,7 +1568,7 @@ type DealDefaultProperties struct {
 	HsAnalyticsLatestSourceTimestampContact *DateTime `json:"hs_analytics_latest_source_timestamp_contact,omitempty"`
 
 	// Original source for the contact with the earliest activity for this deal.
-	HsAnalyticsSource Enumeration `json:"hs_analytics_source,omitempty"`
+	HsAnalyticsSource string `json:"hs_analytics_source,omitempty"`
 
 	// Additional information about the original source for the associated contact, or associated company if there is no contact, with the oldest value for the Time first seen property.
 	HsAnalyticsSourceData1 string `json:"hs_analytics_source_data_1,omitempty"`
@@ -1634,7 +1643,7 @@ type DealDefaultProperties struct {
 	HsDaysToCloseRaw Int `json:"hs_days_to_close_raw,omitempty"`
 
 	// Specifies how deal amount should be calculated from line items
-	HsDealAmountCalculationPreference Enumeration `json:"hs_deal_amount_calculation_preference,omitempty"`
+	HsDealAmountCalculationPreference string `json:"hs_deal_amount_calculation_preference,omitempty"`
 
 	// The predictive deal score calculated by Hubspot AI to score the deal health
 	HsDealScore Int `json:"hs_deal_score,omitempty"`
@@ -1700,7 +1709,7 @@ type DealDefaultProperties struct {
 	HsLineItemGlobalTermRecurringbillingfrequencyEnabled Bool `json:"hs_line_item_global_term_recurringbillingfrequency_enabled,omitempty"`
 
 	// The likelihood a deal will close. This property is used for manual forecasting your deals.
-	HsManualForecastCategory Enumeration `json:"hs_manual_forecast_category,omitempty"`
+	HsManualForecastCategory string `json:"hs_manual_forecast_category,omitempty"`
 
 	// The list of Deal record IDs that have been merged into this Deal. This value is automatically set by HubSpot and may not be modified.
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
@@ -1710,6 +1719,9 @@ type DealDefaultProperties struct {
 
 	// A short description of the next step for the deal
 	HsNextStep string `json:"hs_next_step,omitempty"`
+
+	// The type of the next upcoming activity for a deal. This property is set automatically by HubSpot based on user action. This includes logging a future call, sales email, or meeting using the Log feature, as well as creating a future task or scheduling a future meeting. This is updated automatically by HubSpot.
+	HsNotesNextActivityType string `json:"hs_notes_next_activity_type,omitempty"`
 
 	// The number of active deal registrations associated with this deal. This property is set automatically by HubSpot.
 	HsNumAssociatedActiveDealRegistrations Int `json:"hs_num_associated_active_deal_registrations,omitempty"`
@@ -1745,12 +1757,12 @@ type DealDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
-	// The object ID of the current pinned engagement. This value is automatically set by HubSpot and may not be modified.
+	// The object ID of the current pinned engagement. This will only be shown if there is already an association to the engagement.
 	HsPinnedEngagementId Int `json:"hs_pinned_engagement_id,omitempty"`
 
 	// Returns the multiplication of the deal amount times the predicted likelihood of the deal to close by the close date.
@@ -1760,7 +1772,7 @@ type DealDefaultProperties struct {
 	HsPredictedAmountInHomeCurrency Int `json:"hs_predicted_amount_in_home_currency,omitempty"`
 
 	//
-	HsPriority Enumeration `json:"hs_priority,omitempty"`
+	HsPriority string `json:"hs_priority,omitempty"`
 
 	// Returns the multiplication of the amount times the probability of the deal closing.
 	HsProjectedAmount Int `json:"hs_projected_amount,omitempty"`
@@ -1913,10 +1925,10 @@ type DealDefaultProperties struct {
 	Amount Int `json:"amount,omitempty"`
 
 	// The stage of the deal. Deal stages allow you to categorize and track the progress of the deals that you are working on.
-	Dealstage Enumeration `json:"dealstage,omitempty"`
+	Dealstage string `json:"dealstage,omitempty"`
 
 	// The pipeline the deal is in. This determines which stages are options for the deal.
-	Pipeline Enumeration `json:"pipeline,omitempty"`
+	Pipeline string `json:"pipeline,omitempty"`
 
 	// Date the deal was closed. This property is set automatically by HubSpot.
 	Closedate *DateTime `json:"closedate,omitempty"`
@@ -1943,7 +1955,7 @@ type DealDefaultProperties struct {
 	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// User the deal is assigned to. Assign additional users to a deal record by creating a custom user property.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, sales email, or meeting was logged for this deal. This is set automatically by HubSpot based on user actions.
 	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
@@ -1964,22 +1976,22 @@ type DealDefaultProperties struct {
 	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// Primary team of the deal owner. This property is set automatically by HubSpot.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// The type of deal. By default, categorize your deal as either a New Business or Existing Business.
-	Dealtype Enumeration `json:"dealtype,omitempty"`
+	Dealtype string `json:"dealtype,omitempty"`
 
 	// The value of all owner referencing properties for this object, both default and custom
-	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
+	HsAllOwnerIds string `json:"hs_all_owner_ids,omitempty"`
 
 	// Description of the deal
 	Description string `json:"description,omitempty"`
 
 	// The team ids corresponding to all owner referencing properties for this object, both default and custom
-	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
+	HsAllTeamIds string `json:"hs_all_team_ids,omitempty"`
 
 	// The team ids, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllAccessibleTeamIds Enumeration `json:"hs_all_accessible_team_ids,omitempty"`
+	HsAllAccessibleTeamIds string `json:"hs_all_accessible_team_ids,omitempty"`
 
 	// The number of contacts associated with this deal. This property is set automatically by HubSpot.
 	NumAssociatedContacts Int `json:"num_associated_contacts,omitempty"`
@@ -2065,7 +2077,7 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -2074,7 +2086,7 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// The ID of the Survey in CRM
-	HsSurveyCrmObjectId Enumeration `json:"hs_survey_crm_object_id,omitempty"`
+	HsSurveyCrmObjectId string `json:"hs_survey_crm_object_id,omitempty"`
 
 	// Tag IDs assigned to this submission.
 	HsTagIds Enumeration `json:"hs_tag_ids,omitempty"`
@@ -2116,22 +2128,22 @@ type FeedbackSubmissionDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// Industry standard question type for custom surveys
-	HsIndustryStandardQuestionType Enumeration `json:"hs_industry_standard_question_type,omitempty"`
+	HsIndustryStandardQuestionType string `json:"hs_industry_standard_question_type,omitempty"`
 
 	// The survey id that the feedback submission is linked with
 	HsSurveyId Int `json:"hs_survey_id,omitempty"`
 
 	// The type of the survey
-	HsSurveyType Enumeration `json:"hs_survey_type,omitempty"`
+	HsSurveyType string `json:"hs_survey_type,omitempty"`
 
 	// The channel of the survey when the feedback submission occurred
-	HsSurveyChannel Enumeration `json:"hs_survey_channel,omitempty"`
+	HsSurveyChannel string `json:"hs_survey_channel,omitempty"`
 
 	// The timestamp of the feedback submission
 	HsSubmissionTimestamp *DateTime `json:"hs_submission_timestamp,omitempty"`
@@ -2140,7 +2152,7 @@ type FeedbackSubmissionDefaultProperties struct {
 	HsValue Int `json:"hs_value,omitempty"`
 
 	// The sentiment of the feedback submission
-	HsResponseGroup Enumeration `json:"hs_response_group,omitempty"`
+	HsResponseGroup string `json:"hs_response_group,omitempty"`
 
 	// The follow-up response of the feedback submission
 	HsContent string `json:"hs_content,omitempty"`
@@ -2202,7 +2214,7 @@ type LineItemDefaultProperties struct {
 	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
 
 	// Whether buyer selected quantity is to be enabled or not for a LineItem
-	HsAllowBuyerSelectedQuantity Enumeration `json:"hs_allow_buyer_selected_quantity,omitempty"`
+	HsAllowBuyerSelectedQuantity Bool `json:"hs_allow_buyer_selected_quantity,omitempty"`
 
 	// The annual recurring revenue (ARR) of this product
 	HsArr Int `json:"hs_arr,omitempty"`
@@ -2220,7 +2232,7 @@ type LineItemDefaultProperties struct {
 	HsBillingStartDelayMonths Int `json:"hs_billing_start_delay_months,omitempty"`
 
 	// The type of billing start delay. It can be a fixed date in the future, relative delay in number of days or months
-	HsBillingStartDelayType Enumeration `json:"hs_billing_start_delay_type,omitempty"`
+	HsBillingStartDelayType string `json:"hs_billing_start_delay_type,omitempty"`
 
 	// The amount that sold goods cost the HubSpot customer
 	HsCostOfGoodsSold Int `json:"hs_cost_of_goods_sold,omitempty"`
@@ -2244,7 +2256,7 @@ type LineItemDefaultProperties struct {
 	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Currency code for the line item.
-	HsLineItemCurrencyCode Enumeration `json:"hs_line_item_currency_code,omitempty"`
+	HsLineItemCurrencyCode string `json:"hs_line_item_currency_code,omitempty"`
 
 	// The margin value of this product
 	HsMargin Int `json:"hs_margin,omitempty"`
@@ -2286,7 +2298,7 @@ type LineItemDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -2304,7 +2316,7 @@ type LineItemDefaultProperties struct {
 	HsProductId Int `json:"hs_product_id,omitempty"`
 
 	// The type of product. By default, categorize your product as either Inventory, Non-Inventory or Service.
-	HsProductType Enumeration `json:"hs_product_type,omitempty"`
+	HsProductType string `json:"hs_product_type,omitempty"`
 
 	// Is the object read only
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
@@ -2322,7 +2334,7 @@ type LineItemDefaultProperties struct {
 	HsRecurringBillingStartDate *Date `json:"hs_recurring_billing_start_date,omitempty"`
 
 	// If there are fixed number payments or it goes on until cancelled
-	HsRecurringBillingTerms Enumeration `json:"hs_recurring_billing_terms,omitempty"`
+	HsRecurringBillingTerms string `json:"hs_recurring_billing_terms,omitempty"`
 
 	// Unique product identifier
 	HsSku string `json:"hs_sku,omitempty"`
@@ -2337,7 +2349,7 @@ type LineItemDefaultProperties struct {
 	HsTaxRate Int `json:"hs_tax_rate,omitempty"`
 
 	// Describes the type of the tax applied on a LI. For example VAT, Tax, GST
-	HsTaxType Enumeration `json:"hs_tax_type,omitempty"`
+	HsTaxType string `json:"hs_tax_type,omitempty"`
 
 	// The total contract value (TCV) of this product
 	HsTcv Int `json:"hs_tcv,omitempty"`
@@ -2376,10 +2388,10 @@ type LineItemDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// Product name
 	Name string `json:"name,omitempty"`
@@ -2391,7 +2403,7 @@ type LineItemDefaultProperties struct {
 	Quantity Int `json:"quantity,omitempty"`
 
 	// How often a line item with recurring billing is billed. It informs the pricing calculation for deals and quotes. Line items with one-time billing aren’t included.
-	Recurringbillingfrequency Enumeration `json:"recurringbillingfrequency,omitempty"`
+	Recurringbillingfrequency string `json:"recurringbillingfrequency,omitempty"`
 
 	// The tax amount applied
 	Tax Int `json:"tax,omitempty"`
@@ -2438,7 +2450,7 @@ type ProductDefaultProperties struct {
 	HsDiscountPercentage Int `json:"hs_discount_percentage,omitempty"`
 
 	// The folder containing this product
-	HsFolder Enumeration `json:"hs_folder,omitempty"`
+	HsFolder string `json:"hs_folder,omitempty"`
 
 	// The ID of the folder that has this product
 	HsFolderId Int `json:"hs_folder_id,omitempty"`
@@ -2474,13 +2486,13 @@ type ProductDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
 	// The type of product. By default, categorize your product as either Inventory, Non-Inventory or Service.
-	HsProductType Enumeration `json:"hs_product_type,omitempty"`
+	HsProductType string `json:"hs_product_type,omitempty"`
 
 	// Is the object read only
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
@@ -2519,10 +2531,10 @@ type ProductDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// Product name
 	Name string `json:"name,omitempty"`
@@ -2534,7 +2546,7 @@ type ProductDefaultProperties struct {
 	Quantity Int `json:"quantity,omitempty"`
 
 	// How often a product with recurring billing is billed. It informs the pricing calculation for deals and quotes. Products with one-time billing aren’t included.
-	Recurringbillingfrequency Enumeration `json:"recurringbillingfrequency,omitempty"`
+	Recurringbillingfrequency string `json:"recurringbillingfrequency,omitempty"`
 
 	// The tax amount applied
 	Tax Int `json:"tax,omitempty"`
@@ -2548,7 +2560,7 @@ type QuoteDefaultProperties struct {
 	HsAllowedPaymentMethods Enumeration `json:"hs_allowed_payment_methods,omitempty"`
 
 	//
-	HsApproverId Enumeration `json:"hs_approver_id,omitempty"`
+	HsApproverId string `json:"hs_approver_id,omitempty"`
 
 	// Indicates if this quote is archived or not
 	HsArchived Bool `json:"hs_archived,omitempty"`
@@ -2638,7 +2650,7 @@ type QuoteDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -2647,16 +2659,16 @@ type QuoteDefaultProperties struct {
 	HsPaymentDate *DateTime `json:"hs_payment_date,omitempty"`
 
 	// Payment status for the quote
-	HsPaymentStatus Enumeration `json:"hs_payment_status,omitempty"`
+	HsPaymentStatus string `json:"hs_payment_status,omitempty"`
 
 	// Payment type for the quote if payment is enabled
-	HsPaymentType Enumeration `json:"hs_payment_type,omitempty"`
+	HsPaymentType string `json:"hs_payment_type,omitempty"`
 
 	// The link to download a pdf of a quote
 	HsPdfDownloadLink string `json:"hs_pdf_download_link,omitempty"`
 
 	//
-	HsPdfGenerationStatus Enumeration `json:"hs_pdf_generation_status,omitempty"`
+	HsPdfGenerationStatus string `json:"hs_pdf_generation_status,omitempty"`
 
 	// Domain this proposal should be served from
 	HsProposalDomain string `json:"hs_proposal_domain,omitempty"`
@@ -2674,19 +2686,19 @@ type QuoteDefaultProperties struct {
 	HsQuoteLink string `json:"hs_quote_link,omitempty"`
 
 	// What LineItem property will be used to calculate the Quote Amount
-	HsQuoteTotalPreference Enumeration `json:"hs_quote_total_preference,omitempty"`
+	HsQuoteTotalPreference string `json:"hs_quote_total_preference,omitempty"`
 
 	// Is the object read only
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// The render status of a quote
-	HsRenderStatus Enumeration `json:"hs_render_status,omitempty"`
+	HsRenderStatus string `json:"hs_render_status,omitempty"`
 
 	// URL to image of the sender avatar image to be set on the quote
 	HsSenderImageUrl string `json:"hs_sender_image_url,omitempty"`
 
 	//
-	HsSignStatus Enumeration `json:"hs_sign_status,omitempty"`
+	HsSignStatus string `json:"hs_sign_status,omitempty"`
 
 	// Path to serve this quote from
 	HsSlug string `json:"hs_slug,omitempty"`
@@ -2695,7 +2707,7 @@ type QuoteDefaultProperties struct {
 	HsTcv Int `json:"hs_tcv,omitempty"`
 
 	// Whether this Quote is rendered with the default templates
-	HsTemplateType Enumeration `json:"hs_template_type,omitempty"`
+	HsTemplateType string `json:"hs_template_type,omitempty"`
 
 	// Indicates if the quote is in test mode
 	HsTestMode Bool `json:"hs_test_mode,omitempty"`
@@ -2785,7 +2797,7 @@ type QuoteDefaultProperties struct {
 	HsShowCountersignatureBox Bool `json:"hs_show_countersignature_box,omitempty"`
 
 	// The owner of the quote
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The last timestamp when a call, email or meeting was logged for this quote
 	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
@@ -2809,10 +2821,10 @@ type QuoteDefaultProperties struct {
 	HsSenderCompanyCountry string `json:"hs_sender_company_country,omitempty"`
 
 	// The name of the team associated with the owner of the quote
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// The value of all owner referencing properties for this object, both default and custom
-	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
+	HsAllOwnerIds string `json:"hs_all_owner_ids,omitempty"`
 
 	// URL to image of the sender company image to be set on the quote
 	HsSenderCompanyImageUrl string `json:"hs_sender_company_image_url,omitempty"`
@@ -2821,13 +2833,13 @@ type QuoteDefaultProperties struct {
 	HsTimezone string `json:"hs_timezone,omitempty"`
 
 	// The team ids corresponding to all owner referencing properties for this object, both default and custom
-	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
+	HsAllTeamIds string `json:"hs_all_team_ids,omitempty"`
 
 	// Indicates if payment can be collected via the quote link
 	HsPaymentEnabled Bool `json:"hs_payment_enabled,omitempty"`
 
 	// The team ids, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllAccessibleTeamIds Enumeration `json:"hs_all_accessible_team_ids,omitempty"`
+	HsAllAccessibleTeamIds string `json:"hs_all_accessible_team_ids,omitempty"`
 
 	// Indicates if esign is enabled for quote
 	HsEsignEnabled Bool `json:"hs_esign_enabled,omitempty"`
@@ -2839,7 +2851,7 @@ type QuoteDefaultProperties struct {
 	HsEsignNumSignersRequired Int `json:"hs_esign_num_signers_required,omitempty"`
 
 	// The legacy quote template used to generate a quote. These templates will be sunset on Dec. 12th 2022.
-	HsTemplate Enumeration `json:"hs_template,omitempty"`
+	HsTemplate string `json:"hs_template,omitempty"`
 
 	// Number of completed signatures collected so far
 	HsEsignNumSignersCompleted Int `json:"hs_esign_num_signers_completed,omitempty"`
@@ -2848,7 +2860,7 @@ type QuoteDefaultProperties struct {
 	HsQuoteAmount Int `json:"hs_quote_amount,omitempty"`
 
 	// Approval status of the quote
-	HsStatus Enumeration `json:"hs_status,omitempty"`
+	HsStatus string `json:"hs_status,omitempty"`
 
 	// Reference number shown on quote document
 	HsQuoteNumber string `json:"hs_quote_number,omitempty"`
@@ -2877,7 +2889,7 @@ type DiscountDefaultProperties struct {
 	HsCreatedate *DateTime `json:"hs_createdate,omitempty"`
 
 	// How often the discount will be applied.
-	HsDuration Enumeration `json:"hs_duration,omitempty"`
+	HsDuration string `json:"hs_duration,omitempty"`
 
 	// The name of the discount.
 	HsLabel string `json:"hs_label,omitempty"`
@@ -2907,7 +2919,7 @@ type DiscountDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -2919,7 +2931,7 @@ type DiscountDefaultProperties struct {
 	HsSortOrder Int `json:"hs_sort_order,omitempty"`
 
 	// How the discount will be calculated, and what it will apply to. It could be a fixed amount of the total, a percentage of the total, or a fixed amount per unit.
-	HsType Enumeration `json:"hs_type,omitempty"`
+	HsType string `json:"hs_type,omitempty"`
 
 	// Unique property used for idempotent creates
 	HsUniqueCreationKey string `json:"hs_unique_creation_key,omitempty"`
@@ -2946,10 +2958,10 @@ type DiscountDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 }
 
 type FeeDefaultProperties struct {
@@ -2999,7 +3011,7 @@ type FeeDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -3011,7 +3023,7 @@ type FeeDefaultProperties struct {
 	HsSortOrder Int `json:"hs_sort_order,omitempty"`
 
 	// How the fee will be calculated: as a fixed amount or a percentage.
-	HsType Enumeration `json:"hs_type,omitempty"`
+	HsType string `json:"hs_type,omitempty"`
 
 	// Unique property used for idempotent creates
 	HsUniqueCreationKey string `json:"hs_unique_creation_key,omitempty"`
@@ -3038,10 +3050,10 @@ type FeeDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 }
 
 type TaxDefaultProperties struct {
@@ -3091,7 +3103,7 @@ type TaxDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -3103,7 +3115,7 @@ type TaxDefaultProperties struct {
 	HsSortOrder Int `json:"hs_sort_order,omitempty"`
 
 	// How the tax will be calculated: as a fixed amount or a percentage.
-	HsType Enumeration `json:"hs_type,omitempty"`
+	HsType string `json:"hs_type,omitempty"`
 
 	// Unique property used for idempotent creates
 	HsUniqueCreationKey string `json:"hs_unique_creation_key,omitempty"`
@@ -3130,10 +3142,10 @@ type TaxDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 }
 
 type TicketDefaultProperties struct {
@@ -3225,13 +3237,13 @@ type TicketDefaultProperties struct {
 	HsDateExited4 *DateTime `json:"hs_date_exited_4,omitempty"`
 
 	// Unique ids corresponding to tickets in a system outside of HubSpot
-	HsExternalObjectIds Enumeration `json:"hs_external_object_ids,omitempty"`
+	HsExternalObjectIds string `json:"hs_external_object_ids,omitempty"`
 
 	// Last CES survey comment that this contact gave for this ticket
 	HsFeedbackLastCesFollowUp string `json:"hs_feedback_last_ces_follow_up,omitempty"`
 
 	// Last CES survey rating that this contact gave for this ticket
-	HsFeedbackLastCesRating Enumeration `json:"hs_feedback_last_ces_rating,omitempty"`
+	HsFeedbackLastCesRating string `json:"hs_feedback_last_ces_rating,omitempty"`
 
 	// The time that this contact last submitted a CES survey response. This is automatically set by HubSpot.
 	HsFeedbackLastSurveyDate *DateTime `json:"hs_feedback_last_survey_date,omitempty"`
@@ -3255,7 +3267,7 @@ type TicketDefaultProperties struct {
 	HsIsVisibleInHelpDesk Bool `json:"hs_is_visible_in_help_desk,omitempty"`
 
 	// The type of the last email activity with the contact associated with the ticket.
-	HsLastEmailActivity Enumeration `json:"hs_last_email_activity,omitempty"`
+	HsLastEmailActivity string `json:"hs_last_email_activity,omitempty"`
 
 	// The date of the last email activity with the contact associated with the ticket.
 	HsLastEmailDate *DateTime `json:"hs_last_email_date,omitempty"`
@@ -3285,16 +3297,19 @@ type TicketDefaultProperties struct {
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
 
 	// Most relevant sla status
-	HsMostRelevantSlaStatus Enumeration `json:"hs_most_relevant_sla_status,omitempty"`
+	HsMostRelevantSlaStatus string `json:"hs_most_relevant_sla_status,omitempty"`
 
 	// Most relevant SLA type between Close By, First Response, Next Response
-	HsMostRelevantSlaType Enumeration `json:"hs_most_relevant_sla_type,omitempty"`
+	HsMostRelevantSlaType string `json:"hs_most_relevant_sla_type,omitempty"`
 
 	// Microsoft Teams message ID for this ticket.
 	HsMsteamsMessageId string `json:"hs_msteams_message_id,omitempty"`
 
 	// The date of the next upcoming activity for a ticket. This property is set automatically by HubSpot based on user action. This includes logging a future call, email, or meeting using the Log feature, as well as creating a future task or scheduling a future meeting. This is updated automatically by HubSpot.
 	HsNextactivitydate *DateTime `json:"hs_nextactivitydate,omitempty"`
+
+	// The type of the next upcoming activity for a ticket. This property is set automatically by HubSpot based on user action. This includes logging a future call, email, or meeting using the Log feature, as well as creating a future task or scheduling a future meeting. This is updated automatically by HubSpot.
+	HsNotesNextActivityType string `json:"hs_notes_next_activity_type,omitempty"`
 
 	// Number of companies associated with this ticket
 	HsNumAssociatedCompanies Int `json:"hs_num_associated_companies,omitempty"`
@@ -3324,7 +3339,7 @@ type TicketDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
@@ -3338,14 +3353,14 @@ type TicketDefaultProperties struct {
 	// The channel the conversation is in
 	HsOriginatingGenericChannelId Enumeration `json:"hs_originating_generic_channel_id,omitempty"`
 
-	// The object ID of the current pinned engagement. This value is automatically set by HubSpot and may not be modified.
+	// The object ID of the current pinned engagement. This will only be shown if there is already an association to the engagement.
 	HsPinnedEngagementId Int `json:"hs_pinned_engagement_id,omitempty"`
 
 	// The pipeline that contains this ticket
-	HsPipeline Enumeration `json:"hs_pipeline,omitempty"`
+	HsPipeline string `json:"hs_pipeline,omitempty"`
 
 	// The pipeline stage that contains this ticket
-	HsPipelineStage Enumeration `json:"hs_pipeline_stage,omitempty"`
+	HsPipelineStage string `json:"hs_pipeline_stage,omitempty"`
 
 	// Primary company of a ticket
 	HsPrimaryCompany string `json:"hs_primary_company,omitempty"`
@@ -3360,7 +3375,7 @@ type TicketDefaultProperties struct {
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// The action taken to resolve the ticket
-	HsResolution Enumeration `json:"hs_resolution,omitempty"`
+	HsResolution string `json:"hs_resolution,omitempty"`
 
 	// Stores a list of users who have viewed the most recent interaction on a ticket
 	HsSeenByAgentIds Enumeration `json:"hs_seen_by_agent_ids,omitempty"`
@@ -3381,7 +3396,7 @@ type TicketDefaultProperties struct {
 	HsTicketId Int `json:"hs_ticket_id,omitempty"`
 
 	// The level of attention needed on the ticket
-	HsTicketPriority Enumeration `json:"hs_ticket_priority,omitempty"`
+	HsTicketPriority string `json:"hs_ticket_priority,omitempty"`
 
 	// The total time in seconds spent by the ticket in the 'New' stage, 'Support Pipeline' pipeline
 	HsTimeIn1 Int `json:"hs_time_in_1,omitempty"`
@@ -3399,19 +3414,19 @@ type TicketDefaultProperties struct {
 	HsTimeToCloseSlaAt *DateTime `json:"hs_time_to_close_sla_at,omitempty"`
 
 	// Current Time to Close SLA status of ticket
-	HsTimeToCloseSlaStatus Enumeration `json:"hs_time_to_close_sla_status,omitempty"`
+	HsTimeToCloseSlaStatus string `json:"hs_time_to_close_sla_status,omitempty"`
 
 	// When the ticket falls out of the Time to First Response SLA
 	HsTimeToFirstResponseSlaAt *DateTime `json:"hs_time_to_first_response_sla_at,omitempty"`
 
 	// Current Time to First Response SLA status.
-	HsTimeToFirstResponseSlaStatus Enumeration `json:"hs_time_to_first_response_sla_status,omitempty"`
+	HsTimeToFirstResponseSlaStatus string `json:"hs_time_to_first_response_sla_status,omitempty"`
 
 	// When the ticket falls out of Time to Next Response SLA
 	HsTimeToNextResponseSlaAt *DateTime `json:"hs_time_to_next_response_sla_at,omitempty"`
 
 	// Current Time to Next Response SLA status
-	HsTimeToNextResponseSlaStatus Enumeration `json:"hs_time_to_next_response_sla_status,omitempty"`
+	HsTimeToNextResponseSlaStatus string `json:"hs_time_to_next_response_sla_status,omitempty"`
 
 	// Unique property used for idempotent creates
 	HsUniqueCreationKey string `json:"hs_unique_creation_key,omitempty"`
@@ -3447,7 +3462,7 @@ type TicketDefaultProperties struct {
 	NpsFollowUpQuestionVersion Int `json:"nps_follow_up_question_version,omitempty"`
 
 	// NPS score received after ticket resolution
-	NpsScore Enumeration `json:"nps_score,omitempty"`
+	NpsScore string `json:"nps_score,omitempty"`
 
 	// The id of an email thread with ticket conversation
 	SourceThreadId string `json:"source_thread_id,omitempty"`
@@ -3465,19 +3480,19 @@ type TicketDefaultProperties struct {
 	Content string `json:"content,omitempty"`
 
 	// Channel where ticket was originally submitted
-	SourceType Enumeration `json:"source_type,omitempty"`
+	SourceType string `json:"source_type,omitempty"`
 
 	// The id of a connected source object
 	SourceRef string `json:"source_ref,omitempty"`
 
 	// Tags associated with your tickets
-	Tags Enumeration `json:"tags,omitempty"`
+	Tags string `json:"tags,omitempty"`
 
 	// The last time a tracked sales email was replied to for this ticket
 	HsSalesEmailLastReplied *DateTime `json:"hs_sales_email_last_replied,omitempty"`
 
 	// User the ticket is assigned to. Assign additional users to a ticket record by creating a custom user property.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The last time a call, chat conversation, LinkedIn message, postal mail, meeting, note, sales email, SMS, or WhatsApp message was logged for a ticket. This is set automatically by HubSpot based on user actions in the ticket record.
 	NotesLastContacted *DateTime `json:"notes_last_contacted,omitempty"`
@@ -3495,21 +3510,21 @@ type TicketDefaultProperties struct {
 	NumNotes Int `json:"num_notes,omitempty"`
 
 	// Primary team of the ticket owner. This property is set automatically by HubSpot.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// The value of all owner referencing properties for this object, both default and custom
-	HsAllOwnerIds Enumeration `json:"hs_all_owner_ids,omitempty"`
+	HsAllOwnerIds string `json:"hs_all_owner_ids,omitempty"`
 
 	// The team IDs, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllTeamIds Enumeration `json:"hs_all_team_ids,omitempty"`
+	HsAllTeamIds string `json:"hs_all_team_ids,omitempty"`
 
 	// The team IDs, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom
-	HsAllAccessibleTeamIds Enumeration `json:"hs_all_accessible_team_ids,omitempty"`
+	HsAllAccessibleTeamIds string `json:"hs_all_accessible_team_ids,omitempty"`
 }
 
 type GoalDefaultProperties struct {
 	// Describes if the goal target can be treated as deleted.
-	Hs_MigrationSoftDelete Enumeration `json:"hs__migration_soft_delete,omitempty"`
+	Hs_MigrationSoftDelete Bool `json:"hs__migration_soft_delete,omitempty"`
 
 	// A list of ';'-separated universally unique IDs of ad accounts, each formatted: {AD_NETWORK}-{ACCOUNT_ID}
 	HsAdAccountAssetIds Enumeration `json:"hs_ad_account_asset_ids,omitempty"`
@@ -3533,7 +3548,7 @@ type GoalDefaultProperties struct {
 	HsAssigneeTeamId Int `json:"hs_assignee_team_id,omitempty"`
 
 	// Goal assignee type calculated field based on the assigned user or team ids on the goal
-	HsAssigneeType Enumeration `json:"hs_assignee_type,omitempty"`
+	HsAssigneeType string `json:"hs_assignee_type,omitempty"`
 
 	// The user ID of the assigned user of the goal (unpopulated if the goal is not user-assigned)
 	HsAssigneeUserId Int `json:"hs_assignee_user_id,omitempty"`
@@ -3557,10 +3572,10 @@ type GoalDefaultProperties struct {
 	HsCurrencyExchangeRate Int `json:"hs_currency_exchange_rate,omitempty"`
 
 	// A serialized list of DEAL pipeline IDs used to filter the KPI value calculation.
-	HsDealPipelineIds Enumeration `json:"hs_deal_pipeline_ids,omitempty"`
+	HsDealPipelineIds string `json:"hs_deal_pipeline_ids,omitempty"`
 
 	// The frequency of goal edit update notifications
-	HsEditUpdatesNotificationFrequency Enumeration `json:"hs_edit_updates_notification_frequency,omitempty"`
+	HsEditUpdatesNotificationFrequency string `json:"hs_edit_updates_notification_frequency,omitempty"`
 
 	// The last day covered by the Goal Target's date range.
 	HsEndDate *Date `json:"hs_end_date,omitempty"`
@@ -3584,25 +3599,25 @@ type GoalDefaultProperties struct {
 	HsGoalName string `json:"hs_goal_name,omitempty"`
 
 	// Currency code for the goal target
-	HsGoalTargetCurrencyCode Enumeration `json:"hs_goal_target_currency_code,omitempty"`
+	HsGoalTargetCurrencyCode string `json:"hs_goal_target_currency_code,omitempty"`
 
 	// Object ID of the associated Goal Target Group
 	HsGoalTargetGroupId Int `json:"hs_goal_target_group_id,omitempty"`
 
 	// The goal type
-	HsGoalType Enumeration `json:"hs_goal_type,omitempty"`
+	HsGoalType string `json:"hs_goal_type,omitempty"`
 
 	// Unique ID set on all Goal Targets and Goal Target Groups created by a single request
 	HsGroupCorrelationUuid string `json:"hs_group_correlation_uuid,omitempty"`
 
 	// READ ME! (kind of) indicates whether the goal should appear in the forecasting app - this property may be true even if the goal should NOT appear in the forecasting app. As of April 2023, this property will be true if hs_milestone is either  \“monthly\” or \“quarterly\“, and if the count of pipelines in hs_pipelines 0 or 1. No other checks are made!
-	HsIsForecastable Enumeration `json:"hs_is_forecastable,omitempty"`
+	HsIsForecastable Bool `json:"hs_is_forecastable,omitempty"`
 
 	// Describes if the object was created during the migration process and it comes from the old app.
-	HsIsLegacy Enumeration `json:"hs_is_legacy,omitempty"`
+	HsIsLegacy Bool `json:"hs_is_legacy,omitempty"`
 
 	// Display units for goals based on duration properties
-	HsKpiDisplayUnit Enumeration `json:"hs_kpi_display_unit,omitempty"`
+	HsKpiDisplayUnit string `json:"hs_kpi_display_unit,omitempty"`
 
 	// Filter groups for KPI calculations
 	HsKpiFilterGroups string `json:"hs_kpi_filter_groups,omitempty"`
@@ -3653,7 +3668,7 @@ type GoalDefaultProperties struct {
 	HsLastmodifieddate *DateTime `json:"hs_lastmodifieddate,omitempty"`
 
 	// Migrated value describing if the goal is active or soft deleted.
-	HsLegacyActive Enumeration `json:"hs_legacy_active,omitempty"`
+	HsLegacyActive Bool `json:"hs_legacy_active,omitempty"`
 
 	// Migrated value of created at.
 	HsLegacyCreatedAt Int `json:"hs_legacy_created_at,omitempty"`
@@ -3680,10 +3695,10 @@ type GoalDefaultProperties struct {
 	HsMergedObjectIds Enumeration `json:"hs_merged_object_ids,omitempty"`
 
 	// Describes if the goal target can be treated as deleted.
-	HsMigrationSoftDelete Enumeration `json:"hs_migration_soft_delete,omitempty"`
+	HsMigrationSoftDelete Bool `json:"hs_migration_soft_delete,omitempty"`
 
 	// The period during which a Goal Target is active
-	HsMilestone Enumeration `json:"hs_milestone,omitempty"`
+	HsMilestone string `json:"hs_milestone,omitempty"`
 
 	// The unique ID for this record. This value is automatically set by HubSpot and may not be modified.
 	HsObjectId Int `json:"hs_object_id,omitempty"`
@@ -3704,13 +3719,13 @@ type GoalDefaultProperties struct {
 	HsObjectSourceId string `json:"hs_object_source_id,omitempty"`
 
 	// How this record was created
-	HsObjectSourceLabel Enumeration `json:"hs_object_source_label,omitempty"`
+	HsObjectSourceLabel string `json:"hs_object_source_label,omitempty"`
 
 	// User ID of the user who initiated creation of this object record
 	HsObjectSourceUserId Int `json:"hs_object_source_user_id,omitempty"`
 
 	// Goal Target outcome
-	HsOutcome Enumeration `json:"hs_outcome,omitempty"`
+	HsOutcome string `json:"hs_outcome,omitempty"`
 
 	// The owner IDs of all owners of this object
 	HsOwnerIdsOfAllOwners Enumeration `json:"hs_owner_ids_of_all_owners,omitempty"`
@@ -3722,31 +3737,31 @@ type GoalDefaultProperties struct {
 	HsPipelines string `json:"hs_pipelines,omitempty"`
 
 	// The frequency of goal progress update notifications
-	HsProgressUpdatesNotificationFrequency Enumeration `json:"hs_progress_updates_notification_frequency,omitempty"`
+	HsProgressUpdatesNotificationFrequency string `json:"hs_progress_updates_notification_frequency,omitempty"`
 
 	// Is the object read only
 	HsReadOnly Bool `json:"hs_read_only,omitempty"`
 
 	// Opt into notifications when goal is achieved
-	HsShouldNotifyOnAchieved Enumeration `json:"hs_should_notify_on_achieved,omitempty"`
+	HsShouldNotifyOnAchieved Bool `json:"hs_should_notify_on_achieved,omitempty"`
 
 	// Opt into goal edit update notifications
-	HsShouldNotifyOnEditUpdates Enumeration `json:"hs_should_notify_on_edit_updates,omitempty"`
+	HsShouldNotifyOnEditUpdates Bool `json:"hs_should_notify_on_edit_updates,omitempty"`
 
 	// Opt into notifications when goal is exceeded
-	HsShouldNotifyOnExceeded Enumeration `json:"hs_should_notify_on_exceeded,omitempty"`
+	HsShouldNotifyOnExceeded Bool `json:"hs_should_notify_on_exceeded,omitempty"`
 
 	// Opt into notifications when a goal is kicked off
-	HsShouldNotifyOnKickoff Enumeration `json:"hs_should_notify_on_kickoff,omitempty"`
+	HsShouldNotifyOnKickoff Bool `json:"hs_should_notify_on_kickoff,omitempty"`
 
 	// Opt into notifications when a goal is missed
-	HsShouldNotifyOnMissed Enumeration `json:"hs_should_notify_on_missed,omitempty"`
+	HsShouldNotifyOnMissed Bool `json:"hs_should_notify_on_missed,omitempty"`
 
 	// Opt into goal progress updates notifications
-	HsShouldNotifyOnProgressUpdates Enumeration `json:"hs_should_notify_on_progress_updates,omitempty"`
+	HsShouldNotifyOnProgressUpdates Bool `json:"hs_should_notify_on_progress_updates,omitempty"`
 
 	// Property used to flag Goal targets that need to be recalculated
-	HsShouldRecalculate Enumeration `json:"hs_should_recalculate,omitempty"`
+	HsShouldRecalculate Bool `json:"hs_should_recalculate,omitempty"`
 
 	// The first day that goal target's date range covers
 	HsStartDatetime *DateTime `json:"hs_start_datetime,omitempty"`
@@ -3755,7 +3770,7 @@ type GoalDefaultProperties struct {
 	HsStaticKpiFilterGroups string `json:"hs_static_kpi_filter_groups,omitempty"`
 
 	// The status of the Goal Target
-	HsStatus Enumeration `json:"hs_status,omitempty"`
+	HsStatus string `json:"hs_status,omitempty"`
 
 	// The goal status display order.
 	HsStatusDisplayOrder Int `json:"hs_status_display_order,omitempty"`
@@ -3773,7 +3788,7 @@ type GoalDefaultProperties struct {
 	HsTemplateId Int `json:"hs_template_id,omitempty"`
 
 	// A serialized list of TICKET pipeline IDs used to filter the KPI value calculation.
-	HsTicketPipelineIds Enumeration `json:"hs_ticket_pipeline_ids,omitempty"`
+	HsTicketPipelineIds string `json:"hs_ticket_pipeline_ids,omitempty"`
 
 	// Unique property used for idempotent creates
 	HsUniqueCreationKey string `json:"hs_unique_creation_key,omitempty"`
@@ -3800,10 +3815,10 @@ type GoalDefaultProperties struct {
 	HubspotOwnerAssigneddate *DateTime `json:"hubspot_owner_assigneddate,omitempty"`
 
 	// The owner of the object.
-	HubspotOwnerId Enumeration `json:"hubspot_owner_id,omitempty"`
+	HubspotOwnerId string `json:"hubspot_owner_id,omitempty"`
 
 	// The primary team of the owner.
-	HubspotTeamId Enumeration `json:"hubspot_team_id,omitempty"`
+	HubspotTeamId string `json:"hubspot_team_id,omitempty"`
 
 	// The first day that goal target's date range covers
 	HsStartDate *Date `json:"hs_start_date,omitempty"`

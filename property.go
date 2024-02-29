@@ -29,6 +29,7 @@ const (
 	PropertyFieldTypeCheckbox            PropertyFieldType = "checkbox"
 	PropertyFieldTypeBooleanCheckbox     PropertyFieldType = "booleancheckbox"
 	PropertyFieldTypeCalculationEquation PropertyFieldType = "calculation_equation"
+	PropertyFieldTypeCalculationRollup   PropertyFieldType = "calculation_rollup"
 
 	PropertyReferencedObjectTypeOwner    PropertyReferencedObjectType = "OWNER"
 	PropertyReferencedObjectTypeContact  PropertyReferencedObjectType = "CONTACT"
