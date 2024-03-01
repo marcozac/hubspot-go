@@ -31,7 +31,7 @@ const (
 type (
 	// Property is a HubSpot property as returned by the properties API.
 	//
-	// Do not confuse it with Object properties, which are the properties of a
+	// Do not confuse it with [Object.Properties], which are the properties of a
 	// HubSpot object (e.g. a contact, a company, a deal).
 	Property struct {
 		// Name is the internal name of the property as used in the API.
