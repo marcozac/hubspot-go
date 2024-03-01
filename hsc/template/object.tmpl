@@ -1,0 +1,54 @@
+{{/* This template creates the type of the objects in the Graph. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "objects_type" }}
+{{ template "package_base" $ }}
+{{ with $.Objects }}
+	{{ range $o := $.Objects }}
+	{{ template "object_default_properties" $o }}
+	{{ end }}
+{{ end }}
+{{ end }}
+
+{{/* This template creates the type of the objects in the Graph including only default properties. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "objects_type_default" }}
+{{ template "package_base" $ }}
+{{ with $.Objects }}
+	{{ range $o := $.Objects }}
+	{{ template "object_default_properties" $o }}
+	{{ end }}
+{{ end }}
+{{ end }}
+
+{{/* This template creates an object type. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Object */}}
+{{ define "object_properties" }}
+type {{ $.Name }} struct {
+{{- with $.Properties }}
+	{{- range $p := $.Properties }}
+		{{- template "object_property_field" $p }}
+	{{ end }}
+{{ end }}
+}
+{{- end }}
+
+{{/* This template creates an object type with only default properties. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Object */}}
+{{ define "object_default_properties" }}
+type {{ $.Name }}DefaultProperties struct {
+{{- with $.Properties }}
+	{{- range $p := $.Properties }}
+	{{- if $p.IsDefault }}
+		{{- template "object_property_field" $p }}
+	{{ end }}
+	{{ end }}
+{{ end }}
+}
+{{- end }}
+
+{{/* This template creates a field fot an object type. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Property */}}
+{{- define "object_property_field" }}
+	{{ with $.Description }} // {{ . }} {{ end }}
+	{{ $.StructFieldName }} {{ $.StructFieldType }} {{ $.StructFieldJSONTag }}
+{{- end }}
