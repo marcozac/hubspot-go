@@ -706,6 +706,10 @@ type Results[T any] struct {
 	Results []T `json:"results"`
 }
 
+// results is a type alias for Results for embedding without repeating the
+// Results field.
+type results[T any] Results[T]
+
 type PaginatedResults[T any] struct {
 	Paging  Paging `json:"paging"`
 	Results []T    `json:"results"`

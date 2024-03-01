@@ -98,7 +98,7 @@ func (BatchInput[I]) embedBatchUpdateInput()  {}
 func (BatchInput[I]) embedBatchArchiveInput() {}
 
 type BatchOutput[R any] struct {
-	Results[R] // embed the results
+	results[R] // embed the results
 
 	RequestedAt *DateTime         `json:"requestedAt,omitempty"`
 	StartedAt   *DateTime         `json:"startedAt,omitempty"`
