@@ -1,0 +1,66 @@
+{{/* This template creates the client of the objects in the Graph. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "objects_client" }}
+{{ template "package_base" $ }}
+{{ with $.Objects }}
+	{{ range $o := $.Objects }}
+	{{ template "object_properties_embedder" $o }}
+
+	{{ $objClientType := "" }}
+	{{ if $.ImportHS }}
+	{{ $objClientType = "hubspot.ObjectClient[PE]" }}
+	{{ else }}
+	{{ $objClientType = "ObjectClient[PE]" }}
+	{{ end }}
+
+	// New{{ $o.Name }}Client returns a new client for the HubSpot API.
+	//
+	// The given HTTP client is used to make requests to the HubSpot API and must
+	// be configured to use the appropriate authentication method. You can use
+	// [NewHTTPClient] to create a new HTTP client from an OAuth2 token source.
+	//
+	// The properties type may be provided as a type param or inferred from the
+	// optional pe parameter. In the latter case, the given value is used only
+	// for type inference and has no effect on the client.
+	func New{{ $o.Name }}Client[PE {{ $o.Name }}PropertiesEmbedder](httpClient *http.Client, pe ...PE) *{{ $objClientType }} {
+	{{- with $o.Endpoint }}
+		return NewObjectClient("{{ $o.Endpoint }}", httpClient, pe...)
+	{{ else }}
+		return NewObjectClient({{ $o.EndpointTarget.Alias }}.{{ $o.EndpointTarget.Name }}, httpClient, pe...)
+	{{- end }}
+	}
+	{{ end }}
+
+{{ if $.ImportHS }}{{ else }}
+// Default objects' properties embedder.
+type ObjectPropertiesEmbedder interface {
+	embedProperties()
+}
+{{ end }}
+
+{{ end }}
+{{ end }}
+
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Object */}}
+{{ define "object_properties_embedder" }}
+// {{ $.Name }}PropertiesEmbedder is the interface that must be implemented to
+// create a client for the {{ $.Name }} object.
+//
+// Example:
+//
+//	type My{{ $.Name }}Properties struct {
+//		// Embed the default properties to ensure that the custom properties are
+//		// added to the default ones.
+//		{{ $.Name }}DefaultProperties
+//		// MyCustomProperty is a an example custom property.
+//		MyCustomProperty string `json:"my_custom_property,omitempty"`
+//	}
+type {{ $.Name }}PropertiesEmbedder interface {
+	{{ if $.ImportHS }}
+	hubspot.ObjectPropertiesEmbedder
+	{{ else }}
+	ObjectPropertiesEmbedder
+	{{- end }}
+	Embed{{ $.Name }}Properties()
+}
+{{ end }}

@@ -4,7 +4,7 @@
 {{ template "package_base" $ }}
 {{ with $.Objects }}
 	{{ range $o := $.Objects }}
-	{{ template "object_default_properties" $o }}
+	{{ template "object_properties" $o }}
 	{{ end }}
 {{ end }}
 {{ end }}
@@ -30,12 +30,16 @@ type {{ $.Name }} struct {
 	{{ end }}
 {{ end }}
 }
+
+func ({{ $.Name }}) embedProperties() {}
+func ({{ $.Name }}) Embed{{ $.Name }}Properties() {}
 {{- end }}
 
 {{/* This template creates an object type with only default properties. */}}
 {{/* gotype: github.com/marcozac/hubspot-go/hsc.Object */}}
 {{ define "object_default_properties" }}
-type {{ $.Name }}DefaultProperties struct {
+{{- $typeName := $.Name | printf "%sDefaultProperties" }}
+type {{ $typeName }} struct {
 {{- with $.Properties }}
 	{{- range $p := $.Properties }}
 	{{- if $p.IsDefault }}
@@ -44,6 +48,9 @@ type {{ $.Name }}DefaultProperties struct {
 	{{ end }}
 {{ end }}
 }
+
+func ({{ $typeName }}) embedProperties() {}
+func ({{ $typeName }}) Embed{{ $.Name }}Properties() {}
 {{- end }}
 
 {{/* This template creates a field fot an object type. */}}

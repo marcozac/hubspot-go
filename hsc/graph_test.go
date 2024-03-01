@@ -109,7 +109,7 @@ func TestTemplate(t *testing.T) {
 	assert.NoError(t, graph.resolveImports())
 
 	buf := new(bytes.Buffer)
-	err = tmpl.ExecuteTemplate(buf, "objects_type_default", graph)
+	err = tmpl.ExecuteTemplate(buf, "objects_client", graph)
 	require.NoError(t, err)
 
 	ff, err := imports.Process("", buf.Bytes(), nil)
