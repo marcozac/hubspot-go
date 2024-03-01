@@ -20,6 +20,11 @@ type Graph struct {
 	// Default: "hubspot"
 	PackageName string
 
+	// PackagePath is the path of the package for the generated files.
+	//
+	// Example: "github.com/marcozac/hubspot-go"
+	PackagePath string
+
 	// Imports is a map formatted as "path:alias" for the imports of the graph.
 	Imports map[string]string
 
@@ -34,17 +39,21 @@ type Graph struct {
 	mu sync.RWMutex
 }
 
-func (n *Graph) resolveImports() error {
-	if n.Imports == nil {
-		n.Imports = make(map[string]string)
+func (g *Graph) resolveImports() error {
+	if g.Imports == nil {
+		g.Imports = make(map[string]string)
 	}
-	for _, o := range n.Objects {
+	importStructFieldType := g.PackagePath != "github.com/marcozac/hubspot-go"
+	if importStructFieldType {
+		g.Imports["github.com/marcozac/hubspot-go"] = "hubspot"
+	}
+	for _, o := range g.Objects {
 		if o.EndpointTarget != nil {
-			n.mu.RLock()
-			_, ok := n.Imports[o.EndpointTarget.Package]
-			n.mu.RUnlock()
+			g.mu.RLock()
+			_, ok := g.Imports[o.EndpointTarget.Package]
+			g.mu.RUnlock()
 			if !ok {
-				n.mu.Lock()
+				g.mu.Lock()
 				pkgs, err := packages.Load(&packages.Config{}, o.EndpointTarget.Package)
 				if err != nil {
 					return fmt.Errorf("load packages: %w", err)
@@ -56,7 +65,7 @@ func (n *Graph) resolveImports() error {
 				var i int
 				alias := pkg.Name
 			importsLoop:
-				for _, a := range n.Imports {
+				for _, a := range g.Imports {
 					if alias == a {
 						i++
 						alias = fmt.Sprintf("%s_%d", pkg.Name, i)
@@ -64,8 +73,13 @@ func (n *Graph) resolveImports() error {
 					}
 				}
 				o.EndpointTarget.alias = alias // update the alias of the endpoint target
-				n.Imports[o.EndpointTarget.Package] = alias
-				n.mu.Unlock()
+				g.Imports[o.EndpointTarget.Package] = alias
+				if importStructFieldType {
+					for _, p := range o.Properties {
+						p.importStructFieldType = true
+					}
+				}
+				g.mu.Unlock()
 			}
 		}
 	}
@@ -94,8 +108,9 @@ type Object struct {
 
 type Property struct {
 	*hubspot.Property
-	fieldName       string
-	structFieldType string
+	fieldName             string
+	structFieldType       string
+	importStructFieldType bool
 }
 
 // IsDefault returns true if the property is a HubSpot default property.
@@ -128,9 +143,12 @@ func (p *Property) StructFieldName() string {
 
 func (p *Property) StructFieldType() string {
 	if p.structFieldType == "" {
+		if p.importStructFieldType {
+			p.structFieldType = "hubspot."
+		}
 		switch p.Type {
 		case hubspot.PropertyTypeString, hubspot.PropertyTypePhoneNumber:
-			p.structFieldType = "string"
+			p.structFieldType = "string" // override the import (if any)
 		case hubspot.PropertyTypeNumber:
 			// Set the type to Int64 for the hs_object_id property.
 			//
@@ -139,27 +157,28 @@ func (p *Property) StructFieldType() string {
 			//
 			// See: https://developers.hubspot.com/changelog/increasing-the-size-of-contact-record-ids
 			if p.Name == "hs_object_id" {
-				p.structFieldType = "Int64"
+				p.structFieldType += "Int64"
+			} else {
+				p.structFieldType += "Int"
 			}
-			p.structFieldType = "Int"
 		case hubspot.PropertyTypeBool:
-			p.structFieldType = "Bool"
+			p.structFieldType += "Bool"
 		case hubspot.PropertyTypeDate:
 			// must to be a pointer to respect the omitempty tag
-			p.structFieldType = "*Date"
+			p.structFieldType = "*" + p.structFieldType + "Date"
 		case hubspot.PropertyTypeDateTime:
 			// must to be a pointer to respect the omitempty tag
-			p.structFieldType = "*DateTime"
+			p.structFieldType = "*" + p.structFieldType + "DateTime"
 		case hubspot.PropertyTypeEnumeration:
 			switch p.FieldType {
 			case hubspot.PropertyFieldTypeRadio, hubspot.PropertyFieldTypeSelect, hubspot.PropertyFieldTypeCalculationEquation:
 				p.structFieldType = "string"
 			case hubspot.PropertyFieldTypeBooleanCheckbox:
-				p.structFieldType = "Bool"
+				p.structFieldType += "Bool"
 			case hubspot.PropertyFieldTypeNumber:
-				p.structFieldType = "Int"
+				p.structFieldType += "Int"
 			case hubspot.PropertyFieldTypeCheckbox, hubspot.PropertyFieldTypeCalculationRollup:
-				p.structFieldType = "Enumeration"
+				p.structFieldType += "Enumeration"
 			default:
 				panic(fmt.Errorf("unknown property field type: %s", p.FieldType))
 			}

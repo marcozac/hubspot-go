@@ -2,12 +2,12 @@ package hsc
 
 import (
 	"bytes"
-	"go/format"
 	"testing"
 	"text/template"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"golang.org/x/tools/imports"
 
 	"github.com/marcozac/hubspot-go"
 )
@@ -59,6 +59,16 @@ func TestTemplate(t *testing.T) {
 							GroupName: "contactinformation",
 						},
 					},
+					{
+						Property: &hubspot.Property{
+							Name:        "my_date",
+							Label:       "My Date",
+							Type:        hubspot.PropertyTypeDate,
+							FieldType:   hubspot.PropertyFieldTypeDate,
+							GroupName:   "contactinformation",
+							Description: "A custom date field",
+						},
+					},
 				},
 				EndpointTarget: &EndpointTarget{
 					Name:    "Contacts",
@@ -102,7 +112,8 @@ func TestTemplate(t *testing.T) {
 	err = tmpl.ExecuteTemplate(buf, "objects_type_default", graph)
 	require.NoError(t, err)
 
-	ff, err := format.Source(buf.Bytes())
+	ff, err := imports.Process("", buf.Bytes(), nil)
+
 	assert.NoError(t, err)
 	t.Log(string(ff))
 }
