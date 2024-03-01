@@ -284,10 +284,11 @@ func TestClient(t *testing.T) {
 		})
 
 		t.Run("Batch", func(t *testing.T) {
+			type ContactMutationRequestBody = ObjectMutationRequestBody[ContactPropertiesTest]
 			var contacts []ObjectMutation[ContactPropertiesTest]
 			t.Run("Create", func(t *testing.T) {
 				out, err := client.Contacts.Batch.Create(ctx, &ObjectBatchCreateInput[ContactPropertiesTest]{
-					Inputs: []ObjectMutationRequestBody[ContactPropertiesTest]{
+					Inputs: []ContactMutationRequestBody{
 						{
 							Properties: &ContactPropertiesTest{
 								ContactDefaultProperties: ContactDefaultProperties{
@@ -313,9 +314,10 @@ func TestClient(t *testing.T) {
 			require.NotEmpty(t, contacts, "expected contacts to be created")
 
 			t.Run("Update", func(t *testing.T) {
-				inputs := make([]ObjectBatchUpdateInputStruct[ContactPropertiesTest], 0, len(contacts))
+				type Input = ObjectBatchIDProperties[ContactPropertiesTest]
+				inputs := make([]Input, 0, len(contacts))
 				for _, c := range contacts {
-					inputs = append(inputs, ObjectBatchUpdateInputStruct[ContactPropertiesTest]{
+					inputs = append(inputs, Input{
 						ID: c.ID,
 						Properties: ContactPropertiesTest{
 							ContactDefaultProperties: ContactDefaultProperties{
@@ -342,17 +344,15 @@ func TestClient(t *testing.T) {
 			require.NotEmpty(t, contacts, "expected contacts to be created")
 
 			t.Run("Read", func(t *testing.T) {
-				inputs := make([]ObjectBatchIDInput, 0, len(contacts))
+				inputs := make([]ObjectBatchID, 0, len(contacts))
 				for _, c := range contacts {
-					inputs = append(inputs, ObjectBatchIDInput{
+					inputs = append(inputs, ObjectBatchID{
 						ID: c.ID,
 					})
 				}
 				rcs, err := client.Contacts.Batch.Read(ctx, &ObjectBatchReadInput{
 					Properties: []string{"email", "firstname", "lastname"},
-					BatchInput: BatchInput[ObjectBatchIDInput]{
-						Inputs: inputs,
-					},
+					Inputs:     inputs,
 				})
 				require.NoError(t, err, "expected no error when reading contacts in batch")
 				require.NotNil(t, rcs.Results, "expected results to be returned")
@@ -363,9 +363,9 @@ func TestClient(t *testing.T) {
 				}
 			})
 			t.Run("Archive", func(t *testing.T) {
-				inputs := make([]ObjectBatchIDInput, 0, len(contacts))
+				inputs := make([]ObjectBatchID, 0, len(contacts))
 				for _, c := range contacts {
-					inputs = append(inputs, ObjectBatchIDInput{
+					inputs = append(inputs, ObjectBatchID{
 						ID: c.ID,
 					})
 				}

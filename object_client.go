@@ -244,20 +244,29 @@ func NewObjectBatchClient[PE ObjectPropertiesEmbedder](baseEndpoint string, http
 
 type (
 	ObjectBatchReadInput struct {
-		BatchInput[ObjectBatchIDInput]
-		PropertiesWithHistory []string `json:"propertiesWithHistory,omitempty"`
-		IDProperty            string   `json:"idProperty,omitempty"`
-		Properties            []string `json:"properties,omitempty"`
+		IDProperty            string          `json:"idProperty,omitempty"`
+		PropertiesWithHistory []string        `json:"propertiesWithHistory,omitempty"`
+		Properties            []string        `json:"properties,omitempty"`
+		Inputs                []ObjectBatchID `json:"inputs"`
 	}
-	ObjectBatchCreateInput[PE ObjectPropertiesEmbedder] BatchInput[ObjectMutationRequestBody[PE]]
-	ObjectBatchUpdateInput[PE ObjectPropertiesEmbedder] BatchInput[ObjectBatchUpdateInputStruct[PE]]
-	ObjectBatchArchiveInput                             = BatchInput[ObjectBatchIDInput]
 
-	ObjectBatchIDInput struct {
+	ObjectBatchCreateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectMutationRequestBody[PE] `json:"inputs"`
+	}
+
+	ObjectBatchUpdateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectBatchIDProperties[PE] `json:"inputs"`
+	}
+
+	ObjectBatchArchiveInput struct {
+		Inputs []ObjectBatchID `json:"inputs"`
+	}
+
+	ObjectBatchID struct {
 		ID string `json:"id,omitempty"`
 	}
 
-	ObjectBatchUpdateInputStruct[PE ObjectPropertiesEmbedder] struct {
+	ObjectBatchIDProperties[PE ObjectPropertiesEmbedder] struct {
 		ID         string `json:"id,omitempty"`
 		IDProperty string `json:"idProperty,omitempty"`
 		Properties PE     `json:"properties,omitempty"`
@@ -267,3 +276,4 @@ type (
 func (ObjectBatchReadInput) embedBatchReadInput()         {}
 func (ObjectBatchCreateInput[PE]) embedBatchCreateInput() {}
 func (ObjectBatchUpdateInput[PE]) embedBatchUpdateInput() {}
+func (ObjectBatchArchiveInput) embedBatchArchiveInput()   {}
