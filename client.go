@@ -383,7 +383,7 @@ type PropertiesObjectClient struct {
 //   - WithProperties: include only the specified properties in the response
 //
 // Any other option is ignored.
-func (poc *PropertiesObjectClient) List(ctx context.Context, opts ...RequestOption) ([]Property, error) {
+func (poc *PropertiesObjectClient) List(ctx context.Context, opts ...RequestOption) ([]*Property, error) {
 	cfg := applyRequestOptions(nil, opts...)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, poc.endpoint, nil)
 	if err != nil {
@@ -573,7 +573,7 @@ type PropertyGroupClient struct {
 }
 
 // List returns a list of property groups for the object type.
-func (pgc *PropertyGroupClient) List(ctx context.Context) ([]PropertyGroup, error) {
+func (pgc *PropertyGroupClient) List(ctx context.Context) ([]*PropertyGroup, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, pgc.endpoint, nil)
 	if err != nil {
 		return nil, err
@@ -703,7 +703,7 @@ func (pgc *PropertyGroupClient) Archive(ctx context.Context, name string) error 
 // Results is a generic struct that contains a list of results of type T
 // returned by the HubSpot API.
 type Results[T any] struct {
-	Results []T `json:"results"`
+	Results []*T `json:"results"`
 }
 
 // results is a type alias for Results for embedding without repeating the
@@ -712,7 +712,7 @@ type results[T any] Results[T]
 
 type PaginatedResults[T any] struct {
 	Paging  Paging `json:"paging"`
-	Results []T    `json:"results"`
+	Results []*T   `json:"results"`
 }
 
 type Paging struct {
@@ -762,7 +762,7 @@ type PagingPrev struct {
 // ObjectListResults is a generic struct that contains a paginated list of
 // objects returned by the HubSpot API. Associations and PropertiesWithHistory
 // are also paginated.
-type ObjectListResults[PE ObjectPropertiesEmbedder] PaginatedResults[GenericPublicObject[
+type ObjectListResults[PE ObjectPropertiesEmbedder] PaginatedResults[PublicObject[
 	PE,
 	PaginatedResults[PropertyWithHistory],
 	PaginatedResults[AssociationEdge],
@@ -770,7 +770,7 @@ type ObjectListResults[PE ObjectPropertiesEmbedder] PaginatedResults[GenericPubl
 
 // ObjectRead is a generic struct that contains a single object returned by the
 // HubSpot API. Associations are also paginated.
-type ObjectRead[PE ObjectPropertiesEmbedder] GenericPublicObject[
+type ObjectRead[PE ObjectPropertiesEmbedder] PublicObject[
 	PE,
 	PropertyWithHistory,
 	PaginatedResults[AssociationEdge],
@@ -779,7 +779,7 @@ type ObjectRead[PE ObjectPropertiesEmbedder] GenericPublicObject[
 // ObjectMutation is a generic struct that contains a single object returned by
 // the HubSpot API after a create or update operation. Associations are usually
 // not present in the response.
-type ObjectMutation[PE ObjectPropertiesEmbedder] GenericPublicObject[
+type ObjectMutation[PE ObjectPropertiesEmbedder] PublicObject[
 	PE,
 	PropertyWithHistory,
 	AssociationEdge,
@@ -789,6 +789,6 @@ type ObjectMutation[PE ObjectPropertiesEmbedder] GenericPublicObject[
 // for creating or updating an object in the HubSpot API. Associations should
 // be set only when creating an object.
 type ObjectMutationRequestBody[PE ObjectPropertiesEmbedder] struct {
-	Properties   *PE                    `json:"properties,omitempty"`
-	Associations []AssociationForCreate `json:"associations,omitempty"`
+	Properties   *PE                     `json:"properties,omitempty"`
+	Associations []*AssociationForCreate `json:"associations,omitempty"`
 }

@@ -89,7 +89,7 @@ func (c *BatchClient[RI, CI, UI, AI, O]) do(ctx context.Context, endpoint string
 }
 
 type BatchInput[I any] struct {
-	Inputs []I `json:"inputs"`
+	Inputs []*I `json:"inputs"`
 }
 
 func (BatchInput[I]) embedBatchReadInput()    {}

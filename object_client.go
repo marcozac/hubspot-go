@@ -142,7 +142,7 @@ func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...Request
 
 // Create creates a new object with the given properties and, optionally, the
 // given associations.
-func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...AssociationForCreate) (*ObjectMutation[PE], error) {
+func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...*AssociationForCreate) (*ObjectMutation[PE], error) {
 	rb := &ObjectMutationRequestBody[PE]{
 		Properties:   properties,
 		Associations: associations,
