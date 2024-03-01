@@ -171,7 +171,7 @@ func TestClient(t *testing.T) {
 				})
 				assert.NoError(t, err, "expected no error when creating contact properties in batch")
 				require.NotEmpty(t, out.Results, "expected results to be returned")
-				props = out.Results.Results
+				props = out.Results
 			})
 
 			t.Run("Read", func(t *testing.T) {
@@ -186,7 +186,7 @@ func TestClient(t *testing.T) {
 				})
 				assert.NoError(t, err, "expected no error when reading contact properties in batch")
 				require.NotEmpty(t, out.Results, "expected results to be returned")
-				assert.Equal(t, 2, len(out.Results.Results), "expected 2 results to be returned")
+				assert.Equal(t, 2, len(out.Results), "expected 2 results to be returned")
 			})
 
 			t.Run("Archive", func(t *testing.T) {
@@ -306,7 +306,7 @@ func TestClient(t *testing.T) {
 				})
 
 				require.NoError(t, err, "expected no error when creating contacts in batch")
-				contacts = out.Results.Results
+				contacts = out.Results
 			})
 
 			// Do not run the next tests if the contacts were not created.
@@ -330,12 +330,12 @@ func TestClient(t *testing.T) {
 				})
 				require.NoError(t, err, "expected no error when updating contacts in batch")
 				require.NotNil(t, ucs.Results, "expected results to be returned")
-				assert.Equal(t, 2, len(ucs.Results.Results), "expected 2 results to be returned")
-				for _, c := range ucs.Results.Results {
+				assert.Equal(t, 2, len(ucs.Results), "expected 2 results to be returned")
+				for _, c := range ucs.Results {
 					assert.Equal(t, "John", c.Properties.Firstname, "expected contact firstname to match")
 					assert.Equal(t, "Doe", c.Properties.Lastname, "expected contact lastname to match")
 				}
-				contacts = ucs.Results.Results
+				contacts = ucs.Results
 			})
 
 			// Do not run the next tests if the contacts were not created.
@@ -356,8 +356,8 @@ func TestClient(t *testing.T) {
 				})
 				require.NoError(t, err, "expected no error when reading contacts in batch")
 				require.NotNil(t, rcs.Results, "expected results to be returned")
-				assert.Equal(t, 2, len(rcs.Results.Results), "expected 2 results to be returned")
-				for _, c := range rcs.Results.Results {
+				assert.Equal(t, 2, len(rcs.Results), "expected 2 results to be returned")
+				for _, c := range rcs.Results {
 					assert.Equal(t, "John", c.Properties.Firstname, "expected contact firstname to match")
 					assert.Equal(t, "Doe", c.Properties.Lastname, "expected contact lastname to match")
 				}
