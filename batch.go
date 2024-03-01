@@ -40,7 +40,7 @@ func (c *BatchClient[RI, CI, UI, AI, O]) Update(ctx context.Context, input *UI) 
 }
 
 // Archive archives a batch of objects in HubSpot as specified by the input.
-func (c *BatchClient[ReadInput, CreateInput, UpdateInput, ArchiveInput, Out]) Archive(ctx context.Context, input *ArchiveInput) error {
+func (c *BatchClient[RI, CI, UI, AI, O]) Archive(ctx context.Context, input *AI) error {
 	buf := new(bytes.Buffer)
 	if err := json.NewEncoder(buf).Encode(input); err != nil {
 		return err
@@ -89,7 +89,7 @@ func (c *BatchClient[RI, CI, UI, AI, O]) do(ctx context.Context, endpoint string
 }
 
 type BatchInput[I any] struct {
-	Inputs []I `json:"inputs"`
+	Inputs []*I `json:"inputs"`
 }
 
 func (BatchInput[I]) embedBatchReadInput()    {}
