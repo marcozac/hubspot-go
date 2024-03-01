@@ -159,7 +159,24 @@ func run() error { //nolint:funlen
 				// must to be a pointer to respect the omitempty tag
 				f.Type = "*DateTime"
 			case hubspot.PropertyTypeEnumeration:
-				f.Type = "Enumeration"
+				switch p.FieldType {
+				case hubspot.PropertyFieldTypeBooleanCheckbox:
+					f.Type = "Bool"
+				case hubspot.PropertyFieldTypeCheckbox:
+					f.Type = "Enumeration"
+				case hubspot.PropertyFieldTypeRadio:
+					f.Type = "string"
+				case hubspot.PropertyFieldTypeSelect:
+					f.Type = "string"
+				case hubspot.PropertyFieldTypeCalculationEquation:
+					f.Type = "string"
+				case hubspot.PropertyFieldTypeNumber:
+					f.Type = "Int"
+				case hubspot.PropertyFieldTypeCalculationRollup:
+					f.Type = "Enumeration"
+				default:
+					return fmt.Errorf("unknown property field type: %s", p.FieldType)
+				}
 			case hubspot.PropertyTypeBool:
 				f.Type = "Bool"
 			default:

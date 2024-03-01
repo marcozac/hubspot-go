@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/marcozac/hubspot-go/endpoint"
 	"github.com/marcozac/hubspot-go/util"
 )
 
@@ -31,16 +32,25 @@ import (
 //		// or
 //		NewObjectClient(endpoint.Contacts, http.DefaultClient, ContactPropertiesTest{})
 //	}
-func NewObjectClient[PE ObjectPropertiesEmbedder](endpoint string, httpClient *http.Client, pe ...PE) *ObjectClient[PE] {
+func NewObjectClient[PE ObjectPropertiesEmbedder](baseEndpoint string, httpClient *http.Client, pe ...PE) *ObjectClient[PE] {
 	return &ObjectClient[PE]{
-		endpoint: endpoint,
+		endpoint: baseEndpoint,
 		hc:       httpClient,
+		Batch:    NewObjectBatchClient[PE](baseEndpoint+endpoint.Batch, httpClient),
 	}
 }
 
 type ObjectClient[PE ObjectPropertiesEmbedder] struct {
 	endpoint string
 	hc       *http.Client
+
+	Batch *BatchClient[
+		ObjectBatchReadInput,
+		ObjectBatchCreateInput[PE],
+		ObjectBatchUpdateInput[PE],
+		ObjectBatchArchiveInput,
+		ObjectMutation[PE],
+	]
 }
 
 // List returns a paginated list of objects.
@@ -132,7 +142,7 @@ func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...Request
 
 // Create creates a new object with the given properties and, optionally, the
 // given associations.
-func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...AssociationForCreate) (*ObjectMutation[PE], error) {
+func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...*AssociationForCreate) (*ObjectMutation[PE], error) {
 	rb := &ObjectMutationRequestBody[PE]{
 		Properties:   properties,
 		Associations: associations,
@@ -212,3 +222,58 @@ func (oc *ObjectClient[PE]) Archive(ctx context.Context, id string) error {
 	resp.Body.Close()
 	return nil
 }
+
+func NewObjectBatchClient[PE ObjectPropertiesEmbedder](baseEndpoint string, httpClient *http.Client) *BatchClient[
+	ObjectBatchReadInput,
+	ObjectBatchCreateInput[PE],
+	ObjectBatchUpdateInput[PE],
+	ObjectBatchArchiveInput,
+	ObjectMutation[PE],
+] {
+	return &BatchClient[
+		ObjectBatchReadInput,
+		ObjectBatchCreateInput[PE],
+		ObjectBatchUpdateInput[PE],
+		ObjectBatchArchiveInput,
+		ObjectMutation[PE],
+	]{
+		baseEndpoint: baseEndpoint,
+		hc:           httpClient,
+	}
+}
+
+type (
+	ObjectBatchReadInput struct {
+		IDProperty            string          `json:"idProperty,omitempty"`
+		PropertiesWithHistory []string        `json:"propertiesWithHistory,omitempty"`
+		Properties            []string        `json:"properties,omitempty"`
+		Inputs                []ObjectBatchID `json:"inputs"`
+	}
+
+	ObjectBatchCreateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectMutationRequestBody[PE] `json:"inputs"`
+	}
+
+	ObjectBatchUpdateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectBatchIDProperties[PE] `json:"inputs"`
+	}
+
+	ObjectBatchArchiveInput struct {
+		Inputs []ObjectBatchID `json:"inputs"`
+	}
+
+	ObjectBatchID struct {
+		ID string `json:"id,omitempty"`
+	}
+
+	ObjectBatchIDProperties[PE ObjectPropertiesEmbedder] struct {
+		ID         string `json:"id,omitempty"`
+		IDProperty string `json:"idProperty,omitempty"`
+		Properties PE     `json:"properties,omitempty"`
+	}
+)
+
+func (ObjectBatchReadInput) embedBatchReadInput()         {}
+func (ObjectBatchCreateInput[PE]) embedBatchCreateInput() {}
+func (ObjectBatchUpdateInput[PE]) embedBatchUpdateInput() {}
+func (ObjectBatchArchiveInput) embedBatchArchiveInput()   {}

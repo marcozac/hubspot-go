@@ -32,9 +32,7 @@ const (
 	ObjectTypeIDMarketingEvent     = "0-54"
 )
 
-type PublicObject[P ObjectPropertiesEmbedder] GenericPublicObject[P, PropertyWithHistory, AssociationEdge]
-
-type GenericPublicObject[
+type PublicObject[
 	P ObjectPropertiesEmbedder,
 	PWH PropertyWithHistory | Results[PropertyWithHistory] | PaginatedResults[PropertyWithHistory],
 	AE AssociationEdge | Results[AssociationEdge] | PaginatedResults[AssociationEdge],
@@ -43,7 +41,7 @@ type GenericPublicObject[
 	ID string `json:"id,omitempty"`
 
 	// Properties is the object's properties.
-	Properties P `json:"properties,omitempty"`
+	Properties *P `json:"properties,omitempty"`
 
 	// PropertiesWithHistory is the object's properties with history.
 	//
@@ -61,7 +59,7 @@ type GenericPublicObject[
 	// 			}
 	// 		]
 	// 	}
-	PropertiesWithHistory map[string][]PWH `json:"propertiesWithHistory,omitempty"`
+	PropertiesWithHistory map[string][]*PWH `json:"propertiesWithHistory,omitempty"`
 
 	// Associations is the object's associations.
 	//
@@ -76,15 +74,15 @@ type GenericPublicObject[
 	// 			}
 	// 		]
 	// 	}
-	Associations map[string][]AE `json:"associations,omitempty"`
+	Associations map[string][]*AE `json:"associations,omitempty"`
 
-	CreatedAt DateTime `json:"createdAt,omitempty"`
+	CreatedAt *DateTime `json:"createdAt,omitempty"`
 
-	UpdatedAt DateTime `json:"updatedAt,omitempty"`
+	UpdatedAt *DateTime `json:"updatedAt,omitempty"`
 
 	Archived bool `json:"archived,omitempty"`
 
-	ArchivedAt DateTime `json:"archivedAt,omitempty"`
+	ArchivedAt *DateTime `json:"archivedAt,omitempty"`
 }
 
 type CustomObject struct{}

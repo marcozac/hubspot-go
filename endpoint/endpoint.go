@@ -24,103 +24,115 @@ const (
 	Objects = CRMV3 + "/objects"
 
 	Contacts             = Objects + "/contacts"
-	ContactsBatchArchive = Contacts + BatchArchive
-	ContactsBatchCreate  = Contacts + BatchCreate
-	ContactsBatchRead    = Contacts + BatchRead
-	ContactsBatchUpdate  = Contacts + BatchUpdate
+	ContactsBatch        = Contacts + Batch
+	ContactsBatchArchive = ContactsBatch + Archive
+	ContactsBatchCreate  = ContactsBatch + Create
+	ContactsBatchRead    = ContactsBatch + Read
+	ContactsBatchUpdate  = ContactsBatch + Update
 	ContactsMerge        = Contacts + Merge
 	ContactsGDPRDelete   = Contacts + GDPRDelete
 	ContactsSearch       = Contacts + Search
 
 	Companies             = Objects + "/companies"
-	CompaniesBatchArchive = Companies + BatchArchive
-	CompaniesBatchCreate  = Companies + BatchCreate
-	CompaniesBatchRead    = Companies + BatchRead
-	CompaniesBatchUpdate  = Companies + BatchUpdate
+	CompaniesBatch        = Companies + Batch
+	CompaniesBatchArchive = CompaniesBatch + Archive
+	CompaniesBatchCreate  = CompaniesBatch + Create
+	CompaniesBatchRead    = CompaniesBatch + Read
+	CompaniesBatchUpdate  = CompaniesBatch + Update
 	CompaniesMerge        = Companies + Merge
 	CompaniesGDPRDelete   = Companies + GDPRDelete
 	CompaniesSearch       = Companies + Search
 
 	Deals             = Objects + "/deals"
-	DealsBatchArchive = Deals + BatchArchive
-	DealsBatchCreate  = Deals + BatchCreate
-	DealsBatchRead    = Deals + BatchRead
-	DealsBatchUpdate  = Deals + BatchUpdate
+	DealsBatch        = Deals + Batch
+	DealsBatchArchive = DealsBatch + Archive
+	DealsBatchCreate  = DealsBatch + Create
+	DealsBatchRead    = DealsBatch + Read
+	DealsBatchUpdate  = DealsBatch + Update
 	DealsMerge        = Deals + Merge
 	DealsGDPRDelete   = Deals + GDPRDelete
 	DealsSearch       = Deals + Search
 
 	FeedbackSubmissions          = Objects + "/feedback_submissions"
-	FeedbackSubmissionsBatchRead = FeedbackSubmissions + BatchRead
+	FeedbackSubmissionsBatch     = FeedbackSubmissions + Batch
+	FeedbackSubmissionsBatchRead = FeedbackSubmissionsBatch + Read
 
 	LineItems             = Objects + "/line_items"
-	LineItemsBatchArchive = LineItems + BatchArchive
-	LineItemsBatchCreate  = LineItems + BatchCreate
-	LineItemsBatchRead    = LineItems + BatchRead
-	LineItemsBatchUpdate  = LineItems + BatchUpdate
+	LineItemsBatch        = LineItems + Batch
+	LineItemsBatchArchive = LineItemsBatch + Archive
+	LineItemsBatchCreate  = LineItemsBatch + Create
+	LineItemsBatchRead    = LineItemsBatch + Read
+	LineItemsBatchUpdate  = LineItemsBatch + Update
 	LineItemsMerge        = LineItems + Merge
 	LineItemsGDPRDelete   = LineItems + GDPRDelete
 	LineItemsSearch       = LineItems + Search
 
 	Products             = Objects + "/products"
-	ProductsBatchArchive = Products + BatchArchive
-	ProductsBatchCreate  = Products + BatchCreate
-	ProductsBatchRead    = Products + BatchRead
-	ProductsBatchUpdate  = Products + BatchUpdate
+	ProductsBatch        = Products + Batch
+	ProductsBatchArchive = ProductsBatch + Archive
+	ProductsBatchCreate  = ProductsBatch + Create
+	ProductsBatchRead    = ProductsBatch + Read
+	ProductsBatchUpdate  = ProductsBatch + Update
 	ProductsMerge        = Products + Merge
 	ProductsGDPRDelete   = Products + GDPRDelete
 	ProductsSearch       = Products + Search
 
 	Quotes             = Objects + "/quotes"
-	QuotesBatchArchive = Quotes + BatchArchive
-	QuotesBatchCreate  = Quotes + BatchCreate
-	QuotesBatchRead    = Quotes + BatchRead
-	QuotesBatchUpdate  = Quotes + BatchUpdate
+	QuotesBatch        = Quotes + Batch
+	QuotesBatchArchive = QuotesBatch + Archive
+	QuotesBatchCreate  = QuotesBatch + Create
+	QuotesBatchRead    = QuotesBatch + Read
+	QuotesBatchUpdate  = QuotesBatch + Update
 	QuotesMerge        = Quotes + Merge
 	QuotesGDPRDelete   = Quotes + GDPRDelete
 	QuotesSearch       = Quotes + Search
 
 	Discounts             = Objects + "/discounts"
-	DiscountsBatchArchive = Discounts + BatchArchive
-	DiscountsBatchCreate  = Discounts + BatchCreate
-	DiscountsBatchRead    = Discounts + BatchRead
-	DiscountsBatchUpdate  = Discounts + BatchUpdate
+	DiscountsBatch        = Discounts + Batch
+	DiscountsBatchArchive = DiscountsBatch + Archive
+	DiscountsBatchCreate  = DiscountsBatch + Create
+	DiscountsBatchRead    = DiscountsBatch + Read
+	DiscountsBatchUpdate  = DiscountsBatch + Update
 	DiscountsMerge        = Discounts + Merge
 	DiscountsGDPRDelete   = Discounts + GDPRDelete
 	DiscountsSearch       = Discounts + Search
 
 	Fees             = Objects + "/fees"
-	FeesBatchArchive = Fees + BatchArchive
-	FeesBatchCreate  = Fees + BatchCreate
-	FeesBatchRead    = Fees + BatchRead
-	FeesBatchUpdate  = Fees + BatchUpdate
+	FeesBatch        = Fees + Batch
+	FeesBatchArchive = FeesBatch + Archive
+	FeesBatchCreate  = FeesBatch + Create
+	FeesBatchRead    = FeesBatch + Read
+	FeesBatchUpdate  = FeesBatch + Update
 	FeesMerge        = Fees + Merge
 	FeesGDPRDelete   = Fees + GDPRDelete
 	FeesSearch       = Fees + Search
 
 	Taxes             = Objects + "/taxes"
-	TaxesBatchArchive = Taxes + BatchArchive
-	TaxesBatchCreate  = Taxes + BatchCreate
-	TaxesBatchRead    = Taxes + BatchRead
-	TaxesBatchUpdate  = Taxes + BatchUpdate
+	TaxesBatch        = Taxes + Batch
+	TaxesBatchArchive = TaxesBatch + Archive
+	TaxesBatchCreate  = TaxesBatch + Create
+	TaxesBatchRead    = TaxesBatch + Read
+	TaxesBatchUpdate  = TaxesBatch + Update
 	TaxesMerge        = Taxes + Merge
 	TaxesGDPRDelete   = Taxes + GDPRDelete
 	TaxesSearch       = Taxes + Search
 
 	Tickets             = Objects + "/tickets"
-	TicketsBatchArchive = Tickets + BatchArchive
-	TicketsBatchCreate  = Tickets + BatchCreate
-	TicketsBatchRead    = Tickets + BatchRead
-	TicketsBatchUpdate  = Tickets + BatchUpdate
+	TicketsBatch        = Tickets + Batch
+	TicketsBatchArchive = TicketsBatch + Archive
+	TicketsBatchCreate  = TicketsBatch + Create
+	TicketsBatchRead    = TicketsBatch + Read
+	TicketsBatchUpdate  = TicketsBatch + Update
 	TicketsMerge        = Tickets + Merge
 	TicketsGDPRDelete   = Tickets + GDPRDelete
 	TicketsSearch       = Tickets + Search
 
 	Goals             = Objects + "/goal_targets"
-	GoalsBatchArchive = Goals + BatchArchive
-	GoalsBatchCreate  = Goals + BatchCreate
-	GoalsBatchRead    = Goals + BatchRead
-	GoalsBatchUpdate  = Goals + BatchUpdate
+	GoalsBatch        = Goals + Batch
+	GoalsBatchArchive = GoalsBatch + Archive
+	GoalsBatchCreate  = GoalsBatch + Create
+	GoalsBatchRead    = GoalsBatch + Read
+	GoalsBatchUpdate  = GoalsBatch + Update
 	GoalsMerge        = Goals + Merge
 	GoalsGDPRDelete   = Goals + GDPRDelete
 	GoalsSearch       = Goals + Search
@@ -132,93 +144,106 @@ const (
 	Properties = CRMV3 + "/properties"
 
 	ContactProperties             = Properties + "/contact"
-	ContactPropertiesBatchArchive = ContactProperties + BatchArchive
-	ContactPropertiesBatchCreate  = ContactProperties + BatchCreate
-	ContactPropertiesBatchRead    = ContactProperties + BatchRead
+	ContactPropertiesBatch        = ContactProperties + Batch
+	ContactPropertiesBatchArchive = ContactPropertiesBatch + Archive
+	ContactPropertiesBatchCreate  = ContactPropertiesBatch + Create
+	ContactPropertiesBatchRead    = ContactPropertiesBatch + Read
 	ContactPropertiesGroups       = ContactProperties + Groups
 
 	CompanyProperties             = Properties + "/company"
-	CompanyPropertiesBatchArchive = CompanyProperties + BatchArchive
-	CompanyPropertiesBatchCreate  = CompanyProperties + BatchCreate
-	CompanyPropertiesBatchRead    = CompanyProperties + BatchRead
+	CompanyPropertiesBatch        = CompanyProperties + Batch
+	CompanyPropertiesBatchArchive = CompanyPropertiesBatch + Archive
+	CompanyPropertiesBatchCreate  = CompanyPropertiesBatch + Create
+	CompanyPropertiesBatchRead    = CompanyPropertiesBatch + Read
 	CompanyPropertiesGroups       = CompanyProperties + Groups
 
 	DealProperties             = Properties + "/deal"
-	DealPropertiesBatchArchive = DealProperties + BatchArchive
-	DealPropertiesBatchCreate  = DealProperties + BatchCreate
-	DealPropertiesBatchRead    = DealProperties + BatchRead
+	DealPropertiesBatch        = DealProperties + Batch
+	DealPropertiesBatchArchive = DealPropertiesBatch + Archive
+	DealPropertiesBatchCreate  = DealPropertiesBatch + Create
+	DealPropertiesBatchRead    = DealPropertiesBatch + Read
 	DealPropertiesGroups       = DealProperties + Groups
 
 	FeedbackSubmissionProperties             = Properties + "/feedback_submission"
-	FeedbackSubmissionPropertiesBatchArchive = FeedbackSubmissionProperties + BatchArchive
-	FeedbackSubmissionPropertiesBatchCreate  = FeedbackSubmissionProperties + BatchCreate
-	FeedbackSubmissionPropertiesBatchRead    = FeedbackSubmissionProperties + BatchRead
+	FeedbackSubmissionPropertiesBatch        = FeedbackSubmissionProperties + Batch
+	FeedbackSubmissionPropertiesBatchArchive = FeedbackSubmissionPropertiesBatch + Archive
+	FeedbackSubmissionPropertiesBatchCreate  = FeedbackSubmissionPropertiesBatch + Create
+	FeedbackSubmissionPropertiesBatchRead    = FeedbackSubmissionPropertiesBatch + Read
 	FeedbackSubmissionPropertiesGroups       = FeedbackSubmissionProperties + Groups
 
 	LineItemProperties             = Properties + "/line_item"
-	LineItemPropertiesBatchArchive = LineItemProperties + BatchArchive
-	LineItemPropertiesBatchCreate  = LineItemProperties + BatchCreate
-	LineItemPropertiesBatchRead    = LineItemProperties + BatchRead
+	LineItemPropertiesBatch        = LineItemProperties + Batch
+	LineItemPropertiesBatchArchive = LineItemPropertiesBatch + Archive
+	LineItemPropertiesBatchCreate  = LineItemPropertiesBatch + Create
+	LineItemPropertiesBatchRead    = LineItemPropertiesBatch + Read
 	LineItemPropertiesGroups       = LineItemProperties + Groups
 
 	ProductProperties             = Properties + "/product"
-	ProductPropertiesBatchArchive = ProductProperties + BatchArchive
-	ProductPropertiesBatchCreate  = ProductProperties + BatchCreate
-	ProductPropertiesBatchRead    = ProductProperties + BatchRead
+	ProductPropertiesBatch        = ProductProperties + Batch
+	ProductPropertiesBatchArchive = ProductPropertiesBatch + Archive
+	ProductPropertiesBatchCreate  = ProductPropertiesBatch + Create
+	ProductPropertiesBatchRead    = ProductPropertiesBatch + Read
 	ProductPropertiesGroups       = ProductProperties + Groups
 
 	QuoteProperties             = Properties + "/quote"
-	QuotePropertiesBatchArchive = QuoteProperties + BatchArchive
-	QuotePropertiesBatchCreate  = QuoteProperties + BatchCreate
-	QuotePropertiesBatchRead    = QuoteProperties + BatchRead
+	QuotePropertiesBatch        = QuoteProperties + Batch
+	QuotePropertiesBatchArchive = QuotePropertiesBatch + Archive
+	QuotePropertiesBatchCreate  = QuotePropertiesBatch + Create
+	QuotePropertiesBatchRead    = QuotePropertiesBatch + Read
 	QuotePropertiesGroups       = QuoteProperties + Groups
 
 	DiscountProperties             = Properties + "/discount"
-	DiscountPropertiesBatchArchive = DiscountProperties + BatchArchive
-	DiscountPropertiesBatchCreate  = DiscountProperties + BatchCreate
-	DiscountPropertiesBatchRead    = DiscountProperties + BatchRead
+	DiscountPropertiesBatch        = DiscountProperties + Batch
+	DiscountPropertiesBatchArchive = DiscountPropertiesBatch + Archive
+	DiscountPropertiesBatchCreate  = DiscountPropertiesBatch + Create
+	DiscountPropertiesBatchRead    = DiscountPropertiesBatch + Read
 	DiscountPropertiesGroups       = DiscountProperties + Groups
 
 	FeeProperties             = Properties + "/fee"
-	FeePropertiesBatchArchive = FeeProperties + BatchArchive
-	FeePropertiesBatchCreate  = FeeProperties + BatchCreate
-	FeePropertiesBatchRead    = FeeProperties + BatchRead
+	FeePropertiesBatch        = FeeProperties + Batch
+	FeePropertiesBatchArchive = FeePropertiesBatch + Archive
+	FeePropertiesBatchCreate  = FeePropertiesBatch + Create
+	FeePropertiesBatchRead    = FeePropertiesBatch + Read
 	FeePropertiesGroups       = FeeProperties + Groups
 
 	TaxProperties             = Properties + "/tax"
-	TaxPropertiesBatchArchive = TaxProperties + BatchArchive
-	TaxPropertiesBatchCreate  = TaxProperties + BatchCreate
-	TaxPropertiesBatchRead    = TaxProperties + BatchRead
+	TaxPropertiesBatch        = TaxProperties + Batch
+	TaxPropertiesBatchArchive = TaxPropertiesBatch + Archive
+	TaxPropertiesBatchCreate  = TaxPropertiesBatch + Create
+	TaxPropertiesBatchRead    = TaxPropertiesBatch + Read
 	TaxPropertiesGroups       = TaxProperties + Groups
 
 	TicketProperties             = Properties + "/ticket"
-	TicketPropertiesBatchArchive = TicketProperties + BatchArchive
-	TicketPropertiesBatchCreate  = TicketProperties + BatchCreate
-	TicketPropertiesBatchRead    = TicketProperties + BatchRead
+	TicketPropertiesBatch        = TicketProperties + Batch
+	TicketPropertiesBatchArchive = TicketPropertiesBatch + Archive
+	TicketPropertiesBatchCreate  = TicketPropertiesBatch + Create
+	TicketPropertiesBatchRead    = TicketPropertiesBatch + Read
 	TicketPropertiesGroups       = TicketProperties + Groups
 
 	GoalProperties             = Properties + "/goal_target"
-	GoalPropertiesBatchArchive = GoalProperties + BatchArchive
-	GoalPropertiesBatchCreate  = GoalProperties + BatchCreate
-	GoalPropertiesBatchRead    = GoalProperties + BatchRead
+	GoalPropertiesBatch        = GoalProperties + Batch
+	GoalPropertiesBatchArchive = GoalPropertiesBatch + Archive
+	GoalPropertiesBatchCreate  = GoalPropertiesBatch + Create
+	GoalPropertiesBatchRead    = GoalPropertiesBatch + Read
 	GoalPropertiesGroups       = GoalProperties + Groups
+)
+
+const (
+	// Common paths
+
+	Groups = "/groups"
+	Batch  = "/batch"
 )
 
 const (
 	// Common Operations
 
-	BatchArchive = "/batch/archive"
-	BatchCreate  = "/batch/create"
-	BatchRead    = "/batch/read"
-	BatchUpdate  = "/batch/update"
+	Archive = "/archive"
+	Create  = "/create"
+	Read    = "/read"
+	Update  = "/update"
 
 	Merge      = "/merge"
 	GDPRDelete = "/gdpr-delete"
 	Search     = "/search"
-)
-
-const (
-	// Other common paths
-
-	Groups = "/groups"
 )
