@@ -348,7 +348,7 @@ func TestClient(t *testing.T) {
 						ID: c.ID,
 					})
 				}
-				rcs, err := client.Contacts.Batch.Read(ctx, &ObjectBatchReadInput[ContactPropertiesTest]{
+				rcs, err := client.Contacts.Batch.Read(ctx, &ObjectBatchReadInput{
 					Properties: []string{"email", "firstname", "lastname"},
 					BatchInput: BatchInput[ObjectBatchIDInput]{
 						Inputs: inputs,
