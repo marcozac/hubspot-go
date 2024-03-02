@@ -1,0 +1,26 @@
+{{/* This template creates the package base including the header, package name and imports. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "package_base" }}
+{{ template "header" $ }}
+{{ template "imports" $ }}
+{{ end }}
+
+{{/* This template creates the package header. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "header" }}
+// {{ $.Header }}
+
+package {{ $.PackageName }}
+{{ end }}
+
+{{/* This template creates the package imports. */}}
+{{/* gotype: github.com/marcozac/hubspot-go/hsc.Graph */}}
+{{ define "imports" }}
+{{ with $.Imports }}
+import (
+{{ range $path, $alias := $.Imports }}
+	{{ $alias }} "{{ $path }}"
+{{- end }}
+)
+{{ end }}
+{{ end }}

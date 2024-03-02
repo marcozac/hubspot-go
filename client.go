@@ -139,20 +139,20 @@ func NewTypedClient[
 		TicketProperties,
 		GoalProperties,
 	]{
-		HTTPClient: hc,
-		Properties: NewPropertiesClient(hc),
-		Contacts:   NewContactsClient[ContactProperties](hc),
-		Companies:  NewCompaniesClient[CompanyProperties](hc),
-		Deals:      NewDealsClient[DealProperties](hc),
-		// FeedbackSubmissions: NewFeedbackSubmissionsClient( endpoint.FeedbackSubmissions,hc),
-		LineItems: NewLineItemsClient[LineItemProperties](hc),
-		Products:  NewProductsClient[ProductProperties](hc),
-		Quotes:    NewQuotesClient[QuoteProperties](hc),
-		Discounts: NewDiscountsClient[DiscountProperties](hc),
-		Fees:      NewFeesClient[FeeProperties](hc),
-		Taxes:     NewTaxesClient[TaxProperties](hc),
-		Tickets:   NewTicketsClient[TicketProperties](hc),
-		Goals:     NewGoalsClient[GoalProperties](hc),
+		HTTPClient:          hc,
+		Properties:          NewPropertiesClient(hc),
+		Contacts:            NewContactClient[ContactProperties](hc),
+		Companies:           NewCompanyClient[CompanyProperties](hc),
+		Deals:               NewDealClient[DealProperties](hc),
+		FeedbackSubmissions: NewFeedbackSubmissionClient[FeedbackSubmissionProperties](hc),
+		LineItems:           NewLineItemClient[LineItemProperties](hc),
+		Products:            NewProductClient[ProductProperties](hc),
+		Quotes:              NewQuoteClient[QuoteProperties](hc),
+		Discounts:           NewDiscountClient[DiscountProperties](hc),
+		Fees:                NewFeeClient[FeeProperties](hc),
+		Taxes:               NewTaxClient[TaxProperties](hc),
+		Tickets:             NewTicketClient[TicketProperties](hc),
+		Goals:               NewGoalClient[GoalProperties](hc),
 	}, nil
 }
 
@@ -172,22 +172,21 @@ type Client[
 ] struct {
 	HTTPClient *http.Client
 
-	OAuth OAuthClient
-
-	Contacts  *ObjectClient[ContactProperties]
-	Companies *ObjectClient[CompanyProperties]
-	Deals     *ObjectClient[DealProperties]
-	// FeedbackSubmissions *ObjectClient[FeedbackSubmissionProperties]
-	LineItems *ObjectClient[LineItemProperties]
-	Products  *ObjectClient[ProductProperties]
-	Quotes    *ObjectClient[QuoteProperties]
-	Discounts *ObjectClient[DiscountProperties]
-	Fees      *ObjectClient[FeeProperties]
-	Taxes     *ObjectClient[TaxProperties]
-	Tickets   *ObjectClient[TicketProperties]
-	Goals     *ObjectClient[GoalProperties]
+	Contacts            *ObjectClient[ContactProperties]
+	Companies           *ObjectClient[CompanyProperties]
+	Deals               *ObjectClient[DealProperties]
+	FeedbackSubmissions *ObjectClient[FeedbackSubmissionProperties]
+	LineItems           *ObjectClient[LineItemProperties]
+	Products            *ObjectClient[ProductProperties]
+	Quotes              *ObjectClient[QuoteProperties]
+	Discounts           *ObjectClient[DiscountProperties]
+	Fees                *ObjectClient[FeeProperties]
+	Taxes               *ObjectClient[TaxProperties]
+	Tickets             *ObjectClient[TicketProperties]
+	Goals               *ObjectClient[GoalProperties]
 
 	Properties *PropertiesClient
+	OAuth      OAuthClient
 }
 
 // DefaultClient is a client for the HubSpot API with the default properties for
@@ -207,74 +206,273 @@ type DefaultClient = Client[
 	GoalDefaultProperties,
 ]
 
-// OAuthClient is a client for the HubSpot OAuth API.
+// NewObjectClient returns a new object client for the given object type.
 //
-// It can be used to get access tokens, refresh tokens, and delete refresh tokens.
+// The object type may be provided as a type param or inferred from the
+// optional pe parameter. In the latter case, the given value is used only
+// for type inference and has no effect on the client.
 //
-// Token exchange and refresh are not implemented and should be handled by the
-// oauth2 package from golang.org/x/oauth2. For example, you can configure an
-// oauth2.Config with the HubSpot OAuth 2.0 endpoint and use the Exchange method
-// to get an access token from an authorization code or a refresh token.
-type OAuthClient struct{}
+// Example:
+//
+//	type ContactPropertiesTest struct {
+//		// Embed the default properties to ensure that the custom properties are
+//		// added to the default ones.
+//		ContactDefaultProperties
+//		// MyCustomPropertyFromUI is a custom property added from the HubSpot UI
+//		// for testing purposes.
+//		MyCustomPropertyFromUI string `json:"my_custom_prop_from_ui,omitempty"`
+//	}
+//
+//	func main() {
+//		NewObjectClient[ContactPropertiesTest](endpoint.Contacts, http.DefaultClient)
+//		// or
+//		NewObjectClient(endpoint.Contacts, http.DefaultClient, ContactPropertiesTest{})
+//	}
+func NewObjectClient[PE ObjectPropertiesEmbedder](baseEndpoint string, hc *http.Client, pe ...PE) *ObjectClient[PE] {
+	return &ObjectClient[PE]{
+		endpoint: baseEndpoint,
+		hc:       hc,
+		Batch:    NewObjectBatchClient[PE](baseEndpoint+endpoint.Batch, hc),
+	}
+}
 
-func (OAuthClient) GetAccessToken(ctx context.Context, token string) (*AccessToken, error) {
-	url := endpoint.OAuthAccessTokens + "/" + token
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+type ObjectClient[PE ObjectPropertiesEmbedder] struct {
+	endpoint string
+	hc       *http.Client
+
+	Batch *BatchClient[
+		ObjectBatchReadInput,
+		ObjectBatchCreateInput[PE],
+		ObjectBatchUpdateInput[PE],
+		ObjectBatchArchiveInput,
+		ObjectMutation[PE],
+	]
+}
+
+// List returns a paginated list of objects.
+//
+// Allowed options:
+//   - WithLimit: the number of objects to return per page
+//   - WithAfter: the cursor token to use to get the next page of results
+//   - WithArchived: include only archived objects in the response
+//   - WithProperties: include only the specified properties in the response
+//   - WithPropertiesWithHistory: include the history of the specified
+//     properties in the response
+//   - WithAssociations: include only the specified associations in the response
+//
+// Any other option is ignored.
+//
+// NOTE
+// The HubSpot's default limit is 10 objects per page.
+func (oc *ObjectClient[PE]) List(ctx context.Context, opts ...RequestOption) (*ObjectListResults[PE], error) {
+	cfg := applyRequestOptions(nil, opts...)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, oc.endpoint, nil)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := http.DefaultClient.Do(req)
+	applyQueryOptions(cfg, req.URL,
+		applyLimitQuery,
+		applyAfterQuery,
+		applyArchivedQuery,
+		applyPropertiesQuery,
+		applyPropertiesWithHistoryQuery,
+		applyAssociationsQuery,
+	)
+	resp, err := oc.hc.Do(req)
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
 	if err := HubSpotResponseError(resp); err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	at := new(AccessToken)
-	if err := json.NewDecoder(resp.Body).Decode(at); err != nil {
+	results := new(ObjectListResults[PE])
+	if err := json.NewDecoder(resp.Body).Decode(results); err != nil {
 		return nil, err
 	}
-	return at, nil
+	return results, nil
 }
 
-func (OAuthClient) GetRefreshToken(ctx context.Context, token string) (*RefreshToken, error) {
-	url := endpoint.OAuthRefreshTokens + "/" + token
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+// Read returns the object with the given ID.
+//
+// Object ID is usually a number. If it is declared as a [Int], [Int64], etc.
+// it is possible to use the String method to convert it to a string.
+//
+// Allowed options:
+//   - WithArchived: include only archived objects in the response
+//   - WithProperties: include only the specified properties in the response
+//   - WithPropertiesWithHistory: include the history of the specified
+//     properties in the response
+//   - WithAssociations: include only the specified associations in the response
+//
+// Any other option is ignored.
+func (oc *ObjectClient[PE]) Read(ctx context.Context, id string, opts ...RequestOption) (*ObjectRead[PE], error) {
+	cfg := applyRequestOptions(nil, opts...)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, oc.endpoint+"/"+id, nil)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := http.DefaultClient.Do(req)
+	applyQueryOptions(cfg, req.URL,
+		applyArchivedQuery,
+		applyPropertiesQuery,
+		applyPropertiesWithHistoryQuery,
+		applyAssociationsQuery,
+		applyIDPropertyQuery,
+	)
+	resp, err := oc.hc.Do(req)
 	if err != nil {
 		return nil, err
 	}
+	// Check for errors in the response.
 	if err := HubSpotResponseError(resp); err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	rt := new(RefreshToken)
-	if err := json.NewDecoder(resp.Body).Decode(rt); err != nil {
+	result := new(ObjectRead[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
 		return nil, err
 	}
-	return rt, nil
+	return result, nil
 }
 
-func (OAuthClient) DeleteGetRefreshToken(ctx context.Context, token string) error {
-	url := endpoint.OAuthRefreshTokens + "/" + token
-	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, url, nil)
+// Create creates a new object with the given properties and, optionally, the
+// given associations.
+func (oc *ObjectClient[PE]) Create(ctx context.Context, properties *PE, associations ...*AssociationForCreate) (*ObjectMutation[PE], error) {
+	rb := &ObjectMutationRequestBody[PE]{
+		Properties:   properties,
+		Associations: associations,
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(rb); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, oc.endpoint, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(ObjectMutation[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Update updates the properties of the object with the given ID.
+//
+// According to the HubSpot API, read only and non-writable properties are
+// ignored. To clear a property, set its value to an empty string.
+func (oc *ObjectClient[PE]) Update(ctx context.Context, id string, properties *PE) (*ObjectMutation[PE], error) {
+	rb := &ObjectMutationRequestBody[PE]{
+		Properties: properties,
+	}
+	buf := new(bytes.Buffer)
+	if err := json.NewEncoder(buf).Encode(rb); err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, oc.endpoint+"/"+id, buf)
+	if err != nil {
+		return nil, err
+	}
+	util.SetJSONHeader(req) // Set the Content-Type header to application/json.
+	resp, err := oc.hc.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// Check for errors in the response.
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	result := new(ObjectMutation[PE])
+	if err := json.NewDecoder(resp.Body).Decode(result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// Archive archives the object with the given ID.
+func (oc *ObjectClient[PE]) Archive(ctx context.Context, id string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, oc.endpoint+"/"+id, nil)
 	if err != nil {
 		return err
 	}
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := oc.hc.Do(req)
 	if err != nil {
 		return err
 	}
+	// Check for errors in the response.
 	if err := HubSpotResponseError(resp); err != nil {
 		return err
 	}
 	resp.Body.Close()
 	return nil
 }
+
+func NewObjectBatchClient[PE ObjectPropertiesEmbedder](baseEndpoint string, hc *http.Client) *BatchClient[
+	ObjectBatchReadInput,
+	ObjectBatchCreateInput[PE],
+	ObjectBatchUpdateInput[PE],
+	ObjectBatchArchiveInput,
+	ObjectMutation[PE],
+] {
+	return &BatchClient[
+		ObjectBatchReadInput,
+		ObjectBatchCreateInput[PE],
+		ObjectBatchUpdateInput[PE],
+		ObjectBatchArchiveInput,
+		ObjectMutation[PE],
+	]{
+		baseEndpoint: baseEndpoint,
+		hc:           hc,
+	}
+}
+
+type (
+	ObjectBatchReadInput struct {
+		IDProperty            string          `json:"idProperty,omitempty"`
+		PropertiesWithHistory []string        `json:"propertiesWithHistory,omitempty"`
+		Properties            []string        `json:"properties,omitempty"`
+		Inputs                []ObjectBatchID `json:"inputs"`
+	}
+
+	ObjectBatchCreateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectMutationRequestBody[PE] `json:"inputs"`
+	}
+
+	ObjectBatchUpdateInput[PE ObjectPropertiesEmbedder] struct {
+		Inputs []ObjectBatchIDProperties[PE] `json:"inputs"`
+	}
+
+	ObjectBatchArchiveInput struct {
+		Inputs []ObjectBatchID `json:"inputs"`
+	}
+
+	ObjectBatchID struct {
+		ID string `json:"id,omitempty"`
+	}
+
+	ObjectBatchIDProperties[PE ObjectPropertiesEmbedder] struct {
+		ID         string `json:"id,omitempty"`
+		IDProperty string `json:"idProperty,omitempty"`
+		Properties PE     `json:"properties,omitempty"`
+	}
+)
+
+func (ObjectBatchReadInput) embedBatchReadInput()         {}
+func (ObjectBatchCreateInput[PE]) embedBatchCreateInput() {}
+func (ObjectBatchUpdateInput[PE]) embedBatchUpdateInput() {}
+func (ObjectBatchArchiveInput) embedBatchArchiveInput()   {}
 
 func NewPropertiesClient(hc *http.Client) *PropertiesClient {
 	return &PropertiesClient{
@@ -533,10 +731,10 @@ func (poc *PropertiesObjectClient) Archive(ctx context.Context, name string) err
 	return nil
 }
 
-func NewPropertiesBatchClient(baseEndpoint string, httpClient *http.Client) *PropertiesBatchClient {
+func NewPropertiesBatchClient(baseEndpoint string, hc *http.Client) *PropertiesBatchClient {
 	return &PropertiesBatchClient{
 		baseEndpoint: baseEndpoint,
-		hc:           httpClient,
+		hc:           hc,
 	}
 }
 
@@ -560,10 +758,10 @@ type (
 
 // NewPropertyGroupClient returns a new property group client that uses the
 // given HTTP client to make requests to the endpoint.
-func NewPropertyGroupClient(endpoint string, httpClient *http.Client) *PropertyGroupClient {
+func NewPropertyGroupClient(endpoint string, hc *http.Client) *PropertyGroupClient {
 	return &PropertyGroupClient{
 		endpoint: endpoint,
-		hc:       httpClient,
+		hc:       hc,
 	}
 }
 
@@ -690,6 +888,75 @@ func (pgc *PropertyGroupClient) Archive(ctx context.Context, name string) error 
 		return err
 	}
 	resp, err := pgc.hc.Do(req)
+	if err != nil {
+		return err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return err
+	}
+	resp.Body.Close()
+	return nil
+}
+
+// OAuthClient is a client for the HubSpot OAuth API.
+//
+// It can be used to get access tokens, refresh tokens, and delete refresh tokens.
+//
+// Token exchange and refresh are not implemented and should be handled by the
+// oauth2 package from golang.org/x/oauth2. For example, you can configure an
+// oauth2.Config with the HubSpot OAuth 2.0 endpoint and use the Exchange method
+// to get an access token from an authorization code or a refresh token.
+type OAuthClient struct{}
+
+func (OAuthClient) GetAccessToken(ctx context.Context, token string) (*AccessToken, error) {
+	url := endpoint.OAuthAccessTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	at := new(AccessToken)
+	if err := json.NewDecoder(resp.Body).Decode(at); err != nil {
+		return nil, err
+	}
+	return at, nil
+}
+
+func (OAuthClient) GetRefreshToken(ctx context.Context, token string) (*RefreshToken, error) {
+	url := endpoint.OAuthRefreshTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if err := HubSpotResponseError(resp); err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	rt := new(RefreshToken)
+	if err := json.NewDecoder(resp.Body).Decode(rt); err != nil {
+		return nil, err
+	}
+	return rt, nil
+}
+
+func (OAuthClient) DeleteGetRefreshToken(ctx context.Context, token string) error {
+	url := endpoint.OAuthRefreshTokens + "/" + token
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, url, nil)
+	if err != nil {
+		return err
+	}
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
 	}
