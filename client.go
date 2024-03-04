@@ -908,6 +908,7 @@ func (pgc *PropertyGroupClient) Archive(ctx context.Context, name string) error 
 // to get an access token from an authorization code or a refresh token.
 type OAuthClient struct{}
 
+// GetAccessToken returns the HubSpot [AccessToken] from the given token.
 func (OAuthClient) GetAccessToken(ctx context.Context, token string) (*AccessToken, error) {
 	url := endpoint.OAuthAccessTokens + "/" + token
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
@@ -929,6 +930,7 @@ func (OAuthClient) GetAccessToken(ctx context.Context, token string) (*AccessTok
 	return at, nil
 }
 
+// GetRefreshToken returns the HubSpot [RefreshToken] from the given token.
 func (OAuthClient) GetRefreshToken(ctx context.Context, token string) (*RefreshToken, error) {
 	url := endpoint.OAuthRefreshTokens + "/" + token
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
@@ -950,7 +952,8 @@ func (OAuthClient) GetRefreshToken(ctx context.Context, token string) (*RefreshT
 	return rt, nil
 }
 
-func (OAuthClient) DeleteGetRefreshToken(ctx context.Context, token string) error {
+// DeleteRefreshToken deletes the given refresh token.
+func (OAuthClient) DeleteRefreshToken(ctx context.Context, token string) error {
 	url := endpoint.OAuthRefreshTokens + "/" + token
 	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, url, nil)
 	if err != nil {
