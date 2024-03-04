@@ -68,7 +68,7 @@ func (e *HubSpotError) Unwrap() error {
 // The error message is a concatenation of all the sub-errors' messages.
 //
 // It may be unwrapped to get the list of sub-errors excluding the first one.
-type HubSpotSubErrors []HubSpotSubError
+type HubSpotSubErrors []*HubSpotSubError
 
 func (e HubSpotSubErrors) Error() string {
 	var message strings.Builder
@@ -121,4 +121,31 @@ func HubSpotResponseError(resp *http.Response) error {
 		return fmt.Errorf("decode hubspot error: %w", err)
 	}
 	return hsErr
+}
+
+func IsHubSpotError(err error) bool {
+	_, ok := err.(*HubSpotError)
+	return ok
+}
+
+func IsHubSpotSubErrors(err error) bool {
+	_, ok := err.(HubSpotSubErrors)
+	if ok {
+		return true
+	}
+	ep := &HubSpotSubErrors{}
+	return errors.As(err, &ep)
+}
+
+func IsHubSpotSubError(err error) bool {
+	_, ok := err.(*HubSpotSubError)
+	return ok
+}
+
+func IsAnyHubSpotError(err error) bool {
+	switch err.(type) {
+	case *HubSpotError, *HubSpotSubErrors, HubSpotSubErrors, *HubSpotSubError:
+		return true
+	}
+	return false
 }
